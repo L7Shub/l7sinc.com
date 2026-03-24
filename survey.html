@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L7S Pre-Launch Data Collection | P.A.T. D.O.W.N.S.™</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { red: '#dc2626', dark: '#0f172a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .step-dot.completed { background-color: #dc2626; color: white; }
+        .step-dot.current { background-color: #0f172a; color: white; box-shadow: 0 0 0 4px rgba(220,38,38,0.3); }
+        .step-dot { background-color: #e2e8f0; color: #94a3b8; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .choice-btn.selected { border-color: #dc2626; background-color: #fef2f2; color: #dc2626; }
+        textarea:focus, input:focus, select:focus { outline: none; border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.1); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen">
+
+<!-- HEADER -->
+<header class="bg-slate-900 text-white py-6">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <div class="inline-flex items-center gap-2 mb-2">
+            <div class="bg-red-600 text-white p-1.5 rounded-lg text-lg">🛡️</div>
+            <span class="text-xl font-extrabold tracking-tight">L7S <span class="text-red-500">HERO</span></span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-black mt-2">P.A.T. D.O.W.N.S.™ Pre-Launch Intel</h1>
+        <p class="text-slate-400 mt-2 text-sm">Captain, we need your input on the items below to go fully live. 🔴⚪️⚫️</p>
+    </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 py-3">
+        <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <span id="progress-label">Section 1 of 7</span>
+            <span id="progress-pct">0%</span>
+        </div>
+        <div class="w-full bg-slate-200 rounded-full h-2">
+            <div id="progress-bar" class="bg-red-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between mt-3" id="step-dots"></div>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="max-w-3xl mx-auto px-4 py-8">
+
+<!-- ====== SECTION 1: CONTACT & IDENTITY ====== -->
+<div id="s1" class="section active fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+            <div>
+                <h2 class="text-xl font-bold">Contact & Identity Verification</h2>
+                <p class="text-sm text-slate-500">Confirm the public-facing info for l7sinc.com</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">Primary business phone for the website:</label>
+                <p class="text-xs text-slate-400 mb-2">We found two numbers — which should be public-facing?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="phone-choice">
+                    <button onclick="selectChoice('phone-choice', this, '(833) 693-0777')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">(833) 693-0777</span>
+                        <span class="block text-xs text-slate-400 mt-1">Toll-free (from chat logs)</span>
+                    </button>
+                    <button onclick="selectChoice('phone-choice', this, '(470) 603-8586')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">(470) 603-8586</span>
+                        <span class="block text-xs text-slate-400 mt-1">Local (from archive)</span>
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <input type="text" id="phone-other" placeholder="Or enter a different number..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Primary email for inquiries:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="email-choice">
+                    <button onclick="selectChoice('email-choice', this, 'admin@l7sinc.com')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">admin@l7sinc.com</span>
+                    </button>
+                    <button onclick="selectChoice('email-choice', this, 'hero@l7sinc.com')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">hero@l7sinc.com</span>
+                    </button>
+                </div>
+                <input type="text" id="email-other" placeholder="Or enter a different email..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Instagram handle for the site:</label>
+                <p class="text-xs text-slate-400 mb-2">Found @learnwithllc — is this correct or should it be different?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="ig-choice">
+                    <button onclick="selectChoice('ig-choice', this, '@learnwithllc')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">@learnwithllc</span>
+                        <span class="block text-xs text-slate-400 mt-1">Current Instagram</span>
+                    </button>
+                    <button onclick="selectChoice('ig-choice', this, 'other')" class="choice-btn border-2 border-slate-200 rounded-xl p-4 text-left hover:border-red-300 transition-colors">
+                        <span class="font-bold">Different Handle</span>
+                    </button>
+                </div>
+                <input type="text" id="ig-other" placeholder="Enter Instagram handle..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Other social links to display on the site (optional):</label>
+                <div class="space-y-2">
+                    <input type="text" id="social-linkedin" placeholder="LinkedIn URL" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                    <input type="text" id="social-facebook" placeholder="Facebook URL" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                    <input type="text" id="social-twitter" placeholder="X (Twitter) URL" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                    <input type="text" id="social-tiktok" placeholder="TikTok URL" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end mt-6">
+        <button onclick="goTo(2)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 2: AFFILIATE LINKS ====== -->
+<div id="s2" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+            <div>
+                <h2 class="text-xl font-bold">Affiliate & Partner Links</h2>
+                <p class="text-sm text-slate-500">Credit monitoring links for the intake form</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm">
+                <p class="font-semibold text-amber-800">⚠️ Critical for intake form</p>
+                <p class="text-amber-700 mt-1">When a client clicks "NO" for credit monitoring, the $1 Score Progression button needs your affiliate link.</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Score Progression affiliate/partner link:</label>
+                <p class="text-xs text-slate-400 mb-2">The $1 trial link that clients use to sign up</p>
+                <input type="url" id="link-scoreprog" placeholder="https://..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">IdentityIQ affiliate/partner link:</label>
+                <input type="url" id="link-identityiq" placeholder="https://..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Credit Hero Score link:</label>
+                <p class="text-xs text-slate-400 mb-2">We found this — is it correct?</p>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-mono break-all mb-2">
+                    https://creditheroscore.com/redirect.asp?guid=L0CP5Q0K5AQP
+                </div>
+                <div class="grid grid-cols-2 gap-3" id="credithero-choice">
+                    <button onclick="selectChoice('credithero-choice', this, 'yes')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
+                    <button onclick="selectChoice('credithero-choice', this, 'no')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Needs Update</button>
+                </div>
+                <input type="url" id="credithero-new" placeholder="Enter correct Credit Hero Score URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">GetCreditHelpNow link:</label>
+                <p class="text-xs text-slate-400 mb-2">We found this — is it correct?</p>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-mono break-all mb-2">
+                    https://luckie.getcredithelpnow.com/start
+                </div>
+                <div class="grid grid-cols-2 gap-3" id="getcredit-choice">
+                    <button onclick="selectChoice('getcredit-choice', this, 'yes')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
+                    <button onclick="selectChoice('getcredit-choice', this, 'no')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Needs Update</button>
+                </div>
+                <input type="url" id="getcredit-new" placeholder="Enter correct URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Any other affiliate/referral partner links to include?</label>
+                <textarea id="other-affiliates" rows="3" placeholder="McCarthy Law, New Life Credit Fix, Mark Hunter Law, etc. — paste any URLs here..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(1)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="goTo(3)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 3: PAYMENT & CHECKOUT ====== -->
+<div id="s3" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+            <div>
+                <h2 class="text-xl font-bold">Payment & Checkout</h2>
+                <p class="text-sm text-slate-500">Stripe/payment links for each pricing tier</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">Do you have Stripe checkout links ready for the pricing tiers?</label>
+                <div class="grid grid-cols-2 gap-3" id="stripe-ready">
+                    <button onclick="selectChoice('stripe-ready', this, 'yes'); document.getElementById('stripe-links').classList.remove('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Yes, I have them</button>
+                    <button onclick="selectChoice('stripe-ready', this, 'no'); document.getElementById('stripe-links').classList.add('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Not yet</button>
+                </div>
+            </div>
+
+            <div id="stripe-links" class="hidden space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Monthly Membership — $39/mo</label>
+                    <input type="url" id="stripe-monthly" placeholder="Stripe checkout URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Foundation Tier — $97 OTP</label>
+                    <input type="url" id="stripe-foundation" placeholder="Stripe checkout URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Growth Tier — $197 OTP</label>
+                    <input type="url" id="stripe-growth" placeholder="Stripe checkout URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Elite Tier — $397 OTP</label>
+                    <input type="url" id="stripe-elite" placeholder="Stripe checkout URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Enterprise Tier — $1,497 OTP</label>
+                    <input type="url" id="stripe-enterprise" placeholder="Stripe checkout URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Which merchant/payment processor are you using?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="processor-choice">
+                    <button onclick="selectChoice('processor-choice', this, 'stripe')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">Stripe</button>
+                    <button onclick="selectChoice('processor-choice', this, 'ghl')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">GHL Payments</button>
+                    <button onclick="selectChoice('processor-choice', this, 'other')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">Other</button>
+                </div>
+                <input type="text" id="processor-other" placeholder="Specify processor..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(2)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="goTo(4)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 4: WEBHOOK & CRM ====== -->
+<div id="s4" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+            <div>
+                <h2 class="text-xl font-bold">Webhook & CRM Integration</h2>
+                <p class="text-sm text-slate-500">Connect the intake form to your backend</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
+                <p class="font-semibold text-blue-800">ℹ️ Currently placeholder</p>
+                <p class="text-blue-700 mt-1">The W.O.M.E.N.™ intake form logs to console. A webhook URL will push data directly to your CRM.</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">GoHighLevel Webhook URL:</label>
+                <p class="text-xs text-slate-400 mb-2">From GHL → Automations → Workflows → Webhook trigger URL</p>
+                <input type="url" id="ghl-webhook" placeholder="https://services.leadconnectorhq.com/hooks/..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Or alternative webhook (Zapier, Make, etc.):</label>
+                <input type="url" id="alt-webhook" placeholder="https://hooks.zapier.com/... or https://hook.us1.make.com/..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Google Apps Script endpoint:</label>
+                <p class="text-xs text-slate-400 mb-2">We found this in your archive — should we also send intake data here?</p>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs font-mono break-all mb-2">
+                    https://script.google.com/macros/s/AKfycbx...Vuo/exec
+                </div>
+                <div class="grid grid-cols-2 gap-3" id="gas-choice">
+                    <button onclick="selectChoice('gas-choice', this, 'yes')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Yes, send there too</button>
+                    <button onclick="selectChoice('gas-choice', this, 'no')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ No, skip it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(3)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="goTo(5)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 5: TRACKING & ANALYTICS ====== -->
+<div id="s5" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">5</span>
+            <div>
+                <h2 class="text-xl font-bold">Tracking & Analytics</h2>
+                <p class="text-sm text-slate-500">V.A.L.U.E. T.I.P. — pixel and analytics setup</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">Do you have a Meta (Facebook) Pixel ID?</label>
+                <div class="grid grid-cols-2 gap-3" id="pixel-ready">
+                    <button onclick="selectChoice('pixel-ready', this, 'yes'); document.getElementById('pixel-input').classList.remove('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Yes</button>
+                    <button onclick="selectChoice('pixel-ready', this, 'no'); document.getElementById('pixel-input').classList.add('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Not yet</button>
+                </div>
+                <div id="pixel-input" class="hidden mt-2">
+                    <input type="text" id="meta-pixel" placeholder="Meta Pixel ID (e.g., 123456789012345)" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Do you have a Google Analytics (GA4) Measurement ID?</label>
+                <div class="grid grid-cols-2 gap-3" id="ga4-ready">
+                    <button onclick="selectChoice('ga4-ready', this, 'yes'); document.getElementById('ga4-input').classList.remove('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Yes</button>
+                    <button onclick="selectChoice('ga4-ready', this, 'no'); document.getElementById('ga4-input').classList.add('hidden')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Not yet</button>
+                </div>
+                <div id="ga4-input" class="hidden mt-2">
+                    <input type="text" id="ga4-id" placeholder="GA4 ID (e.g., G-XXXXXXXXXX)" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">GHL tracking script / other CRM pixel?</label>
+                <textarea id="crm-pixel" rows="3" placeholder="Paste the full script tag or tracking ID here..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(4)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="goTo(6)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 6: CALENDAR & SCHEDULING ====== -->
+<div id="s6" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">6</span>
+            <div>
+                <h2 class="text-xl font-bold">Calendar & Scheduling</h2>
+                <p class="text-sm text-slate-500">Confirm R&R™ Audit booking setup</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">Confirm Cal.com calendar link:</label>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-mono mb-2">cal.com/l7sinc</div>
+                <div class="grid grid-cols-2 gap-3" id="cal-choice">
+                    <button onclick="selectChoice('cal-choice', this, 'yes')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
+                    <button onclick="selectChoice('cal-choice', this, 'no')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Different</button>
+                </div>
+                <input type="text" id="cal-other" placeholder="Enter correct Cal.com link..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Confirm R&R™ business hours:</label>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm space-y-1">
+                    <div class="flex justify-between"><span>Monday</span><span class="text-slate-400">Closed (Operations)</span></div>
+                    <div class="flex justify-between font-semibold text-red-600"><span>Tuesday</span><span>11:00 AM – 7:00 PM</span></div>
+                    <div class="flex justify-between"><span>Wednesday</span><span class="text-slate-400">Closed (Structuring)</span></div>
+                    <div class="flex justify-between font-semibold text-red-600"><span>Thursday</span><span>11:00 AM – 7:00 PM</span></div>
+                    <div class="flex justify-between"><span>Friday</span><span class="text-slate-400">Closed (Fulfillment)</span></div>
+                    <div class="flex justify-between font-semibold text-red-600"><span>Saturday</span><span>10:00 AM – 5:00 PM</span></div>
+                    <div class="flex justify-between"><span>Sunday</span><span class="text-slate-400">Closed</span></div>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mt-3" id="hours-choice">
+                    <button onclick="selectChoice('hours-choice', this, 'correct')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
+                    <button onclick="selectChoice('hours-choice', this, 'change')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Needs Changes</button>
+                </div>
+                <textarea id="hours-changes" rows="2" placeholder="Describe changes needed..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">R&R™ session pricing — confirm or update:</label>
+                <p class="text-xs text-slate-400 mb-2">Currently set to: $7 (30 min) to $33 (1 hour)</p>
+                <div class="grid grid-cols-2 gap-3" id="pricing-choice">
+                    <button onclick="selectChoice('pricing-choice', this, 'correct')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
+                    <button onclick="selectChoice('pricing-choice', this, 'change')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Update</button>
+                </div>
+                <input type="text" id="pricing-update" placeholder="Enter correct pricing..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(5)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="goTo(7)" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Next →</button>
+    </div>
+</div>
+
+<!-- ====== SECTION 7: DNS & FINAL NOTES ====== -->
+<div id="s7" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">7</span>
+            <div>
+                <h2 class="text-xl font-bold">DNS, Hosting & Final Notes</h2>
+                <p class="text-sm text-slate-500">Last items before going fully live</p>
+            </div>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold mb-1">Where is l7sinc.com being hosted?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="hosting-choice">
+                    <button onclick="selectChoice('hosting-choice', this, 'github-pages')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">GitHub Pages</button>
+                    <button onclick="selectChoice('hosting-choice', this, 'ghl')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">GoHighLevel</button>
+                    <button onclick="selectChoice('hosting-choice', this, 'other')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">Other</button>
+                </div>
+                <input type="text" id="hosting-other" placeholder="Specify hosting provider..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Domain transfer status (from Wix):</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="dns-choice">
+                    <button onclick="selectChoice('dns-choice', this, 'complete')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Transfer Complete</button>
+                    <button onclick="selectChoice('dns-choice', this, 'in-progress')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">⏳ In Progress</button>
+                    <button onclick="selectChoice('dns-choice', this, 'not-started')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Not Started</button>
+                </div>
+                <input type="text" id="dns-registrar" placeholder="New registrar (Spaceship, Cloudflare, etc.)..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Any logo/image files to add to the site?</label>
+                <p class="text-xs text-slate-400 mb-2">Paste URLs to any logos, headshots, or brand images</p>
+                <textarea id="image-urls" rows="3" placeholder="https://... (one per line)" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold mb-1">Anything else we need to know?</label>
+                <textarea id="final-notes" rows="4" placeholder="Additional notes, corrections, priorities..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between mt-6">
+        <button onclick="goTo(6)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Back</button>
+        <button onclick="generateReport()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">Generate Report →</button>
+    </div>
+</div>
+
+<!-- ====== REPORT VIEW ====== -->
+<div id="s-report" class="section fade-in">
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+        <div class="text-center mb-6">
+            <div class="text-4xl mb-2">✅</div>
+            <h2 class="text-2xl font-black">Transmission Complete</h2>
+            <p class="text-slate-500 mt-2">Copy the report below and send it to your developer.</p>
+        </div>
+        <div class="bg-slate-900 text-green-400 rounded-xl p-6 font-mono text-xs overflow-x-auto whitespace-pre-wrap" id="report-output"></div>
+        <div class="flex justify-center gap-4 mt-6">
+            <button onclick="copyReport()" id="copy-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">📋 Copy to Clipboard</button>
+            <button onclick="goTo(1)" class="border-2 border-slate-300 text-slate-700 font-bold px-8 py-3 rounded-xl hover:bg-slate-50 transition-colors">← Edit Responses</button>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-slate-900 text-slate-500 text-center py-6 mt-12 text-xs">
+    <p>L7S, Inc. Pre-Launch Data Collection — Confidential</p>
+    <p class="mt-1">🔴⚪️⚫️ Let's Get THIS DONE.</p>
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT                                                    -->
+<!-- ============================================================ -->
+<script>
+(function() {
+    var totalSections = 7;
+    var currentSection = 1;
+    var choices = {};
+
+    // Build step dots
+    var dotsContainer = document.getElementById('step-dots');
+    for (var i = 1; i <= totalSections; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'step-dot w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all';
+        dot.textContent = i;
+        dot.id = 'dot-' + i;
+        if (i === 1) dot.classList.add('current');
+        dotsContainer.appendChild(dot);
+    }
+
+    function updateProgress() {
+        var pct = Math.round(((currentSection - 1) / totalSections) * 100);
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('progress-pct').textContent = pct + '%';
+        document.getElementById('progress-label').textContent = 'Section ' + currentSection + ' of ' + totalSections;
+
+        for (var i = 1; i <= totalSections; i++) {
+            var dot = document.getElementById('dot-' + i);
+            dot.classList.remove('completed', 'current');
+            if (i < currentSection) dot.classList.add('completed');
+            else if (i === currentSection) dot.classList.add('current');
+        }
+    }
+
+    window.goTo = function(num) {
+        document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+        var target = document.getElementById('s' + num);
+        if (target) {
+            target.classList.add('active');
+            currentSection = num;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    window.selectChoice = function(groupId, btn, value) {
+        var group = document.getElementById(groupId);
+        group.querySelectorAll('.choice-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        choices[groupId] = value;
+    };
+
+    function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+    window.generateReport = function() {
+        var lines = [];
+        lines.push('═══════════════════════════════════════════');
+        lines.push('  L7S PRE-LAUNCH INTEL REPORT');
+        lines.push('  Generated: ' + new Date().toLocaleString());
+        lines.push('═══════════════════════════════════════════');
+        lines.push('');
+
+        lines.push('▸ SECTION 1: CONTACT & IDENTITY');
+        lines.push('  Phone: ' + (choices['phone-choice'] || 'Not selected') + (val('phone-other') ? ' (Alt: ' + val('phone-other') + ')' : ''));
+        lines.push('  Email: ' + (choices['email-choice'] || 'Not selected') + (val('email-other') ? ' (Alt: ' + val('email-other') + ')' : ''));
+        lines.push('  Instagram: ' + (choices['ig-choice'] || 'Not selected') + (val('ig-other') ? ' → ' + val('ig-other') : ''));
+        lines.push('  LinkedIn: ' + val('social-linkedin'));
+        lines.push('  Facebook: ' + val('social-facebook'));
+        lines.push('  X/Twitter: ' + val('social-twitter'));
+        lines.push('  TikTok: ' + val('social-tiktok'));
+        lines.push('');
+
+        lines.push('▸ SECTION 2: AFFILIATE & PARTNER LINKS');
+        lines.push('  Score Progression: ' + val('link-scoreprog'));
+        lines.push('  IdentityIQ: ' + val('link-identityiq'));
+        lines.push('  Credit Hero Score: ' + (choices['credithero-choice'] === 'yes' ? '✅ Confirmed' : (choices['credithero-choice'] === 'no' ? '❌ Update: ' + val('credithero-new') : 'Not answered')));
+        lines.push('  GetCreditHelpNow: ' + (choices['getcredit-choice'] === 'yes' ? '✅ Confirmed' : (choices['getcredit-choice'] === 'no' ? '❌ Update: ' + val('getcredit-new') : 'Not answered')));
+        lines.push('  Other affiliates: ' + val('other-affiliates'));
+        lines.push('');
+
+        lines.push('▸ SECTION 3: PAYMENT & CHECKOUT');
+        lines.push('  Stripe ready: ' + (choices['stripe-ready'] || 'Not answered'));
+        if (choices['stripe-ready'] === 'yes') {
+            lines.push('  $39/mo: ' + val('stripe-monthly'));
+            lines.push('  $97 Foundation: ' + val('stripe-foundation'));
+            lines.push('  $197 Growth: ' + val('stripe-growth'));
+            lines.push('  $397 Elite: ' + val('stripe-elite'));
+            lines.push('  $1,497 Enterprise: ' + val('stripe-enterprise'));
+        }
+        lines.push('  Processor: ' + (choices['processor-choice'] || 'Not selected') + (val('processor-other') ? ' → ' + val('processor-other') : ''));
+        lines.push('');
+
+        lines.push('▸ SECTION 4: WEBHOOK & CRM');
+        lines.push('  GHL Webhook: ' + val('ghl-webhook'));
+        lines.push('  Alt Webhook: ' + val('alt-webhook'));
+        lines.push('  Google Apps Script: ' + (choices['gas-choice'] || 'Not answered'));
+        lines.push('');
+
+        lines.push('▸ SECTION 5: TRACKING & ANALYTICS');
+        lines.push('  Meta Pixel: ' + (choices['pixel-ready'] === 'yes' ? val('meta-pixel') : (choices['pixel-ready'] || 'Not answered')));
+        lines.push('  GA4: ' + (choices['ga4-ready'] === 'yes' ? val('ga4-id') : (choices['ga4-ready'] || 'Not answered')));
+        lines.push('  CRM Pixel: ' + val('crm-pixel'));
+        lines.push('');
+
+        lines.push('▸ SECTION 6: CALENDAR & SCHEDULING');
+        lines.push('  Cal.com: ' + (choices['cal-choice'] === 'yes' ? '✅ cal.com/l7sinc confirmed' : (val('cal-other') || 'Needs update')));
+        lines.push('  Business hours: ' + (choices['hours-choice'] === 'correct' ? '✅ Confirmed' : val('hours-changes') || 'Needs changes'));
+        lines.push('  R&R pricing: ' + (choices['pricing-choice'] === 'correct' ? '✅ $7-$33 confirmed' : val('pricing-update') || 'Needs update'));
+        lines.push('');
+
+        lines.push('▸ SECTION 7: DNS & HOSTING');
+        lines.push('  Hosting: ' + (choices['hosting-choice'] || 'Not selected') + (val('hosting-other') ? ' → ' + val('hosting-other') : ''));
+        lines.push('  Domain transfer: ' + (choices['dns-choice'] || 'Not answered') + (val('dns-registrar') ? ' → ' + val('dns-registrar') : ''));
+        lines.push('  Images/Logos: ' + val('image-urls'));
+        lines.push('  Final notes: ' + val('final-notes'));
+        lines.push('');
+        lines.push('═══════════════════════════════════════════');
+        lines.push('  🔴⚪️⚫️ END OF REPORT');
+        lines.push('═══════════════════════════════════════════');
+
+        var report = lines.join('\n');
+        document.getElementById('report-output').textContent = report;
+
+        // Show report
+        document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+        document.getElementById('s-report').classList.add('active');
+        document.getElementById('progress-bar').style.width = '100%';
+        document.getElementById('progress-pct').textContent = '100%';
+        document.getElementById('progress-label').textContent = 'Report Generated';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.copyReport = function() {
+        var text = document.getElementById('report-output').textContent;
+        navigator.clipboard.writeText(text).then(function() {
+            var btn = document.getElementById('copy-btn');
+            btn.textContent = '✅ Copied!';
+            setTimeout(function() { btn.textContent = '📋 Copy to Clipboard'; }, 2000);
+        });
+    };
+
+    updateProgress();
+})();
+</script>
+
+</body>
+</html>
