@@ -4,6 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L7S Hero S.O.S.™ | Superhero Operating System</title>
+
+    <!-- ============================================================ -->
+    <!-- GOOGLE ANALYTICS 4                                           -->
+    <!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID           -->
+    <!-- ============================================================ -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+    <!-- ============================================================ -->
+    <!-- META PIXEL                                                    -->
+    <!-- Replace YOUR_PIXEL_ID with your Facebook Pixel ID            -->
+    <!-- ============================================================ -->
+    <!-- <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'YOUR_PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -318,7 +347,7 @@
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Monthly group sessions</li>
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Essential checklists</li>
                     </ul>
-                    <button onclick="setView('intake')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
+                    <button onclick="selectPlan('Foundation','97','prod_T9MBq2PwfaeM3K')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
                 </div>
 
                 <!-- Growth (Best Value) -->
@@ -335,7 +364,7 @@
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Monthly 1-on-1</li>
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Priority support</li>
                     </ul>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Select Plan</button>
+                    <button onclick="selectPlan('Growth','197','prod_T9MB0wTZD4tD3C')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Select Plan</button>
                 </div>
 
                 <!-- Elite -->
@@ -351,7 +380,7 @@
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Custom SOPs</li>
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Direct founder access</li>
                     </ul>
-                    <button onclick="setView('intake')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
+                    <button onclick="selectPlan('Elite','397','prod_T9MBXCw8HlHQQm')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
                 </div>
 
                 <!-- Enterprise -->
@@ -367,7 +396,7 @@
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>JV partnerships</li>
                         <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>Full IP licensing</li>
                     </ul>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Contact Us</button>
+                    <button onclick="selectPlan('Enterprise','1497','prod_T9MBkhUrmJFC7Y')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Contact Us</button>
                 </div>
 
             </div>
@@ -625,6 +654,15 @@
                 <div class="md:col-span-3 p-8">
                     <h3 class="text-2xl font-bold mb-6">R&amp;R™ Audit Intake</h3>
                     <form id="intake-form" class="space-y-5">
+                        <!-- Hidden plan fields -->
+                        <input type="hidden" name="selectedPlan" id="selectedPlan" value="">
+                        <input type="hidden" name="stripeProductId" id="stripeProductId" value="">
+                        <input type="hidden" name="planPrice" id="planPrice" value="">
+                        <!-- Plan badge (shown when plan is pre-selected) -->
+                        <div id="plan-badge" class="hidden bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 flex items-center justify-between">
+                            <span class="text-sm text-slate-700">Selected Plan: <strong id="plan-badge-name" class="text-red-700"></strong></span>
+                            <span id="plan-badge-price" class="text-sm font-black text-red-600"></span>
+                        </div>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
@@ -658,17 +696,36 @@
                                 <option value="">Select your service...</option>
                                 <option value="IdentityIQ">IdentityIQ</option>
                                 <option value="Score Progression">Score Progression</option>
+                                <option value="MyFreeScoreNow">My Free Score Now</option>
+                                <option value="Experian">Experian</option>
+                                <option value="Credit Karma">Credit Karma</option>
                                 <option value="Other">Other</option>
                             </select>
+                            <p class="text-xs text-slate-500 mt-2">
+                                Want a deeper audit?
+                                <a href="https://creditheroscore.com/redirect.asp?guid=L0CP5Q0K5AQP" target="_blank" rel="noopener noreferrer" class="text-red-600 font-semibold hover:underline">Check your Credit Hero Score →</a>
+                            </p>
                         </div>
                         <!-- NO section -->
                         <div id="monitoring-no" class="hidden">
-                            <div class="bg-red-50 border border-red-200 rounded-xl p-4">
-                                <p class="text-sm text-slate-700 mb-3">Credit monitoring is required for your Credit Hero assessment.</p>
-                                <a href="https://scoreprogression.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-red-600 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                                    Get Score Progression for $1
+                            <div class="bg-red-50 border border-red-200 rounded-xl p-4 space-y-3">
+                                <p class="text-sm font-semibold text-slate-800">Credit monitoring is required for your Credit Hero assessment.</p>
+                                <p class="text-xs text-slate-600">Choose one of the options below, then return to complete your intake:</p>
+                                <a href="https://scoreprogression.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-red-600 transition-colors group">
+                                    <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">$1</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 group-hover:text-red-700">Score Progression</p>
+                                        <p class="text-xs text-slate-500">Self-enrollment — $1 trial, set up in minutes</p>
+                                    </div>
                                 </a>
-                                <p class="text-xs text-slate-500 mt-2">You can complete this step and return to finish intake.</p>
+                                <a href="https://luckie.getcredithelpnow.com/start" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-red-600 transition-colors group">
+                                    <span class="bg-slate-900 text-white text-xs font-bold px-2 py-0.5 rounded">HELP</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800 group-hover:text-red-700">Get Credit Help Now</p>
+                                        <p class="text-xs text-slate-500">Agent-assisted credit setup — guided onboarding</p>
+                                    </div>
+                                </a>
+                                <p class="text-xs text-slate-500">You can complete this step and return to finish your intake.</p>
                             </div>
                         </div>
                         <!-- Submit -->
@@ -961,6 +1018,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.setMonitoring = setMonitoring;
 
+    // --- Plan Selection ---
+    window.selectPlan = function(planName, planPrice, productId) {
+        document.getElementById('selectedPlan').value = planName;
+        document.getElementById('planPrice').value = planPrice;
+        document.getElementById('stripeProductId').value = productId;
+        var badge = document.getElementById('plan-badge');
+        badge.classList.remove('hidden');
+        document.getElementById('plan-badge-name').textContent = planName + ' Tier';
+        var priceDisplay = planPrice === '39' ? '$39/mo' : '$' + Number(planPrice).toLocaleString() + ' OTP';
+        document.getElementById('plan-badge-price').textContent = priceDisplay;
+        setView('intake');
+    };
+
     // --- Form Submit ---
     var form = document.getElementById('intake-form');
     if (form) {
@@ -969,9 +1039,19 @@ document.addEventListener('DOMContentLoaded', function() {
             var formData = new FormData(form);
             var data = {};
             formData.forEach(function(value, key) { data[key] = value; });
-            console.log('Intake Data:', data);
 
-            // Trigger Cal.com modal
+            // POST to GHL webhook (replace LOCATION_ID and WORKFLOW_ID after GHL setup)
+            var GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/LOCATION_ID/webhook-triggers/WORKFLOW_ID';
+            fetch(GHL_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(function() {
+                // Webhook not yet configured — form data captured locally
+                console.warn('GHL webhook pending setup. Data:', data);
+            });
+
+            // Trigger Cal.com modal for R&R session booking
             try {
                 Cal('modal', { calLink: 'l7sinc' });
             } catch(err) {
@@ -981,6 +1061,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show success view and reset form
             setView('success');
             form.reset();
+            document.getElementById('plan-badge').classList.add('hidden');
 
             // Reset monitoring button states
             var yesBtn = document.getElementById('btn-mon-yes');
