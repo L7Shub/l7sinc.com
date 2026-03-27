@@ -206,6 +206,8 @@
         .modal-overlay { transition: opacity 0.3s ease; }
         .hero-card:hover { transform: translateY(-4px); transition: transform 0.3s ease; }
         .pricing-card:hover { transform: translateY(-4px); transition: transform 0.3s ease; }
+        /* YES/NO monitoring toggle active state */
+        .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
     </style>
 </head>
 <body class="bg-white text-slate-800 font-sans antialiased">
@@ -283,10 +285,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Credit Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">Deploys for credit profile reconstruction, debt instrument negotiation, and credibility optimization. Connects you with licensed credit professionals.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 2: CEO Hero -->
@@ -296,10 +295,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">CEO Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">Specializes in corporate structuring, brand strategy, operational scaling, and executive-level tactical planning via BXBlueprints™.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 3: Capital Hero -->
@@ -309,10 +305,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Capital Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">Tasked with capital acquisition, sourcing funding solutions, and customizing financial instruments for mission success.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 4: Cashflow Hero -->
@@ -322,10 +315,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Cashflow Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">Manages operational liquidity via P.I.E.S.™ (Profit, Income, Equity, Savings) for financial agility during all mission phases.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 5: Crypto Hero -->
@@ -335,10 +325,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Crypto Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">Leverages C.O.R.E. D.A.T.A.™ — decentralized technologies, blockchain intelligence, and digital asset strategies.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 6: Coverage Hero -->
@@ -348,25 +335,27 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Coverage Hero</h3>
                     <p class="text-sm text-slate-500 mb-6">B.A.C.K. U.P.™ protocol — risk mitigation, asset protection, and strategic insurance deployment.</p>
-                    <div class="flex gap-2">
-                        <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                        <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                    </div>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
-                <!-- Hero 7: Community Hero (special centering) -->
-                <div class="sm:col-span-2 lg:col-span-3 xl:col-span-1 flex justify-center xl:block">
-                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow w-full max-w-sm xl:max-w-none">
-                        <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Community Hero</h3>
-                        <p class="text-sm text-slate-500 mb-6">S.O.S.™ network — builds strategic alliances, fosters collaborative networks, and expands operational influence.</p>
-                        <div class="flex gap-2">
-                            <button onclick="setView('intake')" class="flex-1 bg-red-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-red-700 transition-colors">Generate Plan</button>
-                            <button onclick="setView('intake')" class="flex-1 border border-slate-300 text-slate-700 text-xs font-semibold py-2 rounded-lg hover:bg-slate-50 transition-colors">Consult Now</button>
-                        </div>
+                <!-- Hero 7: Community Hero -->
+                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
+                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-2">Community Hero</h3>
+                    <p class="text-sm text-slate-500 mb-6">S.O.S.™ network — builds strategic alliances, fosters collaborative networks, and expands operational influence.</p>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
+                </div>
+
+                <!-- Card 8: Initiate S.S.S.™ — Obsidian CTA -->
+                <div class="hero-card bg-slate-900 rounded-2xl border border-slate-700 p-6 shadow-sm hover:shadow-red-600/20 hover:shadow-xl transition-all">
+                    <div class="bg-red-600/20 text-red-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="signal" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Initiate S.S.S.™</h3>
+                    <p class="text-sm text-slate-400 mb-6">Signal. Strategy. Scale. Deploy the full L7S ecosystem for your mission. The Captain is standing by for your briefing.</p>
+                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-600/30">Enter the Gateway <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
             </div>
@@ -795,8 +784,8 @@
                             <input type="hidden" name="monitoringStatus" id="monitoringStatus" value="">
                             <label id="monitoring-label" class="block text-sm font-medium text-slate-700 mb-2">Do you have active credit monitoring? *</label>
                             <div class="flex gap-3" role="group" aria-labelledby="monitoring-label">
-                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" aria-pressed="false" aria-controls="monitoring-yes" class="flex-1 py-2.5 rounded-lg border-2 text-sm font-semibold transition-all border-slate-300 text-slate-600 hover:border-red-600">YES</button>
-                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" aria-pressed="false" aria-controls="monitoring-no" class="flex-1 py-2.5 rounded-lg border-2 text-sm font-semibold transition-all border-slate-300 text-slate-600 hover:border-red-600">NO</button>
+                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" aria-pressed="false" aria-controls="monitoring-yes" class="mon-toggle flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold transition-all text-slate-600 bg-white hover:border-red-600 hover:text-red-600">YES</button>
+                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" aria-pressed="false" aria-controls="monitoring-no" class="mon-toggle flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold transition-all text-slate-600 bg-white hover:border-red-600 hover:text-red-600">NO</button>
                             </div>
                             <p id="monitoring-feedback" class="hidden text-xs text-red-600 mt-2"></p>
                         </div>
@@ -859,20 +848,20 @@
                     <div class="border-t border-slate-200 pt-4 mt-4">
                         <p class="text-xs text-slate-500 text-center mb-3">We also accept alternate payment methods:</p>
                         <div class="grid grid-cols-3 gap-2">
-                            <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
-                                <span class="text-lg">💸</span>
-                                <p class="text-[10px] font-semibold text-slate-700 mt-1">Zelle</p>
-                                <p class="text-[10px] text-slate-500">admin@l7sinc.com</p>
+                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
+                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="send" class="w-3.5 h-3.5 text-slate-600"></i></div>
+                                <p class="text-[10px] font-semibold text-slate-700">Zelle</p>
+                                <p class="text-[10px] text-slate-400">admin@l7sinc.com</p>
                             </div>
-                            <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
-                                <span class="text-lg">💲</span>
-                                <p class="text-[10px] font-semibold text-slate-700 mt-1">Cash App</p>
-                                <p class="text-[10px] text-slate-500">$L7SInc</p>
+                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
+                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-slate-600"></i></div>
+                                <p class="text-[10px] font-semibold text-slate-700">Cash App</p>
+                                <p class="text-[10px] text-slate-400">$L7SInc</p>
                             </div>
-                            <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
-                                <span class="text-lg">🪙</span>
-                                <p class="text-[10px] font-semibold text-slate-700 mt-1">Crypto</p>
-                                <p class="text-[10px] text-slate-500">Contact Us</p>
+                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
+                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="bitcoin" class="w-3.5 h-3.5 text-slate-600"></i></div>
+                                <p class="text-[10px] font-semibold text-slate-700">Crypto</p>
+                                <p class="text-[10px] text-slate-400">Contact Us</p>
                             </div>
                         </div>
                         <p class="text-[10px] text-slate-400 text-center mt-2">For alternate payments, submit your intake form first, then contact us at <a href="tel:+18336930777" class="text-red-600 hover:underline">(833) 693-0777</a></p>
@@ -890,8 +879,8 @@
 <div id="view-success" class="view">
     <div class="min-h-screen bg-slate-100 flex items-center justify-center px-4">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-10 text-center">
-            <div class="bg-green-100 text-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i data-lucide="check-circle" class="w-8 h-8"></i>
+            <div class="bg-slate-900 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-slate-900/30">
+                <i data-lucide="check-circle" class="w-8 h-8 text-red-500"></i>
             </div>
             <h2 class="text-2xl font-black mb-3">Transmission Received</h2>
             <p class="text-slate-500 text-sm mb-8">
@@ -1475,28 +1464,28 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="p-3 space-y-2">
             <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">📞</span>
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-3.5 h-3.5"></i></span>
                 <div>
                     <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Call Us</p>
                     <p class="text-[10px] text-slate-400">(833) 693-0777</p>
                 </div>
             </a>
             <a href="sms:+18336930777?body=Hi%20L7S%20Hero%20Team%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">💬</span>
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
                 <div>
                     <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Text Us</p>
                     <p class="text-[10px] text-slate-400">SMS to (833) 693-0777</p>
                 </div>
             </a>
             <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">✉️</span>
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-3.5 h-3.5"></i></span>
                 <div>
                     <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Email Support</p>
                     <p class="text-[10px] text-slate-400">admin@l7sinc.com</p>
                 </div>
             </a>
             <button onclick="openBookingCalendar()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group text-left">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">📅</span>
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-3.5 h-3.5"></i></span>
                 <div>
                     <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Book a Call</p>
                     <p class="text-[10px] text-slate-400">Schedule R&R™ Audit</p>
