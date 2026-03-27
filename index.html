@@ -1080,15 +1080,29 @@ document.addEventListener('DOMContentLoaded', function() {
             var data = {};
             formData.forEach(function(value, key) { data[key] = value; });
 
-            // POST to GHL webhook (replace LOCATION_ID and WORKFLOW_ID after GHL setup)
-            var GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/LOCATION_ID/webhook-triggers/WORKFLOW_ID';
-            fetch(GHL_WEBHOOK, {
+            // POST lead data to GHL via form submission API
+            var GHL_FORM_ID = 'NU96puPRZZkFbH06Y31q';
+            var GHL_LOCATION_ID = 'Thv6yzRgyq3txWmhUPiz';
+            var ghlPayload = {
+                first_name: data.firstName || '',
+                last_name: data.lastName || '',
+                phone: data.phone ? ('+1' + data.phone.replace(/\D/g, '').slice(-10)) : '',
+                email: data.email || '',
+                formId: GHL_FORM_ID,
+                location_id: GHL_LOCATION_ID,
+                eventData: {
+                    source: 'L7S Hero SOS Website',
+                    page: { url: window.location.href, title: document.title },
+                    timestamp: Date.now()
+                }
+            };
+            var ghlFormData = new FormData();
+            ghlFormData.append('formData', JSON.stringify(ghlPayload));
+            fetch('https://backend.leadconnectorhq.com/forms/submit?formId=' + GHL_FORM_ID + '&locationId=' + GHL_LOCATION_ID, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).catch(function() {
-                // Webhook not yet configured — form data captured locally
-                console.warn('GHL webhook pending setup. Data:', data);
+                body: ghlFormData
+            }).catch(function(err) {
+                console.warn('GHL submit error:', err);
             });
 
             // Redirect to Stripe Checkout if a plan was selected
