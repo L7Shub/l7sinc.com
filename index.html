@@ -33,6 +33,9 @@
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
 
+    <!-- Stripe.js for Checkout -->
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -970,6 +973,17 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
+    // --- Handle Stripe Checkout return ---
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'success') {
+        // User completed Stripe Checkout — show success view
+        setTimeout(function() { setView('success'); }, 100);
+        // Clean the URL
+        window.history.replaceState({}, '', window.location.pathname);
+    } else if (urlParams.get('status') === 'cancelled') {
+        window.history.replaceState({}, '', window.location.pathname);
+    }
+
     // --- Lucide Icons Init ---
     try { lucide.createIcons(); } catch(e) { console.warn('Lucide init:', e); }
 
@@ -1018,6 +1032,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.setMonitoring = setMonitoring;
 
+    // --- Stripe Checkout ---
+    var STRIPE_PK = 'pk_live_51J5a9IBgJmN1Pv6Fkoo5pVtIvAPr89MFB7wEjKSQdDi9Ym58aoiCSEFgLZRtbD83WWV5IUC7u6812iNXXC73ahAc009j5RXMmz';
+    var stripePriceMap = {
+        'prod_T9MBq2PwfaeM3K': 'price_1SD3TOBgJmN1Pv6FyCrBerAe',   // Foundation $97
+        'prod_T9MB0wTZD4tD3C': 'price_1SD3TQBgJmN1Pv6F3egEvEBf',   // Growth $197
+        'prod_T9MBXCw8HlHQQm': 'price_1SD3TSBgJmN1Pv6Frsd5vRtj',   // Elite $397
+        'prod_T9MBkhUrmJFC7Y': 'price_1SD3TVBgJmN1Pv6FuSN1n2l1',   // Enterprise $1,497
+        'prod_SafyZJIV81QiVJ': 'price_1RfUcxBgJmN1Pv6Fb2LLdnl2',   // R&R Audit
+        'prod_T9MA6MdhEXEu8u': 'price_1SH8XXBgJmN1Pv6F3jtT1TDd'    // Monthly $39/mo
+    };
+
     // --- Plan Selection ---
     window.selectPlan = function(planName, planPrice, productId) {
         document.getElementById('selectedPlan').value = planName;
@@ -1029,6 +1054,21 @@ document.addEventListener('DOMContentLoaded', function() {
         var priceDisplay = planPrice === '39' ? '$39/mo' : '$' + Number(planPrice).toLocaleString() + ' OTP';
         document.getElementById('plan-badge-price').textContent = priceDisplay;
         setView('intake');
+    };
+
+    // Redirect to Stripe Checkout after form submission
+    window.redirectToStripe = function(productId) {
+        var priceId = stripePriceMap[productId];
+        if (!priceId) { console.error('No price ID for product:', productId); return; }
+        var stripe = Stripe(STRIPE_PK);
+        stripe.redirectToCheckout({
+            lineItems: [{ price: priceId, quantity: 1 }],
+            mode: priceId === 'price_1SH8XXBgJmN1Pv6F3jtT1TDd' ? 'subscription' : 'payment',
+            successUrl: window.location.origin + window.location.pathname + '?session_id={CHECKOUT_SESSION_ID}&status=success',
+            cancelUrl: window.location.origin + window.location.pathname + '?status=cancelled'
+        }).then(function(result) {
+            if (result.error) { alert(result.error.message); }
+        });
     };
 
     // --- Form Submit ---
@@ -1051,7 +1091,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.warn('GHL webhook pending setup. Data:', data);
             });
 
-            // Trigger Cal.com modal for R&R session booking
+            // Redirect to Stripe Checkout if a plan was selected
+            var selectedProduct = data.stripeProductId;
+            if (selectedProduct && stripePriceMap[selectedProduct]) {
+                redirectToStripe(selectedProduct);
+                return; // Stripe handles the rest — don't show success view yet
+            }
+
+            // Trigger Cal.com modal for R&R session booking (no plan selected)
             try {
                 Cal('modal', { calLink: 'l7sinc' });
             } catch(err) {
