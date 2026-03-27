@@ -1221,14 +1221,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Trigger Cal.com modal for R&R session booking (no plan selected)
-            try {
-                Cal('modal', { calLink: 'l7sinc' });
-            } catch(err) {
-                console.warn('Cal.com modal:', err);
-            }
-
-            // Show success view and reset form
-            setView('success');
+            // Show success view first, then open Cal.com modal on top
             form.reset();
             document.getElementById('plan-badge').classList.add('hidden');
 
@@ -1241,6 +1234,16 @@ document.addEventListener('DOMContentLoaded', function() {
             noBtn.classList.add('border-slate-300', 'text-slate-600');
             document.getElementById('monitoring-yes').classList.add('hidden');
             document.getElementById('monitoring-no').classList.add('hidden');
+
+            // Navigate to success view, then open Cal.com modal after DOM settles
+            setView('success');
+            setTimeout(function() {
+                try {
+                    Cal('modal', { calLink: 'l7sinc' });
+                } catch(err) {
+                    console.warn('Cal.com modal:', err);
+                }
+            }, 500);
         });
     }
 
