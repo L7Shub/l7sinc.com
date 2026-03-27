@@ -731,10 +731,49 @@
                                 <p class="text-xs text-slate-500">You can complete this step and return to finish your intake.</p>
                             </div>
                         </div>
+                        <!-- E-Signature Agreement -->
+                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                            <label class="flex items-start gap-3 cursor-pointer">
+                                <input type="checkbox" id="agree-terms" required class="mt-1 w-4 h-4 accent-red-600 shrink-0">
+                                <span class="text-xs text-slate-600 leading-relaxed">
+                                    I acknowledge and agree to L7S, Inc.'s
+                                    <button type="button" onclick="openModal('modal-terms')" class="text-red-600 font-semibold hover:underline">Terms of Service</button>,
+                                    <button type="button" onclick="openModal('modal-privacy')" class="text-red-600 font-semibold hover:underline">Privacy Policy</button>, and
+                                    <button type="button" onclick="openModal('modal-disclaimer')" class="text-red-600 font-semibold hover:underline">Disclaimer</button>.
+                                    I understand that L7S Inc. is a consulting and connection platform and does not directly provide credit repair services.
+                                    All sales are final per the refund policy. This constitutes my electronic signature.
+                                </span>
+                            </label>
+                            <p class="text-[10px] text-slate-400 mt-2 ml-7">By checking this box, you are providing your electronic signature in accordance with the E-SIGN Act (15 U.S.C. § 7001).</p>
+                        </div>
+
                         <!-- Submit -->
                         <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20 text-sm">
                             PROCEED TO R&amp;R™ AUDIT SESSION →
                         </button>
+
+                        <!-- Alternate Payment Methods -->
+                        <div class="border-t border-slate-200 pt-4 mt-2">
+                            <p class="text-xs text-slate-500 text-center mb-3">We also accept alternate payment methods:</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
+                                    <span class="text-lg">💸</span>
+                                    <p class="text-[10px] font-semibold text-slate-700 mt-1">Zelle</p>
+                                    <p class="text-[10px] text-slate-500">admin@l7sinc.com</p>
+                                </div>
+                                <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
+                                    <span class="text-lg">💲</span>
+                                    <p class="text-[10px] font-semibold text-slate-700 mt-1">Cash App</p>
+                                    <p class="text-[10px] text-slate-500">$L7SInc</p>
+                                </div>
+                                <div class="text-center bg-white border border-slate-200 rounded-lg px-2 py-2.5 hover:border-red-300 transition-colors">
+                                    <span class="text-lg">🪙</span>
+                                    <p class="text-[10px] font-semibold text-slate-700 mt-1">Crypto</p>
+                                    <p class="text-[10px] text-slate-500">Contact Us</p>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-slate-400 text-center mt-2">For alternate payments, submit your intake form first, then contact us at <a href="tel:+18336930777" class="text-red-600 hover:underline">(833) 693-0777</a></p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -1083,6 +1122,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // POST lead data to GHL via form submission API
             var GHL_FORM_ID = 'NU96puPRZZkFbH06Y31q';
             var GHL_LOCATION_ID = 'Thv6yzRgyq3txWmhUPiz';
+
+            // Conditional routing: determine lead tags based on plan tier
+            var planTier = data.selectedPlan || 'No Plan Selected';
+            var monService = data.monitoringService || '';
+            var hasMonitoring = document.getElementById('btn-mon-yes').classList.contains('border-red-600');
+            var leadTags = ['L7S Website Lead'];
+            if (planTier !== 'No Plan Selected') leadTags.push(planTier + ' Tier');
+            if (hasMonitoring) { leadTags.push('Has Monitoring'); if (monService) leadTags.push(monService); }
+            else { leadTags.push('Needs Monitoring'); }
+
             var ghlPayload = {
                 first_name: data.firstName || '',
                 last_name: data.lastName || '',
@@ -1090,10 +1139,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 email: data.email || '',
                 formId: GHL_FORM_ID,
                 location_id: GHL_LOCATION_ID,
+                selectedPlan: planTier,
+                planPrice: data.planPrice || '',
+                creditMonitoring: hasMonitoring ? 'Yes' : 'No',
+                monitoringService: monService,
+                tags: leadTags.join(', '),
                 eventData: {
                     source: 'L7S Hero SOS Website',
                     page: { url: window.location.href, title: document.title },
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    planTier: planTier,
+                    hasCreditMonitoring: hasMonitoring
                 }
             };
             var ghlFormData = new FormData();
@@ -1174,6 +1230,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+
+<!-- ============================================================ -->
+<!-- FLOATING SUPPORT WIDGET                                       -->
+<!-- ============================================================ -->
+<div id="support-widget" class="fixed bottom-6 right-6 z-50">
+    <!-- Popover -->
+    <div id="support-popover" class="hidden absolute bottom-16 right-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-2">
+        <div class="bg-slate-900 text-white p-4">
+            <h4 class="font-bold text-sm">Need Help?</h4>
+            <p class="text-xs text-slate-400 mt-1">Choose how you'd like to reach us</p>
+        </div>
+        <div class="p-3 space-y-2">
+            <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">📞</span>
+                <div>
+                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">(833) 693-0777</p>
+                    <p class="text-[10px] text-slate-400">Call or text us</p>
+                </div>
+            </a>
+            <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">✉️</span>
+                <div>
+                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Email Support</p>
+                    <p class="text-[10px] text-slate-400">admin@l7sinc.com</p>
+                </div>
+            </a>
+            <button onclick="Cal('modal', {calLink: 'l7sinc'})" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group text-left">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0">📅</span>
+                <div>
+                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Book a Call</p>
+                    <p class="text-[10px] text-slate-400">Schedule R&R™ Audit</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- Toggle Button -->
+    <button onclick="document.getElementById('support-popover').classList.toggle('hidden')" class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-lg shadow-red-600/30 flex items-center justify-center transition-all hover:scale-110" aria-label="Contact Support">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+    </button>
+</div>
 
 </body>
 </html>
