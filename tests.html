@@ -351,7 +351,7 @@ const CATEGORIES = [
       },
       {
         name: 'Lucide CDN script tag present',
-        run: ({html}) => /unpkg\.com\/lucide|cdn\.jsdelivr\.net\/npm\/lucide/.test(html),
+        run: ({html}) => /unpkg\.com\/lucide|cdn\.jsdelivr\.net\/npm\/lucide|lucide@latest/.test(html),
         detail: 'Checking for Lucide icons CDN script'
       },
       {
@@ -584,8 +584,8 @@ const CATEGORIES = [
     tests: [
       {
         name: 'Cal.com CDN script present',
-        run: ({html}) => /cdn\.cal\.com|cal\.com\/embed/.test(html),
-        detail: 'Checking for cdn.cal.com script or Cal embed script'
+        run: ({html}) => /cdn\.cal\.com|cal\.com\/embed|app\.cal\.com\/embed/.test(html),
+        detail: 'Checking for Cal.com embed script (cdn.cal.com or app.cal.com/embed)'
       },
       {
         name: 'href containing cal.com/l7sinc present',
