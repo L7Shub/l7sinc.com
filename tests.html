@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L7S Inc. — Production Test Suite</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --surface: #111111;
+      --card:    #1a1a1a;
+      --border:  #2a2a2a;
+      --red:     #dc2626;
+      --red-dim: #7f1d1d;
+      --white:   #f5f5f5;
+      --muted:   #6b7280;
+      --pass:    #16a34a;
+      --fail:    #dc2626;
+      --warn:    #d97706;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--red);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-title { display: flex; align-items: center; gap: 12px; }
+    .header-logo {
+      background: var(--red);
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 1px;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    h1 { font-size: 18px; font-weight: 700; color: var(--white); }
+    .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Score pill ── */
+    #score-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: monospace;
+      color: var(--muted);
+      transition: color .3s, border-color .3s;
+    }
+    #score-pill.ready { color: var(--white); border-color: var(--red); }
+
+    /* ── Controls ── */
+    .controls { padding: 20px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    #run-btn {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: background .2s, transform .1s;
+    }
+    #run-btn:hover  { background: #b91c1c; }
+    #run-btn:active { transform: scale(.97); }
+    #run-btn:disabled { background: var(--muted); cursor: default; }
+    #status-msg { font-size: 13px; color: var(--muted); font-family: monospace; }
+
+    /* ── Summary bar ── */
+    #summary {
+      margin: 0 32px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: none;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #summary.visible { display: flex; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 28px; font-weight: 900; font-family: monospace; line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; margin-top: 2px; }
+    .stat-num.pass-color { color: var(--pass); }
+    .stat-num.fail-color { color: var(--fail); }
+    .stat-num.total-color { color: var(--white); }
+
+    .progress-bar-wrap {
+      flex: 1;
+      min-width: 160px;
+    }
+    .progress-bar-track {
+      height: 8px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--pass);
+      border-radius: 999px;
+      transition: width .6s ease;
+    }
+    .progress-label { font-size: 12px; color: var(--muted); font-family: monospace; }
+
+    /* ── Main content ── */
+    main { padding: 0 32px 48px; max-width: 960px; }
+
+    /* ── Category ── */
+    .category {
+      margin-bottom: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .category-header {
+      background: var(--surface);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .category-header:hover { background: #1c1c1c; }
+    .cat-title {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cat-num {
+      background: var(--red-dim);
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: .5px;
+    }
+    .cat-badge {
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--muted);
+    }
+    .cat-badge.all-pass { color: var(--pass); }
+    .cat-badge.has-fail { color: var(--fail); }
+
+    .category-body { padding: 0; }
+    .category-body.collapsed { display: none; }
+
+    /* ── Test row ── */
+    .test-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .test-row:last-child { border-bottom: none; }
+    .test-row:hover { background: rgba(255,255,255,.02); }
+
+    .badge {
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: .5px;
+      font-family: monospace;
+      min-width: 52px;
+      text-align: center;
+    }
+    .badge.pass { background: #14532d; color: #4ade80; }
+    .badge.fail { background: #450a0a; color: #f87171; }
+    .badge.pending { background: #1a1a1a; color: var(--muted); }
+
+    .test-info { flex: 1; }
+    .test-name { font-weight: 600; color: var(--white); font-size: 13px; }
+    .test-detail { font-size: 12px; color: var(--muted); font-family: monospace; margin-top: 3px; word-break: break-all; }
+    .test-detail.fail-detail { color: #f87171; }
+    .test-detail.pass-detail { color: #86efac; }
+
+    /* ── Readiness footer ── */
+    #readiness {
+      margin: 0 32px 48px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-align: center;
+      display: none;
+    }
+    #readiness.visible { display: block; }
+    #readiness-score { font-size: 36px; font-weight: 900; font-family: monospace; margin-bottom: 6px; }
+    #readiness-label { font-size: 14px; color: var(--muted); }
+
+    /* ── Spinner ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <div class="header-logo">L7S</div>
+    <div>
+      <h1>Production Test Suite</h1>
+      <div class="header-sub">l7sinc.com — index.html validation &nbsp;·&nbsp; <span id="target-url">fetching…</span></div>
+    </div>
+  </div>
+  <div id="score-pill">⏳ Not run</div>
+</header>
+
+<div class="controls">
+  <button id="run-btn">▶ Run Tests</button>
+  <span id="status-msg">Click "Run Tests" or wait for auto-run…</span>
+</div>
+
+<div id="summary">
+  <div class="stat"><div class="stat-num pass-color" id="s-pass">—</div><div class="stat-label">Passed</div></div>
+  <div class="stat"><div class="stat-num fail-color" id="s-fail">—</div><div class="stat-label">Failed</div></div>
+  <div class="stat"><div class="stat-num total-color" id="s-total">—</div><div class="stat-label">Total</div></div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-track"><div class="progress-bar-fill" id="prog-fill"></div></div>
+    <div class="progress-label" id="prog-label">0%</div>
+  </div>
+</div>
+
+<main id="results-container">
+  <p style="color:var(--muted);font-family:monospace;padding:8px 0;">Tests will appear here after running…</p>
+</main>
+
+<div id="readiness">
+  <div id="readiness-score">—</div>
+  <div id="readiness-label">Production Readiness Score</div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+//  L7S Inc. — Production Test Suite
+//  tests.html  ·  fetches index.html from same directory
+// ─────────────────────────────────────────────────────────────
+
+const CATEGORIES = [
+  {
+    id: 'structure',
+    title: '1 · Structural / HTML Validity',
+    tests: [
+      {
+        name: 'view-landing div present',
+        run: ({doc}) => !!doc.querySelector('#view-landing'),
+        detail: 'Checking for element with id="view-landing"'
+      },
+      {
+        name: 'view-intake div present',
+        run: ({doc}) => !!doc.querySelector('#view-intake'),
+        detail: 'Checking for element with id="view-intake"'
+      },
+      {
+        name: 'view-success div present',
+        run: ({doc}) => !!doc.querySelector('#view-success'),
+        detail: 'Checking for element with id="view-success"'
+      },
+      {
+        name: 'view-legal div present',
+        run: ({doc}) => !!doc.querySelector('#view-legal'),
+        detail: 'Checking for element with id="view-legal"'
+      },
+      {
+        name: '<title> tag present',
+        run: ({doc}) => !!doc.querySelector('title') && doc.querySelector('title').textContent.trim().length > 0,
+        detail: 'Checking <title> element exists and is non-empty'
+      },
+      {
+        name: 'meta description present',
+        run: ({doc}) => !!doc.querySelector('meta[name="description"]'),
+        detail: 'Checking <meta name="description"> exists'
+      },
+      {
+        name: 'og:title meta present',
+        run: ({doc}) => !!doc.querySelector('meta[property="og:title"]'),
+        detail: 'Checking <meta property="og:title"> exists'
+      },
+      {
+        name: 'og:image meta present',
+        run: ({doc}) => !!doc.querySelector('meta[property="og:image"]'),
+        detail: 'Checking <meta property="og:image"> exists'
+      },
+      {
+        name: 'canonical link present',
+        run: ({doc}) => !!doc.querySelector('link[rel="canonical"]'),
+        detail: 'Checking <link rel="canonical"> exists'
+      },
+      {
+        name: 'Schema.org JSON-LD present',
+        run: ({html}) => html.includes('"@context"') && html.includes('schema.org'),
+        detail: 'Checking for JSON-LD <script type="application/ld+json"> with schema.org'
+      },
+      {
+        name: 'Lucide CDN script tag present',
+        run: ({html}) => /unpkg\.com\/lucide|cdn\.jsdelivr\.net\/npm\/lucide/.test(html),
+        detail: 'Checking for Lucide icons CDN script'
+      },
+      {
+        name: 'Tailwind CDN present',
+        run: ({html}) => /cdn\.tailwindcss\.com|tailwindcss\.com\/.*\.js/.test(html),
+        detail: 'Checking for Tailwind CDN script'
+      },
+    ]
+  },
+  {
+    id: 'brand',
+    title: '2 · Brand Compliance',
+    tests: [
+      {
+        name: 'No orange-500 class used',
+        run: ({html}) => !/(class=["'][^"']*orange-500[^"']*["'])/.test(html),
+        detail: 'Brand palette is Obsidian / White / Crimson only — no orange'
+      },
+      {
+        name: 'No green-100 class used',
+        run: ({html}) => !/(class=["'][^"']*green-100[^"']*["'])/.test(html),
+        detail: 'No off-brand green-100 Tailwind class'
+      },
+      {
+        name: 'No green-600 class used',
+        run: ({html}) => !/(class=["'][^"']*green-600[^"']*["'])/.test(html),
+        detail: 'No off-brand green-600 Tailwind class'
+      },
+      {
+        name: 'No green-500 class used',
+        run: ({html}) => !/(class=["'][^"']*green-500[^"']*["'])/.test(html),
+        detail: 'No off-brand green-500 Tailwind class'
+      },
+      {
+        name: 'No 💸 emoji present',
+        run: ({html}) => !html.includes('💸'),
+        detail: 'Emoji-free brand copy — checking for 💸'
+      },
+      {
+        name: 'No 💲 emoji present',
+        run: ({html}) => !html.includes('💲'),
+        detail: 'Emoji-free brand copy — checking for 💲'
+      },
+      {
+        name: 'No 🪙 emoji present',
+        run: ({html}) => !html.includes('🪙'),
+        detail: 'Emoji-free brand copy — checking for 🪙'
+      },
+      {
+        name: 'No 📞 emoji present',
+        run: ({html}) => !html.includes('📞'),
+        detail: 'Emoji-free brand copy — checking for 📞'
+      },
+      {
+        name: 'No 💬 emoji present',
+        run: ({html}) => !html.includes('💬'),
+        detail: 'Emoji-free brand copy — checking for 💬'
+      },
+      {
+        name: 'No ✉️ emoji present',
+        run: ({html}) => !html.includes('✉️'),
+        detail: 'Emoji-free brand copy — checking for ✉️'
+      },
+      {
+        name: 'No 📅 emoji present',
+        run: ({html}) => !html.includes('📅'),
+        detail: 'Emoji-free brand copy — checking for 📅'
+      },
+      {
+        name: '8th hero card uses slate-900 (dark bg)',
+        run: ({html}) => {
+          // Look for "Initiate S.S.S." card — should have slate-900 near it, not a light bg
+          const idx = html.indexOf('Initiate S.S.S.');
+          if (idx === -1) return { pass: false, note: '"Initiate S.S.S." text not found' };
+          const chunk = html.slice(Math.max(0, idx - 400), idx + 400);
+          return /slate-900/.test(chunk);
+        },
+        detail: 'Initiate S.S.S. card must use slate-900 background'
+      },
+    ]
+  },
+  {
+    id: 'navigation',
+    title: '3 · Navigation / Routing',
+    tests: [
+      {
+        name: 'setView function defined in script',
+        run: ({html}) => /function\s+setView\s*\(/.test(html) || /const\s+setView\s*=/.test(html) || /let\s+setView\s*=/.test(html),
+        detail: 'Checking JS source for setView() definition'
+      },
+      {
+        name: 'showPolicy function defined in script',
+        run: ({html}) => /function\s+showPolicy\s*\(/.test(html) || /const\s+showPolicy\s*=/.test(html),
+        detail: 'Checking JS source for showPolicy() definition'
+      },
+      {
+        name: 'toggleFAQ function defined in script',
+        run: ({html}) => /function\s+toggleFAQ\s*\(/.test(html) || /const\s+toggleFAQ\s*=/.test(html),
+        detail: 'Checking JS source for toggleFAQ() definition'
+      },
+      {
+        name: 'All 4 view IDs present in DOM',
+        run: ({doc}) => {
+          const ids = ['view-landing','view-intake','view-success','view-legal'];
+          const missing = ids.filter(id => !doc.querySelector('#' + id));
+          return missing.length === 0
+            ? true
+            : { pass: false, note: 'Missing: ' + missing.join(', ') };
+        },
+        detail: 'DOM check for #view-landing, #view-intake, #view-success, #view-legal'
+      },
+      {
+        name: "Footer legal links call setView('legal'…)",
+        run: ({html}) => {
+          // Check that legal links in footer use setView not openModal
+          return /setView\s*\(\s*['"]legal['"]/.test(html) && !/openModal/.test(html);
+        },
+        detail: "Legal footer links must use setView('legal', ...) pattern"
+      },
+    ]
+  },
+  {
+    id: 'form',
+    title: '4 · W.O.M.E.N. Intake Form Fields',
+    tests: [
+      {
+        name: 'first-name input present',
+        run: ({doc}) => !!doc.querySelector('[id*="first-name"],[name*="first-name"],[id*="firstName"],[name*="firstName"]'),
+        detail: 'Checking for first name input field'
+      },
+      {
+        name: 'last-name input present',
+        run: ({doc}) => !!doc.querySelector('[id*="last-name"],[name*="last-name"],[id*="lastName"],[name*="lastName"]'),
+        detail: 'Checking for last name input field'
+      },
+      {
+        name: 'email input present',
+        run: ({doc}) => !!doc.querySelector('input[type="email"], input[id*="email"], input[name*="email"]'),
+        detail: 'Checking for email input field'
+      },
+      {
+        name: 'phone input present',
+        run: ({doc}) => !!doc.querySelector('input[type="tel"], input[id*="phone"], input[name*="phone"]'),
+        detail: 'Checking for phone input field'
+      },
+      {
+        name: 'business-name input present',
+        run: ({doc}) => !!doc.querySelector('[id*="business-name"],[name*="business-name"],[id*="businessName"],[name*="businessName"],[id*="business_name"]'),
+        detail: 'Checking for business name input field'
+      },
+      {
+        name: 'business-type input/select present',
+        run: ({doc}) => !!doc.querySelector('[id*="business-type"],[name*="business-type"],[id*="businessType"],[name*="businessType"],[id*="business_type"]'),
+        detail: 'Checking for business type input/select field'
+      },
+      {
+        name: 'Credit monitoring toggle buttons (.mon-toggle) present',
+        run: ({doc}) => doc.querySelectorAll('.mon-toggle').length >= 2,
+        detail: 'Checking for at least 2 elements with class="mon-toggle" (YES/NO buttons)'
+      },
+      {
+        name: 'agree-terms checkbox present',
+        run: ({doc}) => {
+          return !!doc.querySelector('#agree-terms, [name="agree-terms"], [id*="agree"], input[type="checkbox"]');
+        },
+        detail: 'Checking for terms agreement checkbox'
+      },
+      {
+        name: 'Form submit button present',
+        run: ({doc}) => {
+          const inIntake = doc.querySelector('#view-intake');
+          if (!inIntake) return { pass: false, note: '#view-intake not found' };
+          return !!inIntake.querySelector('button[type="submit"], button[onclick*="submit"], input[type="submit"]') ||
+                 !!doc.querySelector('form button');
+        },
+        detail: 'Checking for submit button in intake form'
+      },
+    ]
+  },
+  {
+    id: 'payment',
+    title: '5 · Payment Infrastructure',
+    tests: [
+      {
+        name: 'At least 5 pricing tier buttons present',
+        run: ({html}) => {
+          // Count stripe checkout or pricing CTA buttons
+          const matches = html.match(/stripe\.com|checkout|pricing|tier|enroll|get-started/gi) || [];
+          // Also look for button elements with payment-related content
+          const btns = (html.match(/<button[^>]*>/gi) || []).length;
+          return btns >= 5 ? true : { pass: btns >= 5, note: `Found ${btns} <button> elements` };
+        },
+        detail: 'Checking for 5+ button elements (pricing CTA / Stripe checkout)'
+      },
+      {
+        name: 'Zelle payment option div present',
+        run: ({html}) => /zelle/i.test(html),
+        detail: 'Checking for Zelle alternative payment option'
+      },
+      {
+        name: 'CashApp payment option div present',
+        run: ({html}) => /cash\s*app|cashapp|\$cashtag/i.test(html),
+        detail: 'Checking for CashApp alternative payment option'
+      },
+      {
+        name: 'Crypto payment option present',
+        run: ({html}) => /crypto|bitcoin|usdc|ethereum/i.test(html),
+        detail: 'Checking for crypto alternative payment option'
+      },
+      {
+        name: 'Lucide banknote icon in alt payments',
+        run: ({html}) => /data-lucide=["']banknote["']/.test(html),
+        detail: 'Checking for <i data-lucide="banknote"> icon (no emoji)'
+      },
+      {
+        name: 'Lucide dollar-sign icon in alt payments',
+        run: ({html}) => /data-lucide=["']dollar-sign["']/.test(html),
+        detail: 'Checking for <i data-lucide="dollar-sign"> icon (no emoji)'
+      },
+      {
+        name: 'Lucide coins icon in alt payments',
+        run: ({html}) => /data-lucide=["']coins["']/.test(html),
+        detail: 'Checking for <i data-lucide="coins"> icon (no emoji)'
+      },
+    ]
+  },
+  {
+    id: 'booking',
+    title: '6 · Booking / Cal.com Integration',
+    tests: [
+      {
+        name: 'Cal.com CDN script present',
+        run: ({html}) => /cdn\.cal\.com|cal\.com\/embed/.test(html),
+        detail: 'Checking for cdn.cal.com script or Cal embed script'
+      },
+      {
+        name: 'href containing cal.com/l7sinc present',
+        run: ({html}) => /cal\.com\/l7sinc/.test(html),
+        detail: 'Checking for booking link href="https://cal.com/l7sinc"'
+      },
+      {
+        name: 'btn-pulse class on booking CTA',
+        run: ({doc}) => {
+          const pulseBtns = doc.querySelectorAll('.btn-pulse');
+          return pulseBtns.length > 0
+            ? true
+            : { pass: false, note: 'No element with class="btn-pulse" found' };
+        },
+        detail: 'Checking for animated pulse CTA button on booking element'
+      },
+    ]
+  },
+  {
+    id: 'legal',
+    title: '7 · Legal Compliance',
+    tests: [
+      {
+        name: '#view-legal div present',
+        run: ({doc}) => !!doc.querySelector('#view-legal'),
+        detail: 'Legal view container must exist in DOM'
+      },
+      {
+        name: 'Privacy Policy tab/content present',
+        run: ({html}) => /privacy\s*policy/i.test(html),
+        detail: 'Checking for "Privacy Policy" text in legal section'
+      },
+      {
+        name: 'Terms of Service tab/content present',
+        run: ({html}) => /terms\s*of\s*service/i.test(html),
+        detail: 'Checking for "Terms of Service" text in legal section'
+      },
+      {
+        name: 'CROA disclaimer text present',
+        run: ({html}) => /CROA|Credit\s*Repair\s*Organizations\s*Act/i.test(html),
+        detail: 'Federal CROA disclosure must be present'
+      },
+      {
+        name: 'Georgia state regulations mention present',
+        run: ({html}) => /georgia|GA\s*state/i.test(html),
+        detail: 'State-specific Georgia regulations must be referenced'
+      },
+    ]
+  },
+  {
+    id: 'seo',
+    title: '8 · SEO',
+    tests: [
+      {
+        name: '<title> contains "L7S"',
+        run: ({doc}) => {
+          const title = doc.querySelector('title')?.textContent || '';
+          return title.includes('L7S')
+            ? true
+            : { pass: false, note: `Title is: "${title}"` };
+        },
+        detail: 'Page title must contain brand name "L7S"'
+      },
+      {
+        name: 'meta description > 50 characters',
+        run: ({doc}) => {
+          const desc = doc.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+          return desc.length > 50
+            ? true
+            : { pass: false, note: `Description length: ${desc.length} chars — "${desc}"` };
+        },
+        detail: 'Meta description should be descriptive (>50 chars)'
+      },
+      {
+        name: 'Canonical URL points to l7shub.github.io or l7sinc.com',
+        run: ({doc}) => {
+          const canonical = doc.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
+          return /l7shub\.github\.io|l7sinc\.com/.test(canonical)
+            ? true
+            : { pass: false, note: `Canonical href: "${canonical}"` };
+        },
+        detail: 'Canonical must reference production domain'
+      },
+      {
+        name: 'og:image has a non-empty value',
+        run: ({doc}) => {
+          const img = doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+          return img.length > 0
+            ? true
+            : { pass: false, note: 'og:image content is empty' };
+        },
+        detail: 'Open Graph image must be set for social sharing'
+      },
+      {
+        name: 'Schema.org @type is ProfessionalService or Organization',
+        run: ({html}) => /"@type"\s*:\s*"(ProfessionalService|Organization|LocalBusiness)"/.test(html),
+        detail: 'JSON-LD must define a business type for rich results'
+      },
+    ]
+  },
+  {
+    id: 'footer',
+    title: '9 · Responsive Footer',
+    tests: [
+      {
+        name: 'Footer grid uses sm:grid-cols-2',
+        run: ({html}) => /sm:grid-cols-2/.test(html),
+        detail: 'Footer must break to 2 columns at "sm" breakpoint (not md)'
+      },
+      {
+        name: 'Footer grid has items-start alignment',
+        run: ({html}) => {
+          // Look for items-start near a footer grid
+          const ftIdx = html.lastIndexOf('<footer');
+          if (ftIdx === -1) return { pass: false, note: '<footer> element not found' };
+          const ftChunk = html.slice(ftIdx);
+          return /items-start/.test(ftChunk);
+        },
+        detail: 'Footer grid columns should be top-aligned with items-start'
+      },
+      {
+        name: 'No "Closed for Operations" long text',
+        run: ({html}) => !/Closed\s+for\s+Operations/i.test(html),
+        detail: 'Hours text should use shortened labels, not verbose "Closed for Operations"'
+      },
+      {
+        name: 'Legal links section uses grid-cols-2 on mobile',
+        run: ({html}) => {
+          // Find footer legal links area and check for grid-cols-2
+          const legalIdx = html.search(/Privacy\s*Policy/i);
+          if (legalIdx === -1) return { pass: false, note: 'Privacy Policy text not found near footer' };
+          const chunk = html.slice(Math.max(0, legalIdx - 300), legalIdx + 300);
+          return /grid-cols-2/.test(chunk);
+        },
+        detail: 'Footer legal links grid should use grid-cols-2 at mobile sizes'
+      },
+    ]
+  },
+  {
+    id: 'support',
+    title: '10 · Support Widget',
+    tests: [
+      {
+        name: 'Floating support widget present',
+        run: ({doc}) => {
+          // Look for a fixed-positioned widget div
+          return !!doc.querySelector('[class*="fixed"][class*="bottom"], [id*="support"], [id*="widget"], [class*="support"]') ||
+                 /fixed.*bottom|bottom.*fixed/.test(
+                   Array.from(doc.querySelectorAll('div[class*="fixed"]'))
+                     .map(el => el.className).join(' ')
+                 );
+        },
+        detail: 'Checking for a fixed/floating support widget element'
+      },
+      {
+        name: 'Lucide phone icon in widget (no emoji)',
+        run: ({html}) => /data-lucide=["']phone["']/.test(html),
+        detail: 'Support widget must use Lucide phone icon, not 📞 emoji'
+      },
+      {
+        name: 'Lucide message-circle icon in widget (no emoji)',
+        run: ({html}) => /data-lucide=["']message-circle["']/.test(html),
+        detail: 'Support widget must use Lucide message-circle icon, not 💬 emoji'
+      },
+      {
+        name: 'Lucide mail icon present (no emoji)',
+        run: ({html}) => /data-lucide=["']mail["']/.test(html),
+        detail: 'Support widget must use Lucide mail icon, not ✉️ emoji'
+      },
+      {
+        name: 'Lucide calendar icon present (no emoji)',
+        run: ({html}) => /data-lucide=["']calendar["']/.test(html),
+        detail: 'Support widget must use Lucide calendar icon, not 📅 emoji'
+      },
+    ]
+  },
+];
+
+// ─────────────────────────────────────────────────────────────
+//  Runner
+// ─────────────────────────────────────────────────────────────
+
+let ran = false;
+
+async function runTests() {
+  if (ran) return;
+  ran = true;
+
+  const btn = document.getElementById('run-btn');
+  const statusMsg = document.getElementById('status-msg');
+  const container = document.getElementById('results-container');
+  const targetUrlEl = document.getElementById('target-url');
+
+  btn.disabled = true;
+  btn.textContent = 'Running…';
+  statusMsg.innerHTML = '<span class="spinner"></span> Fetching index.html…';
+  container.innerHTML = '';
+
+  let html, doc;
+
+  try {
+    const res = await fetch('index.html');
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    html = await res.text();
+    const parser = new DOMParser();
+    doc = parser.parseFromString(html, 'text/html');
+    targetUrlEl.textContent = 'index.html fetched ✓';
+  } catch (err) {
+    container.innerHTML = `
+      <div style="background:#450a0a;border:1px solid #dc2626;border-radius:8px;padding:20px 24px;color:#f87171;font-family:monospace;">
+        <strong>⚠ Could not load index.html</strong><br>
+        ${err.message}<br><br>
+        Make sure both <code>tests.html</code> and <code>index.html</code> are served from the same origin
+        (e.g. <code>python -m http.server 8080</code> or VS Code Live Server).
+        Fetching local files directly via <code>file://</code> is blocked by browser security.
+      </div>`;
+    statusMsg.textContent = 'Failed to load index.html';
+    btn.disabled = false;
+    btn.textContent = '▶ Retry';
+    ran = false;
+    return;
+  }
+
+  statusMsg.innerHTML = '<span class="spinner"></span> Running assertions…';
+
+  let totalPass = 0, totalFail = 0;
+
+  for (const cat of CATEGORIES) {
+    const catEl = document.createElement('div');
+    catEl.className = 'category';
+    catEl.id = 'cat-' + cat.id;
+
+    const headerEl = document.createElement('div');
+    headerEl.className = 'category-header';
+
+    const body = document.createElement('div');
+    body.className = 'category-body';
+
+    let catPass = 0, catFail = 0;
+
+    for (const test of cat.tests) {
+      let result;
+      let note = '';
+      try {
+        const raw = test.run({ html, doc });
+        if (typeof raw === 'boolean') {
+          result = raw;
+        } else if (raw && typeof raw === 'object') {
+          result = !!raw.pass;
+          note = raw.note || '';
+        } else {
+          result = !!raw;
+        }
+      } catch (e) {
+        result = false;
+        note = 'Exception: ' + e.message;
+      }
+
+      if (result) { catPass++; totalPass++; } else { catFail++; totalFail++; }
+
+      const row = document.createElement('div');
+      row.className = 'test-row';
+
+      const badge = document.createElement('span');
+      badge.className = 'badge ' + (result ? 'pass' : 'fail');
+      badge.textContent = result ? 'PASS' : 'FAIL';
+
+      const info = document.createElement('div');
+      info.className = 'test-info';
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'test-name';
+      nameEl.textContent = (result ? '✅ ' : '❌ ') + test.name;
+
+      const detailEl = document.createElement('div');
+      detailEl.className = 'test-detail ' + (result ? 'pass-detail' : 'fail-detail');
+      detailEl.textContent = note || test.detail;
+
+      info.appendChild(nameEl);
+      info.appendChild(detailEl);
+      row.appendChild(badge);
+      row.appendChild(info);
+      body.appendChild(row);
+    }
+
+    // category header
+    const catTitle = document.createElement('div');
+    catTitle.className = 'cat-title';
+    catTitle.innerHTML = `<span>${cat.title}</span><span class="cat-num">${cat.tests.length} tests</span>`;
+
+    const catBadge = document.createElement('div');
+    catBadge.className = 'cat-badge ' + (catFail === 0 ? 'all-pass' : 'has-fail');
+    catBadge.textContent = catFail === 0 ? `✅ ${catPass}/${cat.tests.length}` : `❌ ${catFail} failed`;
+
+    headerEl.appendChild(catTitle);
+    headerEl.appendChild(catBadge);
+
+    // toggle collapse
+    headerEl.addEventListener('click', () => {
+      body.classList.toggle('collapsed');
+    });
+
+    catEl.appendChild(headerEl);
+    catEl.appendChild(body);
+    container.appendChild(catEl);
+  }
+
+  // ── Summary ──
+  const total = totalPass + totalFail;
+  const pct = total > 0 ? Math.round((totalPass / total) * 100) : 0;
+
+  document.getElementById('s-pass').textContent = totalPass;
+  document.getElementById('s-fail').textContent = totalFail;
+  document.getElementById('s-total').textContent = total;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-fill').style.background = pct >= 90 ? '#16a34a' : pct >= 70 ? '#d97706' : '#dc2626';
+  document.getElementById('prog-label').textContent = pct + '% passing';
+  document.getElementById('summary').classList.add('visible');
+
+  // Score pill
+  const pill = document.getElementById('score-pill');
+  pill.textContent = `${totalPass} / ${total} passed (${pct}%)`;
+  pill.classList.add('ready');
+  pill.style.color = pct >= 90 ? '#4ade80' : pct >= 70 ? '#fbbf24' : '#f87171';
+
+  // Readiness footer
+  const readinessEl = document.getElementById('readiness');
+  const scoreEl = document.getElementById('readiness-score');
+  const labelEl = document.getElementById('readiness-label');
+  scoreEl.textContent = `${totalPass} / ${total} tests passed (${pct}%)`;
+  scoreEl.style.color = pct >= 90 ? '#4ade80' : pct >= 70 ? '#fbbf24' : '#f87171';
+  const grade = pct >= 95 ? '🟢 Ship it.' : pct >= 85 ? '🟡 Review failures before deploying.' : '🔴 Critical issues — do not ship.';
+  labelEl.textContent = `Production Readiness Score  ·  ${grade}`;
+  readinessEl.classList.add('visible');
+
+  statusMsg.textContent = `Done — ${total} tests complete.`;
+  btn.textContent = '✓ Complete';
+}
+
+document.getElementById('run-btn').addEventListener('click', () => { ran = false; runTests(); });
+
+// Auto-run on load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(runTests, 300);
+});
+</script>
+</body>
+</html>
