@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!-- ============================================================ -->
-    <!-- PRIMARY SEO                                                   -->
+    <!-- PRIMARY SEO                                                  -->
     <!-- ============================================================ -->
     <title>L7S Inc. | Business Growth Solutions for Founders, Entrepreneurs & CEOs | Roswell, GA</title>
     <meta name="description" content="L7S Inc. is the L7S Hero S.O.S.™ — an AI-powered business ecosystem platform helping Founders, Owners, Entrepreneurs & Executives start, scale, and streamline. Credit, CEO, Capital, Cashflow, Coverage, Crypto & Currency solutions. Serving Roswell, Atlanta, GA and nationwide.">
@@ -48,7 +48,7 @@
     <meta name="twitter:image" content="https://l7sinc.com/assets/og-image.png">
 
     <!-- ============================================================ -->
-    <!-- SCHEMA.ORG STRUCTURED DATA — LocalBusiness + Organization   -->
+    <!-- SCHEMA.ORG STRUCTURED DATA — LocalBusiness + Organization    -->
     <!-- ============================================================ -->
     <script type="application/ld+json">
     {
@@ -119,7 +119,7 @@
 
     <!-- ============================================================ -->
     <!-- GOOGLE ANALYTICS 4                                           -->
-    <!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID           -->
+    <!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID            -->
     <!-- ============================================================ -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -130,7 +130,7 @@
     </script> -->
 
     <!-- ============================================================ -->
-    <!-- META PIXEL                                                    -->
+    <!-- META PIXEL                                                   -->
     <!-- Replace YOUR_PIXEL_ID with your Facebook Pixel ID            -->
     <!-- ============================================================ -->
     <!-- <script>
@@ -143,12 +143,13 @@
       fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
+      src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript> -->
 
     <!-- Stripe.js for Checkout -->
     <script src="https://js.stripe.com/v3/"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -164,7 +165,9 @@
             }
         }
     </script>
+    
     <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
+    
     <!-- Cal.com Embed -->
     <script>
         (function (C, A, L) {
@@ -196,6 +199,7 @@
             layout: "month_view"
         });
     </script>
+    
     <style>
         html { scroll-behavior: smooth; }
         .view { display: none; }
@@ -204,158 +208,249 @@
         .faq-chevron { transition: transform 0.3s ease; }
         .faq-chevron.rotate { transform: rotate(180deg); }
         .modal-overlay { transition: opacity 0.3s ease; }
-        .hero-card:hover { transform: translateY(-4px); transition: transform 0.3s ease; }
-        .pricing-card:hover { transform: translateY(-4px); transition: transform 0.3s ease; }
+        /* Smooth, premium hover animations */
+        .hero-card:hover { transform: translateY(-4px); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .pricing-card:hover { transform: translateY(-4px); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        /* Custom scrollbar for legal content */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Pulse animation for the booking button */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .btn-pulse { animation: pulse-red 2s infinite; }
         /* YES/NO monitoring toggle active state */
         .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
     </style>
 </head>
-<body class="bg-white text-slate-800 font-sans antialiased">
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-red-500 selection:text-white">
 
 <!-- ============================================================ -->
 <!-- VIEW 1: LANDING PAGE                                         -->
 <!-- ============================================================ -->
-<div id="view-landing" class="view active">
-
+<div id="view-landing" class="view active min-h-screen">
+    
     <!-- NAV -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="setView('landing')">
-                <img src="assets/logo-icon.png" alt="L7S" class="w-9 h-9 rounded-lg">
-                <span class="text-xl font-extrabold tracking-tight">L7S<span class="text-red-600">, Inc.</span></span>
+            <div class="flex items-center gap-3 cursor-pointer" onclick="setView('landing')">
+                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/20">
+                    <i data-lucide="shield" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight uppercase">L7S<span class="text-red-600">, Inc.</span></span>
             </div>
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-slate-600">
                 <a href="#league" class="hover:text-red-600 transition-colors">The League</a>
                 <a href="#pricing" class="hover:text-red-600 transition-colors">Pricing</a>
                 <a href="#captain" class="hover:text-red-600 transition-colors">About</a>
                 <a href="#debrief" class="hover:text-red-600 transition-colors">Debrief</a>
-                <button onclick="setView('intake')" class="bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors">Get Started</button>
+                <button onclick="setView('intake')" class="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wide hover:bg-slate-800 transition-all shadow-md">Get Started</button>
             </div>
-            <button id="mobile-menu-btn" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden p-2">
+            <button id="mobile-menu-btn" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden p-2 text-slate-600 hover:text-slate-900 transition-colors">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
+        
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pb-4 space-y-2">
-            <a href="#league" class="block py-2 text-sm font-medium hover:text-red-600">The League</a>
-            <a href="#pricing" class="block py-2 text-sm font-medium hover:text-red-600">Pricing</a>
-            <a href="#captain" class="block py-2 text-sm font-medium hover:text-red-600">About</a>
-            <a href="#debrief" class="block py-2 text-sm font-medium hover:text-red-600">Debrief</a>
-            <button onclick="setView('intake')" class="w-full bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors">Get Started</button>
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full left-0 top-16 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-6 shadow-xl space-y-4">
+            <a href="#league" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-2 text-sm font-bold uppercase tracking-wider text-slate-600 hover:text-red-600">The League</a>
+            <a href="#pricing" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-2 text-sm font-bold uppercase tracking-wider text-slate-600 hover:text-red-600">Pricing</a>
+            <a href="#captain" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-2 text-sm font-bold uppercase tracking-wider text-slate-600 hover:text-red-600">About</a>
+            <a href="#debrief" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-2 text-sm font-bold uppercase tracking-wider text-slate-600 hover:text-red-600">Debrief</a>
+            <button onclick="setView('intake'); document.getElementById('mobile-menu').classList.add('hidden')" class="w-full bg-slate-900 text-white px-5 py-3 rounded-lg text-sm font-bold uppercase tracking-wide hover:bg-slate-800 transition-colors mt-4">Get Started</button>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-red-600 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
+    <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white">
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-red-600 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-red-700 rounded-full blur-[100px]"></div>
         </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium mb-8">
-                🔴⚪️⚫️ AI-Powered Business Intelligence
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-sm">
+                <i data-lucide="zap" class="w-4 h-4 text-red-500"></i> AI-Powered Business Intelligence
             </div>
-            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-4">
-                L7S<span class="text-red-500">, Inc.</span>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 leading-tight">
+                Strategy Solution <span class="text-red-500">Stream</span>
             </h1>
-            <p class="text-2xl md:text-3xl font-light text-slate-300 mb-6">The Source of L7S Hero S.O.S.™</p>
-            <p class="max-w-3xl mx-auto text-lg text-slate-400 mb-10">
-                L7S, Inc. powers the L7S Hero S.O.S.™ platform for Aware-Wolfs, Founders, Commanders &amp; C-Suite Executives. Start, Scale &amp; Streamline your business with the <strong class="text-white">League of 7 Superheroes</strong>.
+            <p class="max-w-3xl mx-auto text-xl font-medium text-slate-300 mb-10 leading-relaxed">
+                Calling all Aware-Wolfs, Founders, and Commanders. Describe your goal. Get an expert AI recommendation instantly, backed by the L7S Hero A.B.C.S.™ architecture.
             </p>
-            <button onclick="setView('intake')" class="bg-red-600 hover:bg-red-700 text-white text-lg font-bold px-10 py-4 rounded-xl shadow-lg shadow-red-600/30 transition-all hover:shadow-xl hover:shadow-red-600/40">
-                Book Your R&amp;R™ Audit Session
+            <button onclick="setView('intake')" class="inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-500 text-white text-lg font-black uppercase tracking-wide px-10 py-5 rounded-xl shadow-xl shadow-red-600/30 transition-all hover:shadow-red-600/50 active:scale-95">
+                Get Recommendation
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
             </button>
-            <p class="mt-4 text-sm text-slate-500">R&amp;R™: Review &amp; Recommendation Audit &amp; Analysis Awareness Evaluation</p>
+            <p class="mt-6 text-sm font-medium text-slate-400">R&amp;R™: Review &amp; Recommendation Audit &amp; Analysis Awareness Evaluation</p>
         </div>
     </section>
 
     <!-- LEAGUE OF 7 SUPERHEROES -->
-    <section id="league" class="py-20 bg-slate-50">
+    <section id="league" class="py-24 bg-slate-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4">Meet The League Of 7 Superheroes</h2>
-                <p class="text-lg text-slate-500">Your strategic assets, ready for deployment.</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-wide mb-4">
+                    Meet The League Of <span class="text-red-600">7 Superheroes</span>
+                </h2>
+                <p class="text-lg text-slate-500 font-medium">Your strategic assets, ready for deployment.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
+            
+            <!-- PERFECT 8-GRID SYMMETRY (4x2 on Desktop, 2x4 on Tablet) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                
                 <!-- Hero 1: Credit Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="star" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="star" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Credit Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Deploys for missions involving credit profile reconstruction, debt instrument negotiation, and credibility optimization.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Credit Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">Deploys for credit profile reconstruction, debt instrument negotiation, and credibility optimization. Connects you with licensed credit professionals.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 2: CEO Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="briefcase" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">CEO Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Specializes in corporate structuring, brand strategy, operational scaling, and executive-level tactical planning via BXBlueprints™.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">CEO Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">Specializes in corporate structuring, brand strategy, operational scaling, and executive-level tactical planning via BXBlueprints™.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 3: Capital Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Loan Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Tasked with capital acquisition, sourcing funding solutions, and customizing financial instruments for mission success.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Capital Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">Tasked with capital acquisition, sourcing funding solutions, and customizing financial instruments for mission success.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 4: Cashflow Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="zap" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Cashflow Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Manages operational liquidity via P.I.E.S.™ (Profit, Income, Equity, Savings) for financial agility during all mission phases.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Cashflow Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">Manages operational liquidity via P.I.E.S.™ (Profit, Income, Equity, Savings) for financial agility during all mission phases.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 5: Crypto Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="bitcoin" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="bitcoin" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Crypto Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Leverages decentralized technologies, blockchain intelligence, and digital asset strategies for wealth creation.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Crypto Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">Leverages C.O.R.E. D.A.T.A.™ — decentralized technologies, blockchain intelligence, and digital asset strategies.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
                 <!-- Hero 6: Coverage Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Coverage Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Focuses on risk mitigation, asset protection, and strategic deployment of insurance protocols for long-term stability.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Coverage Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">B.A.C.K. U.P.™ protocol — risk mitigation, asset protection, and strategic insurance deployment.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
-                <!-- Hero 7: Community Hero -->
-                <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-shadow">
-                    <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                <!-- Hero 7: Community Hero (Fixed col-span issue) -->
+                <div class="w-full">
+                    <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900 mb-3">Community Hero</h3>
+                        <p class="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1">Builds strategic alliances, fosters collaborative networks, and expands operational influence for collective success.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-orange-500"></i> Generate Plan
+                            </button>
+                            <button onclick="setView('intake')" class="w-full py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                                Consult Now
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Community Hero</h3>
-                    <p class="text-sm text-slate-500 mb-6">S.O.S.™ network — builds strategic alliances, fosters collaborative networks, and expands operational influence.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2">Deploy Hero <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
-                <!-- Card 8: Initiate S.S.S.™ — Obsidian CTA -->
-                <div class="hero-card bg-slate-900 rounded-2xl border border-slate-700 p-6 shadow-sm hover:shadow-red-600/20 hover:shadow-xl transition-all">
-                    <div class="bg-red-600/20 text-red-400 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="signal" class="w-6 h-6"></i>
+                <!-- Hero 8: The Red Action Card Anchor -->
+                <div class="w-full">
+                    <div class="hero-card bg-gradient-to-br from-red-600 to-red-800 border border-red-500 p-6 rounded-3xl shadow-lg hover:shadow-red-600/30 transition-all flex flex-col h-full">
+                        <div class="w-14 h-14 bg-white/20 border border-white/20 rounded-2xl flex items-center justify-center text-white mb-6 backdrop-blur-sm">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-white mb-1">Initiate S.S.S.</h3>
+                        <p class="text-red-200 text-xs font-bold uppercase tracking-wider mb-4">Strategy Session</p>
+                        <p class="text-white/90 text-sm font-medium leading-relaxed mb-8 flex-1">We don't give answers; we give Blueprints. Lock in your Strategy Session Solution today and stop guessing.</p>
+                        <div class="space-y-3 mt-auto">
+                            <button onclick="setView('intake')" class="w-full py-3 rounded-xl font-bold text-sm bg-white text-red-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-lg active:scale-95">
+                                LET'S GET THIS DONE
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-white">Initiate S.S.S.™</h3>
-                    <p class="text-sm text-slate-400 mb-6">Signal. Strategy. Scale. Deploy the full L7S ecosystem for your mission. The Captain is standing by for your briefing.</p>
-                    <button onclick="setView('intake')" class="w-full bg-red-600 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-600/30">Enter the Gateway <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
                 </div>
 
             </div>
@@ -363,360 +458,346 @@
     </section>
 
     <!-- A.B.C.S.™ PROTOCOL -->
-    <section id="abcs" class="py-20">
+    <section id="abcs" class="py-24 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black mb-4">The A.B.C.S.™ Protocol</h2>
-                <p class="text-lg text-slate-500">Our proprietary foundation framework for every engagement.</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-wide mb-4">The A.B.C.S.™ Protocol</h2>
+                <p class="text-lg text-slate-500 font-medium">Our proprietary foundation framework for every engagement.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
                 <div class="text-center">
-                    <div class="bg-red-100 text-red-600 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+                    <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">A — Analytics</h3>
-                    <p class="text-sm text-slate-500">Data-driven insights, credit reports analysis, business audits, and performance scorecards to establish your baseline.</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">A — Analytics</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Data-driven insights, credit reports analysis, business audits, and performance scorecards to establish your baseline.</p>
                 </div>
                 <div class="text-center">
-                    <div class="bg-red-100 text-red-600 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="file-text" class="w-7 h-7"></i>
+                    <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i data-lucide="file-text" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">B — Blueprints</h3>
-                    <p class="text-sm text-slate-500">Custom business plans, BXBlueprints™, buildout bundles, and strategic roadmaps tailored to your mission.</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">B — Blueprints</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Custom business plans, BXBlueprints™, buildout bundles, and strategic roadmaps tailored to your mission.</p>
                 </div>
                 <div class="text-center">
-                    <div class="bg-red-100 text-red-600 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="check-square" class="w-7 h-7"></i>
+                    <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i data-lucide="check-square" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">C — Checklists</h3>
-                    <p class="text-sm text-slate-500">Progress trackers, compliance checklists, P.A.T. D.O.W.N.S.™ protocols, and accountability dashboards.</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">C — Checklists</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Progress trackers, compliance checklists, P.A.T. D.O.W.N.S.™ protocols, and accountability dashboards.</p>
                 </div>
                 <div class="text-center">
-                    <div class="bg-red-100 text-red-600 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="trending-up" class="w-7 h-7"></i>
+                    <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <i data-lucide="trending-up" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">S — Scaling</h3>
-                    <p class="text-sm text-slate-500">Systems, sequences, SOPs, and L7S automation frameworks to multiply your results.</p>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">S — Scaling</h3>
+                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Systems, sequences, SOPs, and L7S automation frameworks to multiply your results and streamline operations.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- MEET THE CAPTAIN -->
-    <section id="captain" class="py-20 bg-slate-900 text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-black mb-4">Meet The Captain</h2>
-            <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2 text-sm font-medium mb-8">
-                <img src="assets/logo-icon.png" alt="L7S" class="w-4 h-4 rounded-sm">
-                Luckie "Links" Goggins — Founder &amp; CEO, L7S Inc.
+    <section id="captain" class="py-24 bg-slate-950 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-red-600 rounded-full blur-[100px] -translate-y-1/2"></div>
+        </div>
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-wide mb-6">Meet The Captain</h2>
+            <div class="inline-flex items-center gap-3 bg-slate-900 border border-slate-800 rounded-full px-6 py-2.5 text-sm font-bold tracking-wider mb-10 shadow-lg">
+                <img src="assets/logo-icon.png" alt="L7S" class="w-5 h-5 rounded-sm">
+                Luckie "Links" Goggins — Founder &amp; CEO
             </div>
-            <p class="text-slate-300 text-lg leading-relaxed mb-6">
+            <p class="text-slate-300 text-lg leading-relaxed mb-6 font-medium">
                 Entrepreneur since 2011. Business owner since 2016. From insurance agent to I.T. contractor, hospitality professional to multi-service consultant — Captain Goggins built L7S Inc. to be the AI-powered business coordination firm that connects F.O.O.D.I.E.S.™ (Founders, Owners, Operations Directors, Incorporators, Executives, Entrepreneurs, Self-Employed Specialists) with the resources, frameworks, and strategic partnerships they need to win.
             </p>
-            <p class="text-slate-400 leading-relaxed mb-10">
+            <p class="text-slate-400 leading-relaxed mb-12 font-medium text-lg">
                 Through the L7S Hero S.O.S.™ Superhero Operating System, The Captain deploys 7 specialized heroes to handle Credit, CEO services, Capital, Cashflow, Crypto, Coverage, and Community — so you can focus on commanding your empire.
             </p>
-            <button onclick="setView('intake')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 transition-all">
+            <button onclick="setView('intake')" class="bg-red-600 hover:bg-red-500 text-white font-black uppercase tracking-wide px-10 py-5 rounded-xl shadow-xl shadow-red-600/30 transition-all active:scale-95">
                 Book Your R&amp;R™ Session with The Captain
             </button>
         </div>
     </section>
 
     <!-- PRICING -->
-    <section id="pricing" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-black mb-4">L7S HERO™ Pricing</h2>
+    <section id="pricing" class="py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-wide mb-4">
+                    L7S HERO™ <span class="text-red-600">Pricing</span>
+                </h2>
+                <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto">
+                    A simple monthly membership with powerful one-time upgrades to expand your access.
+                </p>
             </div>
-            <!-- Monthly Membership -->
-            <div class="max-w-lg mx-auto bg-slate-900 text-white rounded-2xl p-6 text-center mb-6 shadow-xl">
-                <p class="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-1">Monthly Membership</p>
-                <p class="text-4xl font-black">$39<span class="text-lg font-medium text-slate-400">/mo</span></p>
-            </div>
-            <p class="text-center text-lg font-semibold text-slate-600 mb-10">Access Tier Upgrades</p>
-            <!-- Pricing Grid -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
+            <!-- Monthly Membership Banner -->
+            <div class="max-w-3xl mx-auto bg-slate-900 rounded-3xl p-8 md:p-10 mb-20 text-center shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-slate-800">
+                <div class="text-left">
+                    <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">Monthly Membership</h3>
+                    <p class="text-slate-400 font-medium max-w-md">Universal access for all members to our frameworks, community, and core resources.</p>
+                </div>
+                <div class="text-right shrink-0">
+                    <div class="text-5xl font-black text-white mb-1">$39</div>
+                    <div class="text-red-500 font-black uppercase tracking-wider text-sm">Per Month</div>
+                </div>
+            </div>
+
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Access Tier Upgrades</h3>
+                <p class="text-slate-500 mt-2 font-medium">One-time payments to permanently unlock additional frameworks, strategies, and personalized consultations.</p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6 items-stretch">
+                
                 <!-- Foundation -->
-                <div class="pricing-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-                    <h3 class="text-lg font-bold mb-1">Foundation</h3>
-                    <p class="text-3xl font-black mb-1">$97 <span class="text-sm font-medium text-slate-400">OTP</span></p>
-                    <p class="text-xs text-slate-400 mb-6">One-time purchase</p>
-                    <ul class="space-y-3 text-sm text-slate-600 mb-6">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>A.B.C.S.™ access</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Basic blueprints</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>S.O.S.™ community</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Monthly group sessions</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Essential checklists</li>
-                    </ul>
-                    <button onclick="selectPlan('Foundation','97','prod_T9MBq2PwfaeM3K')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
+                <div class="w-full">
+                    <div class="pricing-card bg-white rounded-3xl border border-slate-200 p-8 shadow-sm flex flex-col h-full">
+                        <h4 class="text-lg font-black text-slate-900 uppercase tracking-widest mb-4">Foundation Tier</h4>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-slate-900">$97</span>
+                            <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>A.B.C.S.™ Framework access</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Basic business blueprints</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>S.O.S.™ community access</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Monthly group strategy</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Essential checklists</span></li>
+                        </ul>
+                        <button onclick="selectPlan('Foundation','97','prod_T9MBq2PwfaeM3K')" class="w-full py-3.5 rounded-xl font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-md mt-auto">Select Upgrade</button>
+                    </div>
                 </div>
 
                 <!-- Growth (Best Value) -->
-                <div class="pricing-card bg-white rounded-2xl border-2 border-red-600 p-6 shadow-lg shadow-red-600/10 relative -translate-y-2">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-bold px-4 py-1 rounded-full">Best Value</div>
-                    <h3 class="text-lg font-bold mb-1">Growth</h3>
-                    <p class="text-3xl font-black mb-1">$197 <span class="text-sm font-medium text-slate-400">OTP</span></p>
-                    <p class="text-xs text-slate-400 mb-6">One-time purchase</p>
-                    <ul class="space-y-3 text-sm text-slate-600 mb-6">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Everything in Foundation</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>P.A.C.T.S.™ implementation</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Credit Hero strategies</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Cashflow Hero P.I.E.S.™</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Monthly 1-on-1</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Priority support</li>
-                    </ul>
-                    <button onclick="selectPlan('Growth','197','prod_T9MB0wTZD4tD3C')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Select Plan</button>
+                <div class="w-full">
+                    <div class="pricing-card bg-gradient-to-b from-red-600 to-red-800 rounded-3xl p-1 shadow-2xl relative transform lg:-translate-y-4 flex flex-col h-full">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-black uppercase tracking-widest py-1.5 px-5 rounded-full shadow-lg border-2 border-white">Best Value</div>
+                        <div class="bg-white rounded-[22px] p-8 flex flex-col h-full relative">
+                            <h4 class="text-lg font-black text-red-600 uppercase tracking-widest mb-4">Growth Tier</h4>
+                            <div class="mb-6">
+                                <span class="text-4xl font-black text-slate-900">$197</span>
+                                <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="text-sm font-bold text-slate-900 italic border-b border-slate-100 pb-2">Everything in Foundation, plus:</li>
+                                <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>P.A.C.T.S.™ implementation</span></li>
+                                <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Credit Hero basic strategies</span></li>
+                                <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Cashflow Hero P.I.E.S.™</span></li>
+                                <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>1-on-1 monthly consultation</span></li>
+                                <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Priority support access</span></li>
+                            </ul>
+                            <button onclick="selectPlan('Growth','197','prod_T9MB0wTZD4tD3C')" class="w-full py-3.5 rounded-xl font-bold bg-red-600 text-white hover:bg-red-500 transition-colors shadow-lg shadow-red-500/25 mt-auto">Select Upgrade</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Elite -->
-                <div class="pricing-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-                    <h3 class="text-lg font-bold mb-1">Elite</h3>
-                    <p class="text-3xl font-black mb-1">$397 <span class="text-sm font-medium text-slate-400">OTP</span></p>
-                    <p class="text-xs text-slate-400 mb-6">One-time purchase</p>
-                    <ul class="space-y-3 text-sm text-slate-600 mb-6">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Everything in Growth</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>T.H.I.S. I.S. V.I.P.™</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>B.E.S.T. M.A.P.S.™</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Weekly 1-on-1</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Custom SOPs</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-600 mt-0.5 shrink-0"></i>Direct founder access</li>
-                    </ul>
-                    <button onclick="selectPlan('Elite','397','prod_T9MBXCw8HlHQQm')" class="w-full bg-slate-900 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-slate-800 transition-colors">Select Plan</button>
+                <div class="w-full">
+                    <div class="pricing-card bg-white rounded-3xl border border-slate-200 p-8 shadow-sm flex flex-col h-full">
+                        <h4 class="text-lg font-black text-slate-900 uppercase tracking-widest mb-4">Elite Tier</h4>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-slate-900">$397</span>
+                            <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm font-bold text-slate-900 italic border-b border-slate-100 pb-2">Everything in Growth, plus:</li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Full T.H.I.S. I.S. V.I.P.™</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>B.E.S.T. M.A.P.S.™</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Weekly 1-on-1 sessions</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Custom SOP development</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Direct founder access</span></li>
+                        </ul>
+                        <button onclick="selectPlan('Elite','397','prod_T9MBXCw8HlHQQm')" class="w-full py-3.5 rounded-xl font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-md mt-auto">Select Upgrade</button>
+                    </div>
                 </div>
 
                 <!-- Enterprise -->
-                <div class="pricing-card bg-slate-900 text-white rounded-2xl p-6 shadow-xl">
-                    <h3 class="text-lg font-bold mb-1">Enterprise</h3>
-                    <p class="text-3xl font-black mb-1">$1,497 <span class="text-sm font-medium text-slate-400">OTP</span></p>
-                    <p class="text-xs text-slate-400 mb-6">One-time purchase</p>
-                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>Everything in Elite</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>White-label licensing</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>Custom frameworks</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>Dedicated account mgmt</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>JV partnerships</li>
-                        <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-red-400 mt-0.5 shrink-0"></i>Full IP licensing</li>
-                    </ul>
-                    <button onclick="selectPlan('Enterprise','1497','prod_T9MBkhUrmJFC7Y')" class="w-full bg-red-600 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">Contact Us</button>
+                <div class="w-full">
+                    <div class="pricing-card bg-slate-900 border border-slate-800 rounded-3xl p-8 text-white shadow-xl flex flex-col h-full">
+                        <h4 class="text-lg font-black text-white uppercase tracking-widest mb-4">Enterprise Tier</h4>
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-white">$1,497</span>
+                            <span class="block text-red-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm font-bold text-slate-300 italic border-b border-slate-700 pb-2">Everything in Elite, plus:</li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>White-label licensing</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Custom frameworks</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Dedicated account mgmt</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>JV partnerships</span></li>
+                            <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Full IP licensing rights</span></li>
+                        </ul>
+                        <button onclick="selectPlan('Enterprise','1497','prod_T9MBkhUrmJFC7Y')" class="w-full py-3.5 rounded-xl font-bold bg-white text-slate-900 hover:bg-slate-100 transition-colors shadow-md mt-auto">Apply Now</button>
+                    </div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- DEBRIEF -->
-    <section id="debrief" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black mb-4">Debrief</h2>
+    <!-- DEBRIEF & FAQ -->
+    <section id="debrief" class="py-24 bg-white border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-wide mb-4">Debrief</h2>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
+            
+            <div class="grid md:grid-cols-2 gap-10 mb-20">
                 <!-- Application Process -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                    <h3 class="text-xl font-bold mb-6">Application Process for Enterprise</h3>
-                    <ol class="space-y-4 text-sm text-slate-600">
-                        <li class="flex gap-3">
-                            <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                            <span>Complete the W.O.M.E.N.™ intake profile with your business details and objectives.</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                            <span>Book your R&amp;R™ Audit Session with The Captain for strategic assessment.</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                            <span>Receive your personalized A.B.C.S.™ roadmap and hero deployment plan.</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">4</span>
-                            <span>Select your membership tier and access your assigned hero services.</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0">5</span>
-                            <span>Enterprise applicants undergo additional review for white-label and JV opportunities.</span>
-                        </li>
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm">
+                    <div class="flex items-center gap-3 mb-8">
+                        <i data-lucide="briefcase" class="w-7 h-7 text-red-600"></i>
+                        <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Application Process</h3>
+                    </div>
+                    <ol class="space-y-6 text-slate-600 font-medium relative border-l-2 border-red-100 ml-4">
+                        <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Complete the W.O.M.E.N.™ intake profile with your business details and objectives.</li>
+                        <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Book your R&amp;R™ Audit Session with The Captain for strategic assessment.</li>
+                        <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Receive your personalized A.B.C.S.™ roadmap and hero deployment plan.</li>
+                        <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Select your membership tier and access your assigned hero services.</li>
                     </ol>
                 </div>
-                <!-- Additional Information -->
-                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-                    <h3 class="text-xl font-bold mb-6">Additional Information</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <div>
-                            <h4 class="font-semibold text-slate-800 mb-1">Membership Structure</h4>
-                            <p>All plans require the $39/mo base membership. Tier upgrades are one-time purchases that unlock permanent access to that level's features and hero services.</p>
+                
+                <!-- FAQ -->
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm flex flex-col">
+                    <div class="flex items-center gap-3 mb-8">
+                        <i data-lucide="help-circle" class="w-7 h-7 text-red-600"></i>
+                        <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Intelligence Brief</h3>
+                    </div>
+                    <div class="space-y-4 flex-1">
+                        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 hover:bg-slate-50 transition-colors">
+                                <span>What is L7S Hero S.O.S.™?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600 font-medium">
+                                It's an AI-powered business coordination platform that connects entrepreneurs and executives with strategic resources through 7 specialized service heroes.
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-semibold text-slate-800 mb-1">R&amp;R™ Audit Sessions</h4>
-                            <p>Sessions range from $7-$33 (30 min to 1 hour). This is your direct consultation with Founder Luckie Goggins for personalized strategy.</p>
+                        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 hover:bg-slate-50 transition-colors">
+                                <span>Do you directly provide credit repair?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600 font-medium">
+                                No. L7S Inc. is a connection platform linking you with licensed credit professionals and law firms in full compliance with CROA and FTC regulations.
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-semibold text-slate-800 mb-1">Credit Monitoring Requirement</h4>
-                            <p>Active credit monitoring (IdentityIQ or Score Progression) is required for Credit Hero services. Score Progression available for $1 during intake.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-slate-800 mb-1">Refund Policy</h4>
-                            <p>All sales are final. Please review all tier features carefully before purchasing.</p>
+                        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 hover:bg-slate-50 transition-colors">
+                                <span>What credit monitoring is required?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600 font-medium">
+                                We recommend IdentityIQ or Score Progression. If you don't have active monitoring, you can access a $1 trial during the intake process.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Mission Debrief CTA -->
-            <div class="bg-slate-900 text-white rounded-2xl p-10 text-center shadow-xl">
-                <h3 class="text-2xl font-bold mb-4">Mission Debrief</h3>
-                <p class="text-slate-300 max-w-2xl mx-auto mb-8">
-                    The League provides the AI support. The R&amp;R™ Audit provides the human element: direct consultation with The Captain, strategic assessment, and your personalized A.B.C.S.™ roadmap.
-                </p>
-                <button onclick="setView('intake')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 transition-all">
-                    Proceed to R&amp;R™ Audit
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="py-20 bg-slate-50">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black mb-4">Frequently Asked Questions</h2>
-            </div>
-            <div class="space-y-4">
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>What is L7S Hero S.O.S.™?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
+            <div class="bg-slate-900 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/20 blur-3xl rounded-full pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-black text-white uppercase tracking-wide mb-4">Mission <span class="text-red-500">Debrief</span></h2>
+                    <p class="text-slate-300 font-medium text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+                        The League provides the AI support. The R&amp;R™ Audit provides the human element: direct consultation with The Captain, strategic assessment, and your personalized A.B.C.S.™ roadmap.
+                    </p>
+                    <button onclick="setView('intake')" class="bg-red-600 text-white font-black text-lg uppercase tracking-wide py-4 px-10 rounded-xl hover:bg-red-500 transform transition-all active:scale-95 shadow-xl shadow-red-600/30 inline-flex items-center gap-3">
+                        Proceed to Beast Gateway <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        L7S Hero S.O.S.™ is the Superhero Operating System — an AI-powered business coordination platform that connects entrepreneurs, executives, and self-employed professionals with strategic resources through 7 specialized service heroes.
-                    </div>
                 </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>What is an R&amp;R™ Audit Session?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
-                    </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        R&amp;R™ stands for Review &amp; Recommendation. It's a personalized audit and analysis awareness evaluation call with Founder Luckie Goggins, where your current situation is assessed and matched with the right hero services and strategic partnerships. Sessions are $7-$33 (30 min to 1 hour).
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>Do you directly provide credit repair?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
-                    </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        No. L7S Inc. does not directly provide credit repair services. We are a connection platform that links you with licensed credit professionals, law firms, and credit repair organizations in full compliance with CROA and FTC regulations.
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>What is the A.B.C.S.™ Framework?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
-                    </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        A.B.C.S.™ stands for Analytics, Blueprints, Checklists, and Scaling. It's our proprietary methodology applied to every client engagement to ensure data-driven decisions, strategic planning, accountability tracking, and systematic growth.
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>What credit monitoring service do I need?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
-                    </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        We recommend IdentityIQ or Score Progression. If you don't have active monitoring, you can get Score Progression for just $1 during the intake process. This is required for your Credit Hero assessment.
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left font-semibold hover:bg-slate-50 transition-colors">
-                        <span>When can I book a session?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-chevron shrink-0"></i>
-                    </button>
-                    <div class="faq-answer hidden px-5 pb-5 text-sm text-slate-600">
-                        R&amp;R™ Audit Sessions are available: Tuesday &amp; Thursday 11:00 AM – 7:00 PM, Saturday 10:00 AM – 5:00 PM. All other days are reserved for operations, structuring, and fulfillment.
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                <!-- Brand -->
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <img src="assets/logo-icon.png" alt="L7S" class="w-8 h-8 rounded-lg">
-                        <span class="text-lg font-extrabold">L7S <span class="text-red-500">HERO</span></span>
-                    </div>
-                    <p class="text-sm text-slate-400 mb-3">760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076</p>
-                    <p class="text-sm text-slate-400 mb-1"><i data-lucide="phone" class="w-3.5 h-3.5 inline mr-1"></i> +1 (833) 693-0777</p>
-                    <p class="text-sm text-slate-400"><i data-lucide="mail" class="w-3.5 h-3.5 inline mr-1"></i> admin@l7sinc.com</p>
+    <footer class="bg-slate-950 pt-20 pb-10 px-4 border-t border-slate-900 text-slate-400">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <!-- Brand & About -->
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo-icon.png" alt="L7S" class="w-8 h-8 rounded-md">
+                    <span class="text-white font-black tracking-widest text-xl uppercase">L7S HERO</span>
                 </div>
-                <!-- Our Heroes -->
-                <div>
-                    <h4 class="font-bold mb-4">Our Heroes</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#league" class="hover:text-white transition-colors">Credit Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">CEO Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Capital Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Cashflow Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Crypto Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Coverage Hero</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Community Hero</a></li>
-                    </ul>
-                </div>
-                <!-- Services -->
-                <div>
-                    <h4 class="font-bold mb-4">Services</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#" onclick="setView('intake'); return false;" class="hover:text-white transition-colors">R&amp;R™ Audit</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">BXBlueprints™</a></li>
-                        <li><a href="#abcs" class="hover:text-white transition-colors">A.B.C.S.™ Framework</a></li>
-                        <li><a href="#league" class="hover:text-white transition-colors">Credit Hero Program</a></li>
-                    </ul>
-                </div>
-                <!-- Business Hours -->
-                <div>
-                    <h4 class="font-bold mb-4">Business Hours</h4>
-                    <ul class="space-y-1.5 text-sm text-slate-400">
-                        <li>Monday: <span class="text-slate-500">Closed (Operations)</span></li>
-                        <li class="text-white font-medium">Tuesday: 11:00 AM – 7:00 PM</li>
-                        <li>Wednesday: <span class="text-slate-500">Closed (Structuring)</span></li>
-                        <li class="text-white font-medium">Thursday: 11:00 AM – 7:00 PM</li>
-                        <li>Friday: <span class="text-slate-500">Closed (Fulfillment)</span></li>
-                        <li class="text-white font-medium">Saturday: 10:00 AM – 5:00 PM</li>
-                        <li>Sunday: <span class="text-slate-500">Closed</span></li>
-                    </ul>
+                <p class="text-sm font-medium leading-relaxed">
+                    Transforming business challenges into success stories through expert guidance and strategic solutions.
+                </p>
+                <div class="space-y-3 text-sm font-medium">
+                    <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-red-500 shrink-0"></i> 760 Old Roswell Rd, Suite 324<br/>Roswell, GA 30076</div>
+                    <div class="flex items-center gap-3"><i data-lucide="phone" class="w-5 h-5 text-red-500 shrink-0"></i> +1 (833) 693-0777</div>
+                    <div class="flex items-center gap-3"><i data-lucide="mail" class="w-5 h-5 text-red-500 shrink-0"></i> admin@l7sinc.com</div>
                 </div>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="border border-slate-700 rounded-xl p-6 mb-8 text-xs text-slate-400 leading-relaxed">
-                <p class="font-semibold text-slate-300 mb-2">Regulatory Disclaimer (CROA/FTC Compliance)</p>
-                <p>L7S Inc. is a business consulting and connection platform. L7S Inc. does not directly provide credit repair services, nor does it operate as a credit repair organization as defined under the Credit Repair Organizations Act (CROA). Any credit restoration references describe services facilitated through licensed third-party partners. L7S Inc. does not guarantee specific outcomes related to credit scores, loan approvals, or financial results. All financial and credit-related services are provided by licensed, independent professionals and organizations. Clients are encouraged to perform their own due diligence and consult with licensed advisors.</p>
+            <!-- Our Heroes -->
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-6">Our Heroes</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Credit Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">CEO Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Loan Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Cashflow Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Crypto Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Coverage Hero</button></li>
+                    <li><button onclick="setView('landing'); setTimeout(() => window.location.hash = 'league', 100);" class="hover:text-red-400 transition-colors text-left">Community Hero</button></li>
+                </ul>
             </div>
 
-            <!-- Bottom -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-800">
-                <p class="text-sm text-slate-500">&copy; 2026 L7S, Inc. All rights reserved.</p>
-                <div class="flex gap-6 text-sm text-slate-500">
-                    <button onclick="openModal('modal-privacy')" class="hover:text-white transition-colors">Privacy Policy</button>
-                    <button onclick="openModal('modal-terms')" class="hover:text-white transition-colors">Terms of Service</button>
-                    <button onclick="openModal('modal-disclaimer')" class="hover:text-white transition-colors">Disclaimer</button>
-                    <button onclick="openModal('modal-dmca')" class="hover:text-white transition-colors">DMCA Policy</button>
+            <!-- Services -->
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-6">Services</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><button class="hover:text-red-400 transition-colors text-left">Strategic Assessment</button></li>
+                    <li><button class="hover:text-red-400 transition-colors text-left">Operational Optimization</button></li>
+                    <li><button class="hover:text-red-400 transition-colors text-left">Sustainable Solutions</button></li>
+                    <li><button class="hover:text-red-400 transition-colors text-left">Business Transformation</button></li>
+                </ul>
+            </div>
+
+            <!-- Hours -->
+            <div>
+                <h4 class="text-white font-black uppercase tracking-wider mb-6 flex items-center gap-2">
+                    <i data-lucide="clock" class="w-5 h-5 text-red-500"></i> R&R Audit Hours
+                </h4>
+                <ul class="space-y-2 text-sm font-medium">
+                    <li class="flex justify-between"><span>Monday</span> <span class="text-red-400">Closed for Operations</span></li>
+                    <li class="flex justify-between"><span>Tuesday</span> <span class="text-slate-300">11:00 AM - 7:00 PM</span></li>
+                    <li class="flex justify-between"><span>Wednesday</span> <span class="text-red-400">Closed for Structuring</span></li>
+                    <li class="flex justify-between"><span>Thursday</span> <span class="text-slate-300">11:00 AM - 7:00 PM</span></li>
+                    <li class="flex justify-between"><span>Friday</span> <span class="text-red-400">Closed for Fulfillment</span></li>
+                    <li class="flex justify-between"><span>Saturday</span> <span class="text-slate-300">10:00 AM - 5:00 PM</span></li>
+                    <li class="flex justify-between text-slate-500"><span>Sunday</span> <span>Unavailable</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-slate-800 pt-8 space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <h5 class="text-white font-bold text-sm uppercase mb-2 flex items-center gap-2">
+                    <i data-lucide="info" class="w-4 h-4 text-red-500"></i> Important Disclaimer
+                </h5>
+                <p class="text-xs leading-relaxed text-slate-500">
+                    L7S Inc. is a financial guidance and connection platform that provides analytics, blueprints, and progress tracking tools to help members make informed financial decisions. We connect members with licensed professionals including credit repair specialists, attorneys, accountants, and financial advisors. L7S Inc. does not directly provide credit repair, legal, or financial advisory services. All services are provided by licensed third-party professionals in compliance with Georgia state regulations and applicable federal laws.
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
+                <p>© 2026 L7S, Inc. All rights reserved.</p>
+                
+                <!-- LEGAL ROUTING BUTTONS -->
+                <div class="flex flex-wrap gap-6">
+                    <button onclick="setView('legal', 'privacy')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Privacy Policy</button>
+                    <button onclick="setView('legal', 'terms')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Terms of Service</button>
+                    <button onclick="setView('legal', 'disclaimers')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Disclaimer</button>
+                    <button onclick="setView('legal', 'dmca')" class="hover:text-red-400 transition-colors uppercase tracking-wide">DMCA Policy</button>
                 </div>
             </div>
         </div>
     </footer>
-
 </div><!-- /view-landing -->
 
 
@@ -724,147 +805,150 @@
 <!-- VIEW 2: INTAKE FORM                                          -->
 <!-- ============================================================ -->
 <div id="view-intake" class="view">
-    <div class="min-h-screen bg-slate-100">
-        <!-- Back Button -->
-        <div class="max-w-5xl mx-auto px-4 pt-8">
-            <button onclick="setView('landing')" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors mb-6">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                &larr; BACK TO HEADQUARTERS
+    <div class="min-h-screen bg-slate-50 py-12 px-4">
+        <div class="max-w-5xl mx-auto">
+            <button onclick="setView('landing')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider mb-8">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> BACK TO HEADQUARTERS
             </button>
-        </div>
-        <!-- Card -->
-        <div class="max-w-5xl mx-auto px-4 pb-16">
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-5">
-                <!-- Left Panel -->
-                <div class="md:col-span-2 bg-slate-900 text-white p-8 flex flex-col justify-center">
-                    <img src="assets/logo-icon.png" alt="L7S" class="w-14 h-14 rounded-2xl mb-6">
-                    <h2 class="text-2xl font-black mb-2">W.O.M.E.N.™ Profile</h2>
-                    <p class="text-sm text-red-400 font-semibold mb-4">Personal Profile Intake</p>
-                    <p class="text-sm text-slate-400 leading-relaxed mb-8">
-                        Complete your profile to proceed to your R&amp;R™ (Review &amp; Recommendation) Audit &amp; Analysis Awareness Evaluation Session.
-                    </p>
-                    <div class="flex items-center gap-2 text-xs text-slate-500">
-                        <span>🔒</span>
-                        <span>256-Bit Encrypted | CROA Compliant</span>
+
+            <div class="grid md:grid-cols-5 gap-8 bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+                <!-- Left Info Panel -->
+                <div class="md:col-span-2 bg-slate-900 p-8 text-white flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/20 blur-3xl rounded-full pointer-events-none"></div>
+                    <div class="relative z-10 space-y-6">
+                        <img src="assets/logo-icon.png" alt="L7S" class="w-14 h-14 rounded-2xl mb-6 shadow-lg shadow-black/50">
+                        <h2 class="text-3xl font-black uppercase leading-tight tracking-wide">W.O.M.E.N.™<br/><span class="text-red-500">Profile</span></h2>
+                        <p class="text-sm font-bold text-red-400 uppercase tracking-wider">Personal Profile Intake</p>
+                        <p class="text-slate-300 font-medium text-sm leading-relaxed">
+                            Complete your profile to proceed to your R&amp;R™ (Review &amp; Recommendation) Audit &amp; Analysis Awareness Evaluation Session.
+                        </p>
+                    </div>
+                    <div class="relative z-10 mt-12 flex items-center gap-2 text-red-400 text-xs font-bold uppercase tracking-wider">
+                        <i data-lucide="lock" class="w-4 h-4"></i> 256-Bit Encrypted | CROA Compliant
                     </div>
                 </div>
-                <!-- Right Form -->
+
+                <!-- Right Form Panel -->
                 <div class="md:col-span-3 p-8">
-                    <h3 class="text-2xl font-bold mb-6">R&amp;R™ Audit Intake</h3>
-                    <form id="intake-form" class="space-y-5">
+                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wide">R&amp;R™ Audit Intake</h3>
+                    <form id="intake-form" class="space-y-6">
+                        
                         <!-- Hidden plan fields -->
                         <input type="hidden" name="selectedPlan" id="selectedPlan" value="">
                         <input type="hidden" name="stripeProductId" id="stripeProductId" value="">
                         <input type="hidden" name="planPrice" id="planPrice" value="">
-                        <!-- Plan badge (shown when plan is pre-selected) -->
-                        <div id="plan-badge" class="hidden bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 flex items-center justify-between">
-                            <span class="text-sm text-slate-700">Selected Plan: <strong id="plan-badge-name" class="text-red-700"></strong></span>
+                        
+                        <!-- Plan badge -->
+                        <div id="plan-badge" class="hidden bg-red-50 border border-red-200 rounded-xl px-5 py-3 flex items-center justify-between">
+                            <span class="text-sm font-medium text-slate-700">Selected Plan: <strong id="plan-badge-name" class="text-red-700 uppercase tracking-wide"></strong></span>
                             <span id="plan-badge-price" class="text-sm font-black text-red-600"></span>
                         </div>
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
-                                <input type="text" name="firstName" required class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all" placeholder="First name">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
-                                <input type="text" name="lastName" required class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all" placeholder="Last name">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
-                            <input type="email" name="email" required class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all" placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Phone *</label>
-                            <input type="tel" name="phone" id="phone" required inputmode="tel" autocomplete="tel" pattern="^(?:\+?1[\s.-]?)?(?:\([0-9]{3}\)|[0-9]{3})[\s.-]?[0-9]{3}[\s.-]?[0-9]{4}$" title="Please enter a valid 10-digit U.S. phone number." class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all" placeholder="(555) 000-0000">
-                        </div>
-                        <!-- Credit Monitoring -->
-                        <div>
-                            <input type="hidden" name="monitoringStatus" id="monitoringStatus" value="">
-                            <label id="monitoring-label" class="block text-sm font-medium text-slate-700 mb-2">Do you have active credit monitoring? *</label>
-                            <div class="flex gap-3" role="group" aria-labelledby="monitoring-label">
-                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" aria-pressed="false" aria-controls="monitoring-yes" class="mon-toggle flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold transition-all text-slate-600 bg-white hover:border-red-600 hover:text-red-600">YES</button>
-                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" aria-pressed="false" aria-controls="monitoring-no" class="mon-toggle flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold transition-all text-slate-600 bg-white hover:border-red-600 hover:text-red-600">NO</button>
-                            </div>
-                            <p id="monitoring-feedback" class="hidden text-xs text-red-600 mt-2"></p>
-                        </div>
-                        <!-- YES section -->
-                        <div id="monitoring-yes" class="hidden">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Which service?</label>
-                            <select name="monitoringService" id="monitoringSelect" class="w-full border border-slate-300 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all">
-                                <option value="">Select your service...</option>
-                                <option value="IdentityIQ">IdentityIQ</option>
-                                <option value="Score Progression">Score Progression</option>
-                                <option value="MyFreeScoreNow">My Free Score Now</option>
-                                <option value="Experian">Experian</option>
-                                <option value="Credit Karma">Credit Karma</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <p class="text-xs text-slate-500 mt-2">
-                                Want a deeper audit?
-                                <a href="https://creditheroscore.com/redirect.asp?guid=L0CP5Q0K5AQP" target="_blank" rel="noopener noreferrer" class="text-red-600 font-semibold hover:underline">Check your Credit Hero Score →</a>
-                            </p>
-                        </div>
-                        <!-- NO section -->
-                        <div id="monitoring-no" class="hidden">
-                            <div class="bg-red-50 border border-red-200 rounded-xl p-4 space-y-3">
-                                <p class="text-sm font-semibold text-slate-800">Credit monitoring is required for your Credit Hero assessment.</p>
-                                <p class="text-xs text-slate-600">Choose one of the options below, then return to complete your intake:</p>
-                                <a href="https://scoreprogression.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-red-600 transition-colors group">
-                                    <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">$1</span>
-                                    <div>
-                                        <p class="text-sm font-semibold text-slate-800 group-hover:text-red-700">Score Progression</p>
-                                        <p class="text-xs text-slate-500">Self-enrollment — $1 trial, set up in minutes</p>
-                                    </div>
-                                </a>
 
-                                <p class="text-xs text-slate-500">You can complete this step and return to finish your intake.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">First Name *</label>
+                                <input required name="firstName" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="First name" />
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Last Name *</label>
+                                <input required name="lastName" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="Last name" />
                             </div>
                         </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Email Address *</label>
+                            <input required name="email" type="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="you@example.com" />
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Phone Number *</label>
+                            <input required name="phone" id="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="^(?:\+?1[\s.-]?)?(?:\([0-9]{3}\)|[0-9]{3})[\s.-]?[0-9]{3}[\s.-]?[0-9]{4}$" title="Please enter a valid 10-digit U.S. phone number." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="(555) 000-0000" />
+                        </div>
+
+                        <!-- Credit Monitoring -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                            <input type="hidden" name="monitoringStatus" id="monitoringStatus" value="">
+                            <label class="text-sm font-bold text-slate-900 block text-center uppercase tracking-wide">
+                                Do you have active credit monitoring? *
+                            </label>
+                            <div class="flex gap-4 justify-center">
+                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
+                                    YES
+                                </button>
+                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
+                                    NO
+                                </button>
+                            </div>
+                            <p id="monitoring-feedback" class="hidden text-xs text-red-600 mt-2 text-center font-bold"></p>
+
+                            <!-- Show if YES -->
+                            <div id="monitoring-yes" class="hidden pt-4 transition-all">
+                                <select name="monitoringService" id="monitoringSelect" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 outline-none font-medium text-slate-700">
+                                    <option value="">-- Choose Provider --</option>
+                                    <option value="IdentityIQ">IdentityIQ</option>
+                                    <option value="Score Progression">Score Progression</option>
+                                    <option value="MyFreeScoreNow">My Free Score Now</option>
+                                    <option value="Experian">Experian</option>
+                                    <option value="Credit Karma">Credit Karma</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Show if NO -->
+                            <div id="monitoring-no" class="hidden pt-4 transition-all">
+                                <div class="bg-white border border-slate-200 rounded-xl p-5 text-center">
+                                    <p class="text-sm font-bold text-slate-800 mb-2">Credit monitoring is required for assessment.</p>
+                                    <a href="https://scoreprogression.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-slate-900 text-white font-bold text-sm py-3 px-6 rounded-lg hover:bg-slate-800 transition-colors w-full shadow-md mb-2">
+                                        Get Score Progression for <span class="bg-red-600 px-1.5 rounded">$1</span>
+                                    </a>
+                                    <p class="text-xs text-slate-500 font-medium">
+                                        Self-enrollment — set up in minutes. You can complete this step and return to finish your intake.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- E-Signature Agreement -->
-                        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+                        <div class="border border-slate-200 rounded-xl p-5 bg-white">
                             <label class="flex items-start gap-3 cursor-pointer">
                                 <input type="checkbox" id="agree-terms" required class="mt-1 w-4 h-4 accent-red-600 shrink-0">
-                                <span class="text-xs text-slate-600 leading-relaxed">
+                                <span class="text-xs text-slate-600 font-medium leading-relaxed">
                                     I acknowledge and agree to L7S, Inc.'s
-                                    <button type="button" onclick="openModal('modal-terms')" class="text-red-600 font-semibold hover:underline">Terms of Service</button>,
-                                    <button type="button" onclick="openModal('modal-privacy')" class="text-red-600 font-semibold hover:underline">Privacy Policy</button>, and
-                                    <button type="button" onclick="openModal('modal-disclaimer')" class="text-red-600 font-semibold hover:underline">Disclaimer</button>.
-                                    I understand that L7S Inc. is a consulting and connection platform and does not directly provide credit repair services.
-                                    All sales are final per the refund policy. This constitutes my electronic signature.
+                                    <button type="button" onclick="setView('legal', 'terms')" class="text-red-600 font-bold hover:underline">Terms of Service</button>,
+                                    <button type="button" onclick="setView('legal', 'privacy')" class="text-red-600 font-bold hover:underline">Privacy Policy</button>, and
+                                    <button type="button" onclick="setView('legal', 'disclaimers')" class="text-red-600 font-bold hover:underline">Disclaimer</button>.
+                                    I understand that L7S Inc. is a consulting and connection platform. This constitutes my electronic signature.
                                 </span>
                             </label>
-                            <p class="text-[10px] text-slate-400 mt-2 ml-7">By checking this box, you are providing your electronic signature in accordance with the E-SIGN Act (15 U.S.C. § 7001).</p>
                         </div>
 
                         <!-- Submit -->
-                        <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20 text-sm">
-                            PROCEED TO R&amp;R™ AUDIT SESSION →
+                        <button type="submit" class="w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transform transition-all active:scale-95 shadow-xl shadow-red-600/20 flex items-center justify-center gap-3">
+                            PROCEED TO R&amp;R™ AUDIT SESSION <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </button>
                     </form>
 
-                    <!-- Alternate Payment Methods (outside form) -->
-                    <div class="border-t border-slate-200 pt-4 mt-4">
-                        <p class="text-xs text-slate-500 text-center mb-3">We also accept alternate payment methods:</p>
-                        <div class="grid grid-cols-3 gap-2">
-                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
-                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="send" class="w-3.5 h-3.5 text-slate-600"></i></div>
-                                <p class="text-[10px] font-semibold text-slate-700">Zelle</p>
-                                <p class="text-[10px] text-slate-400">admin@l7sinc.com</p>
+                    <!-- Alternate Payment Methods -->
+                    <div class="border-t border-slate-200 pt-6 mt-8">
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wide text-center mb-4">We also accept alternate payments:</p>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
+                                <span class="text-xl">💸</span>
+                                <p class="text-xs font-bold text-slate-800 mt-2">Zelle</p>
+                                <p class="text-[10px] text-slate-500 font-medium">admin@l7sinc.com</p>
                             </div>
-                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
-                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="dollar-sign" class="w-3.5 h-3.5 text-slate-600"></i></div>
-                                <p class="text-[10px] font-semibold text-slate-700">Cash App</p>
-                                <p class="text-[10px] text-slate-400">$L7SInc</p>
+                            <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
+                                <span class="text-xl">💲</span>
+                                <p class="text-xs font-bold text-slate-800 mt-2">Cash App</p>
+                                <p class="text-[10px] text-slate-500 font-medium">$L7SInc</p>
                             </div>
-                            <div class="text-center bg-white border border-slate-200 rounded-xl px-2 py-3 hover:border-red-300 transition-colors">
-                                <div class="w-7 h-7 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-1.5"><i data-lucide="bitcoin" class="w-3.5 h-3.5 text-slate-600"></i></div>
-                                <p class="text-[10px] font-semibold text-slate-700">Crypto</p>
-                                <p class="text-[10px] text-slate-400">Contact Us</p>
+                            <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
+                                <span class="text-xl">🪙</span>
+                                <p class="text-xs font-bold text-slate-800 mt-2">Crypto</p>
+                                <p class="text-[10px] text-slate-500 font-medium">Contact Us</p>
                             </div>
                         </div>
-                        <p class="text-[10px] text-slate-400 text-center mt-2">For alternate payments, submit your intake form first, then contact us at <a href="tel:+18336930777" class="text-red-600 hover:underline">(833) 693-0777</a></p>
+                        <p class="text-xs text-slate-500 font-medium text-center mt-4">Submit your intake form first, then contact us at <a href="tel:+18336930777" class="text-red-600 font-bold hover:underline">(833) 693-0777</a></p>
                     </div>
                 </div>
             </div>
@@ -872,243 +956,340 @@
     </div>
 </div><!-- /view-intake -->
 
-
 <!-- ============================================================ -->
-<!-- VIEW 3: SUCCESS PAGE                                         -->
+<!-- VIEW 3: SUCCESS PAGE (CALENDAR GATEWAY)                      -->
 <!-- ============================================================ -->
 <div id="view-success" class="view">
-    <div class="min-h-screen bg-slate-100 flex items-center justify-center px-4">
-        <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-10 text-center">
-            <div class="bg-slate-900 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-slate-900/30">
-                <i data-lucide="check-circle" class="w-8 h-8 text-red-500"></i>
+    <div class="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl p-10 max-w-lg w-full text-center relative z-10">
+            <div class="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-slate-900/30">
+                <i data-lucide="check-circle" class="w-10 h-10 text-red-500"></i>
             </div>
-            <h2 class="text-2xl font-black mb-3">Transmission Received</h2>
-            <p class="text-slate-500 text-sm mb-8">
-                Your W.O.M.E.N.™ profile has been securely logged. Please complete scheduling for your R&amp;R™ session below.
-            </p>
-            <div class="space-y-3">
-                <button onclick="openBookingCalendar()" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-colors shadow-lg shadow-red-600/20">
-                    Open Booking Calendar
-                </button>
-                <button onclick="setView('landing')" class="w-full border border-slate-300 text-slate-700 font-semibold py-3 rounded-xl hover:bg-slate-50 transition-colors">
-                    Return to Headquarters
-                </button>
+            
+            <h2 class="text-3xl font-black text-slate-900 mb-2 uppercase tracking-wide">Transmission<br/>Received</h2>
+            <p class="text-slate-500 font-medium mb-8">Your W.O.M.E.N.™ profile has been securely logged in the L7S Database.</p>
+            
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 mb-8">
+                <p class="text-xs font-black text-red-600 uppercase tracking-widest mb-3">Step 2 Is Mandatory</p>
+                <p class="text-slate-800 font-bold text-lg mb-8">
+                    Lock in your Review &amp; Recommendation (R&amp;R) Audit time slot now.
+                </p>
+                
+                <a href="https://cal.com/l7sinc" target="_blank" rel="noopener noreferrer" class="btn-pulse flex items-center justify-center gap-3 w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transition-all shadow-lg active:scale-95">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    SCHEDULE R&amp;R AUDIT
+                </a>
             </div>
+
+            <button onclick="setView('landing')" class="text-slate-500 hover:text-slate-900 font-bold text-xs transition-colors uppercase tracking-widest">
+                Return to Headquarters
+            </button>
         </div>
     </div>
 </div><!-- /view-success -->
 
+<!-- ============================================================ -->
+<!-- VIEW 4: LEGAL & COMPLIANCE                                   -->
+<!-- ============================================================ -->
+<div id="view-legal" class="view min-h-screen bg-slate-50 text-slate-800">
+    <nav class="bg-white border-b border-slate-200 p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="setView('landing')">
+                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/20">
+                    <i data-lucide="shield" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-slate-900 font-black tracking-widest text-xl uppercase hidden sm:block">
+                    L7S <span class="text-red-500">Compliance</span>
+                </span>
+            </div>
+            <button onclick="setView('landing')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to HQ
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-wide mb-4">
+                Legal &amp; <span class="text-red-600">Compliance</span>
+            </h1>
+            <p class="text-slate-500 font-medium">Effective Date: October 15, 2024</p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="md:col-span-1">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-2 sticky top-28 flex flex-col gap-1">
+                    <button id="tab-privacy" onclick="showPolicy('privacy')" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-bold text-sm transition-all bg-red-50 text-red-600 border-l-4 border-red-600 flex items-center gap-3">
+                        <i data-lucide="lock" class="w-4 h-4"></i> Privacy Policy
+                    </button>
+                    <button id="tab-terms" onclick="showPolicy('terms')" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-bold text-sm transition-all text-slate-500 border-l-4 border-transparent hover:bg-slate-50 hover:text-slate-900 flex items-center gap-3">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Terms of Service
+                    </button>
+                    <button id="tab-disclaimers" onclick="showPolicy('disclaimers')" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-bold text-sm transition-all text-slate-500 border-l-4 border-transparent hover:bg-slate-50 hover:text-slate-900 flex items-center gap-3">
+                        <i data-lucide="alert-triangle" class="w-4 h-4"></i> Disclaimers
+                    </button>
+                    <button id="tab-dmca" onclick="showPolicy('dmca')" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-bold text-sm transition-all text-slate-500 border-l-4 border-transparent hover:bg-slate-50 hover:text-slate-900 flex items-center gap-3">
+                        <i data-lucide="shield-alert" class="w-4 h-4"></i> DMCA Policy
+                    </button>
+                </div>
+            </div>
+
+            <!-- Policy Content Area -->
+            <div class="md:col-span-3 bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-12 min-h-[600px]">
+                
+                <!-- 1. PRIVACY POLICY -->
+                <div id="policy-privacy" class="policy-section block space-y-6">
+                    <div class="border-b border-slate-100 pb-6 mb-6">
+                        <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Privacy Policy</h2>
+                    </div>
+                    <div class="prose max-w-none text-slate-600 font-medium space-y-6">
+                        <p>L7S, Inc. ("L7S") is committed to safeguarding your privacy. This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you interact with our website and services.</p>
+                        
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Information We Collect</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong class="text-slate-800">Personal Information:</strong> We may collect personal details such as your name, email address, phone number, and mailing address when you register for an account, purchase services, or communicate with us.</li>
+                            <li><strong class="text-slate-800">Usage Data:</strong> We gather information on how you access and use the website, including your IP address, browser type, pages visited, and the time and date of your visit.</li>
+                            <li><strong class="text-slate-800">Cookies and Tracking Technologies:</strong> Our website uses cookies and similar tracking technologies to enhance your experience, analyze site traffic, and for marketing purposes.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">How We Use Your Information</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong class="text-slate-800">Service Delivery:</strong> To provide and maintain our services, process transactions, and manage user accounts.</li>
+                            <li><strong class="text-slate-800">Communication:</strong> To send you updates, newsletters, marketing materials, and respond to your inquiries.</li>
+                            <li><strong class="text-slate-800">Improvement:</strong> To analyze usage patterns and improve our website and services.</li>
+                            <li><strong class="text-slate-800">Legal Compliance:</strong> To comply with legal obligations and protect our rights.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Information Sharing and Disclosure</h3>
+                        <p>L7S does not sell or rent your personal information. We may share your information with:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Trusted third-party service providers who assist us in operating our website and conducting our business, subject to confidentiality agreements.</li>
+                            <li>Law enforcement or government agencies when required by law or to protect our legal rights.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Data Security</h3>
+                        <p>L7S implements a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Your Choices</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong class="text-slate-800">Access and Correction:</strong> You may request access to or correction of your personal information by contacting us.</li>
+                            <li><strong class="text-slate-800">Opt-Out:</strong> You can opt out of receiving marketing communications from us by following the unsubscribe link in our emails.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Third-Party Links</h3>
+                        <p>Our website may contain links to third-party sites. We are not responsible for the privacy practices of these other sites. We encourage you to review their privacy policies.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Changes to This Privacy Policy</h3>
+                        <p>L7S may update this Privacy Policy periodically. We will notify you of any changes by posting the new Privacy Policy on this page with an updated effective date.</p>
+                    </div>
+                </div>
+
+                <!-- 2. TERMS OF SERVICE -->
+                <div id="policy-terms" class="policy-section hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-6 mb-6">
+                        <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Terms of Service</h2>
+                    </div>
+                    <div class="prose max-w-none text-slate-600 font-medium space-y-6">
+                        <p>These Terms of Service ("Terms") govern your access to and use of the L7S, Inc. ("L7S", "we", "us", or "our") website, products, and services (collectively, the "Services"). By using the Services, you agree to comply with and be bound by these terms.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Acceptance of Terms</h3>
+                        <p>By accessing or using our services, you confirm that you can form a binding contract with L7S, that you accept these Terms and our Privacy Policy, and that you agree to comply with them.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Services</h3>
+                        <p>L7S provides business consulting, financial guidance, credit restoration, educational resources, and technology solutions. The information provided through our Services is for educational and informational purposes only and does not constitute professional advice.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Eligibility</h3>
+                        <p>You must be at least 18 years old to use our Services.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Account Registration</h3>
+                        <p>To access certain features, you may need to register for an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Payment and Billing</h3>
+                        <p>Certain services require payment. By purchasing, you agree to pay the fees listed for those services. All sales are final and non-refundable unless otherwise stated in a specific offer.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Intellectual Property</h3>
+                        <p>All content included in or made available through any L7S Service, such as text, graphics, logos, and software, is the property of L7S or its content suppliers and protected by United States and international copyright laws. This content may not be used without our express written permission.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">User Conduct</h3>
+                        <p>You agree not to:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Use the services for any unlawful purpose.</li>
+                            <li>Disrupt or interfere with the security or functionality of the services.</li>
+                            <li>Impersonate any person or entity.</li>
+                            <li>Use any automated means to access the services for any purpose without our express written permission.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Disclaimers</h3>
+                        <p>The Services are provided "as is" and "as available" without warranties of any kind, either express or implied. L7S does not warrant that the services will meet your requirements, be accurate, or be error-free.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Limitation of Liability</h3>
+                        <p>To the fullest extent permitted by applicable law, L7S shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, arising out of your use or inability to use the services.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Indemnification</h3>
+                        <p>You agree to indemnify and hold L7S harmless from any claims, damages, liabilities, costs, and expenses arising from your violation of these Terms.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Termination</h3>
+                        <p>L7S reserves the right to suspend or terminate your access to the services at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users of the Services, us, or third parties, or for any other reason.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Modifications to Terms</h3>
+                        <p>L7S can modify these Terms at any time. We will notify you by posting the revised Terms on our website. Your continued use of the services after such changes constitutes your acceptance of the new Terms.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Governing Law</h3>
+                        <p>These Terms are governed by and construed in accordance with the laws of the State of Georgia, without regard to its conflict of law principles.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Entire Agreement</h3>
+                        <p>These Terms, our Privacy Policy, and any other legal notices published by us on the Services, shall constitute the entire agreement between you and L7S concerning the Services.</p>
+                    </div>
+                </div>
+
+                <!-- 3. DISCLAIMERS -->
+                <div id="policy-disclaimers" class="policy-section hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-6 mb-6">
+                        <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Disclaimers and Disclosures</h2>
+                    </div>
+                    <div class="prose max-w-none text-slate-600 font-medium space-y-6">
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">General Information Disclaimer</h3>
+                        <p>The information provided by L7S, Inc. ("L7S") is for general informational and educational purposes only. All information on the site is provided in good faith, however, L7S makes no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">No Financial, Legal, or Tax Advice</h3>
+                        <p>L7S does not provide financial, legal, or tax advice. The content and services are not intended to be a substitute for professional advice. Users should consult with qualified professionals before making any financial, legal, or tax-related decisions.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">No Guarantees of Results</h3>
+                        <p>L7S cannot guarantee specific outcomes or results from the use of our services. Success depends on various factors including individual effort, financial situation, and market conditions. Results will vary depending on individual circumstances.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Affiliate Disclosure</h3>
+                        <p>L7S may engage in affiliate marketing, which is done by embedding tracking links into the website. If you click on a link for an affiliate partnership, a cookie will be placed on your browser to track any sales for purposes of commissions. L7S will disclose any affiliate relationships.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Third-Party Links and Resources</h3>
+                        <p>Our services may contain links to third-party websites or resources. L7S does not endorse and is not responsible or liable for their availability, accuracy, or the related content, products, or services. Users access such third-party sites at their own risk.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Testimonials and Reviews</h3>
+                        <p>Testimonials on our website reflect the individual experiences of those who have used our services. However, they are individual results and results do vary. We do not claim that they are typical results that consumers will generally achieve.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Limitation of Liability</h3>
+                        <p>In no event shall L7S, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the services.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Modification of Disclaimers and Disclosures</h3>
+                        <p>L7S reserves the right to modify these disclaimers at any time. We will notify you of any changes by posting the new disclaimers on this page. Changes are effective immediately upon posting.</p>
+                    </div>
+                </div>
+
+                <!-- 4. DMCA POLICY -->
+                <div id="policy-dmca" class="policy-section hidden space-y-6">
+                    <div class="border-b border-slate-100 pb-6 mb-6">
+                        <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wide">DMCA Policy</h2>
+                    </div>
+                    <div class="prose max-w-none text-slate-600 font-medium space-y-6">
+                        <p>L7S, Inc. respects the intellectual property rights of others and expects its users to do the same. In accordance with the Digital Millennium Copyright Act of 1998, we have implemented procedures for receiving written notification of claimed infringements.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Reporting Claims of Copyright Infringement</h3>
+                        <p>If you believe that your copyrighted work has been infringed upon, please notify our designated Copyright Agent.</p>
+
+                        <div class="bg-red-50 p-6 rounded-xl border border-red-100 my-6">
+                            <h4 class="font-black text-slate-900 mb-2">Designated Copyright Agent:</h4>
+                            <p class="text-sm text-slate-700">L7S, Inc.<br>Attn: Copyright Agent<br>760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076<br>Email: admin@l7sinc.com</p>
+                        </div>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Filing a DMCA Takedown Notice</h3>
+                        <p>Your written notification must include the following:</p>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Identification of the copyrighted work claimed to have been infringed.</li>
+                            <li>Identification of the material that is claimed to be infringing and information reasonably sufficient to permit us to locate the material.</li>
+                            <li>Your contact information, including your address, telephone number, and an email address.</li>
+                            <li>A statement that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</li>
+                            <li>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+                            <li>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+                        </ol>
+                        <p>Upon receipt of a valid notice, L7S will promptly remove or disable access to the infringing material and notify the user responsible for the content.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Filing a DMCA Counter-Notice</h3>
+                        <p>If you believe material was removed by mistake, you may file a counter-notification with our Copyright Agent. It must include:</p>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Identification of the material that has been removed or to which access has been disabled and the location at which the material appeared before it was removed or access to it was disabled.</li>
+                            <li>A statement under penalty of perjury that you have a good faith belief that the material was removed or disabled as a result of mistake or misidentification of the material to be removed or disabled.</li>
+                            <li>Your name, address, and telephone number, and a statement that you consent to the jurisdiction of the federal district court for the judicial district in which your address is located, and that you will accept service of process from the person who provided the original notification of infringement.</li>
+                        </ol>
+                        <p>Upon receipt of a valid counter-notification, L7S will forward it to the original claimant. The material will be restored if no lawsuit is filed within ten (10) business days.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Repeat Infringer Policy</h3>
+                        <p>L7S has a policy of terminating, in appropriate circumstances, users who are determined to be repeat infringers. L7S may also, at its sole discretion, limit access to the services for any users who infringe any intellectual property rights of others, whether or not there is any repeat infringement.</p>
+
+                        <h3 class="text-lg font-black text-slate-900 mt-8 mb-4">Modifications to Policy</h3>
+                        <p>L7S reserves the right to modify this DMCA Policy at any time. Any changes will take effect upon posting on the website.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <footer class="text-center mt-16 pt-8 border-t border-slate-200">
+            <p class="text-slate-500 text-sm font-medium">© 2026 L7S, Inc. All rights reserved. <br/> Built for Compliance, Designed for the C-Suite.</p>
+        </footer>
+    </main>
+</div><!-- /view-legal -->
+
 
 <!-- ============================================================ -->
-<!-- LEGAL MODALS                                                 -->
+<!-- FLOATING SUPPORT WIDGET                                      -->
 <!-- ============================================================ -->
-
-<!-- Privacy Policy Modal -->
-<div id="modal-privacy" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/60 modal-overlay" onclick="closeModal('modal-privacy')"></div>
-    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-black">Privacy Policy</h2>
-                <button onclick="closeModal('modal-privacy')" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <p class="text-sm text-slate-500 mb-6">Effective Date: October 15, 2024</p>
-            <div class="prose prose-sm prose-slate max-w-none text-sm text-slate-600 space-y-4">
-                <p>L7S, Inc. ("L7S," "we," "us," or "our") is committed to safeguarding your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you visit our website, use our services, or interact with us.</p>
-
-                <h3 class="text-base font-bold text-slate-800">1. Information We Collect</h3>
-                <p><strong>Personal Information:</strong> When you create an account, complete intake forms, book sessions, or contact us, we may collect your name, email address, phone number, mailing address, business information, and payment details.</p>
-                <p><strong>Usage Data:</strong> We automatically collect information about your interaction with our website, including IP address, browser type, operating system, referring URLs, pages visited, and timestamps.</p>
-                <p><strong>Cookies and Tracking Technologies:</strong> We use cookies, web beacons, and similar technologies to enhance your experience, analyze site traffic, and personalize content. You can manage cookie preferences through your browser settings.</p>
-
-                <h3 class="text-base font-bold text-slate-800">2. How We Use Your Information</h3>
-                <p><strong>Service Delivery:</strong> To provide, maintain, and improve our services, process transactions, and fulfill your requests.</p>
-                <p><strong>Communication:</strong> To send you service-related notifications, updates, marketing communications (with your consent), and respond to your inquiries.</p>
-                <p><strong>Improvement:</strong> To analyze usage patterns, conduct research, and develop new features and services.</p>
-                <p><strong>Legal Compliance:</strong> To comply with applicable laws, regulations, and legal processes, and to protect our rights and safety.</p>
-
-                <h3 class="text-base font-bold text-slate-800">3. Information Sharing</h3>
-                <p>We do not sell your personal information. We may share information with trusted third-party service providers who assist in operating our website and services, subject to confidentiality obligations. We may also disclose information when required by law or to protect our rights.</p>
-
-                <h3 class="text-base font-bold text-slate-800">4. Data Security</h3>
-                <p>We implement industry-standard security measures including 256-bit encryption, secure servers, and access controls to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
-
-                <h3 class="text-base font-bold text-slate-800">5. Your Choices</h3>
-                <p>You may access, update, or delete your personal information by contacting us. You may opt out of marketing communications at any time. You can manage cookie preferences through your browser settings.</p>
-
-                <h3 class="text-base font-bold text-slate-800">6. Third-Party Links</h3>
-                <p>Our website may contain links to third-party sites. We are not responsible for the privacy practices of these external sites and encourage you to review their privacy policies.</p>
-
-                <h3 class="text-base font-bold text-slate-800">7. Changes to This Policy</h3>
-                <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of our services constitutes acceptance of the updated policy.</p>
-
-                <h3 class="text-base font-bold text-slate-800">8. Contact Us</h3>
-                <p>L7S Inc.<br>760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076<br>Email: admin@l7sinc.com</p>
-            </div>
+<div id="support-widget" class="fixed bottom-6 right-6 z-50">
+    <!-- Popover -->
+    <div id="support-popover" class="hidden absolute bottom-16 right-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-2" aria-hidden="true">
+        <div class="bg-slate-900 text-white p-4">
+            <h4 class="font-bold text-sm">Need Help?</h4>
+            <p class="text-xs text-slate-400 mt-1">Choose how you'd like to reach us</p>
+        </div>
+        <div class="p-3 space-y-2">
+            <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-3.5 h-3.5"></i></span>
+                <div>
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Call Us</p>
+                    <p class="text-[10px] font-medium text-slate-500">(833) 693-0777</p>
+                </div>
+            </a>
+            <a href="sms:+18336930777?body=Hi%20L7S%20Hero%20Team%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
+                <div>
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Text Us</p>
+                    <p class="text-[10px] font-medium text-slate-500">SMS to (833) 693-0777</p>
+                </div>
+            </a>
+            <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-3.5 h-3.5"></i></span>
+                <div>
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Email Support</p>
+                    <p class="text-[10px] font-medium text-slate-500">admin@l7sinc.com</p>
+                </div>
+            </a>
+            <button onclick="openBookingCalendar()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group text-left">
+                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-3.5 h-3.5"></i></span>
+                <div>
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Book a Call</p>
+                    <p class="text-[10px] font-medium text-slate-500">Schedule R&amp;R™ Audit</p>
+                </div>
+            </button>
         </div>
     </div>
+    <!-- Toggle Button -->
+    <button id="support-toggle" type="button" onclick="toggleSupportPopover()" class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-lg shadow-red-600/30 flex items-center justify-center transition-all hover:scale-110 active:scale-95" aria-label="Contact Support" aria-controls="support-popover" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+    </button>
 </div>
-
-<!-- Terms of Service Modal -->
-<div id="modal-terms" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/60 modal-overlay" onclick="closeModal('modal-terms')"></div>
-    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-black">Terms of Service</h2>
-                <button onclick="closeModal('modal-terms')" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <p class="text-sm text-slate-500 mb-6">Effective Date: October 15, 2024</p>
-            <div class="prose prose-sm prose-slate max-w-none text-sm text-slate-600 space-y-4">
-                <h3 class="text-base font-bold text-slate-800">1. Acceptance of Terms</h3>
-                <p>By accessing or using the services provided by L7S, Inc. ("L7S," "we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
-
-                <h3 class="text-base font-bold text-slate-800">2. Description of Services</h3>
-                <p>L7S provides business consulting, financial guidance, credit restoration connections, educational resources, and AI-powered business coordination services through the L7S Hero S.O.S.™ platform. Services include but are not limited to strategic planning, blueprint development, and connection to licensed professionals.</p>
-
-                <h3 class="text-base font-bold text-slate-800">3. Eligibility</h3>
-                <p>You must be at least 18 years of age to use our services. By using our services, you represent and warrant that you meet this requirement.</p>
-
-                <h3 class="text-base font-bold text-slate-800">4. Account Registration</h3>
-                <p>You may be required to create an account to access certain services. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
-
-                <h3 class="text-base font-bold text-slate-800">5. Payment Terms</h3>
-                <p>All fees are stated in U.S. dollars. Payment is due at the time of purchase. All sales are final. Membership fees are billed monthly. One-time purchase tier upgrades provide permanent access to that tier's features.</p>
-
-                <h3 class="text-base font-bold text-slate-800">6. Intellectual Property</h3>
-                <p>All content, materials, frameworks, trademarks, and intellectual property on our website and within our services are owned by L7S, Inc. You may not reproduce, distribute, or create derivative works without express written permission.</p>
-
-                <h3 class="text-base font-bold text-slate-800">7. User Conduct</h3>
-                <p>You agree not to use our services for any unlawful purpose, interfere with the operation of our platform, attempt to gain unauthorized access, or misrepresent your identity or affiliation.</p>
-
-                <h3 class="text-base font-bold text-slate-800">8. Disclaimers</h3>
-                <p>Our services are provided "as is" and "as available" without warranties of any kind, either express or implied. L7S does not guarantee specific results from the use of our services.</p>
-
-                <h3 class="text-base font-bold text-slate-800">9. Limitation of Liability</h3>
-                <p>To the maximum extent permitted by law, L7S, Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services.</p>
-
-                <h3 class="text-base font-bold text-slate-800">10. Indemnification</h3>
-                <p>You agree to indemnify and hold harmless L7S, Inc., its officers, directors, employees, and agents from any claims, damages, or expenses arising from your use of our services or violation of these terms.</p>
-
-                <h3 class="text-base font-bold text-slate-800">11. Termination</h3>
-                <p>We reserve the right to suspend or terminate your account and access to our services at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users or our business.</p>
-
-                <h3 class="text-base font-bold text-slate-800">12. Modifications</h3>
-                <p>We reserve the right to modify these Terms at any time. Changes will be effective upon posting. Your continued use of our services constitutes acceptance of the modified terms.</p>
-
-                <h3 class="text-base font-bold text-slate-800">13. Governing Law</h3>
-                <p>These Terms shall be governed by and construed in accordance with the laws of the State of Georgia, without regard to its conflict of law provisions.</p>
-
-                <h3 class="text-base font-bold text-slate-800">14. Contact</h3>
-                <p>L7S Inc.<br>760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076<br>Email: admin@l7sinc.com</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Disclaimer Modal -->
-<div id="modal-disclaimer" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/60 modal-overlay" onclick="closeModal('modal-disclaimer')"></div>
-    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-black">Disclaimers</h2>
-                <button onclick="closeModal('modal-disclaimer')" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <p class="text-sm text-slate-500 mb-6">Effective Date: October 15, 2024</p>
-            <div class="prose prose-sm prose-slate max-w-none text-sm text-slate-600 space-y-4">
-                <h3 class="text-base font-bold text-slate-800">1. General Information Disclaimer</h3>
-                <p>The information provided by L7S, Inc. ("L7S") on our website and through our services is for general informational and educational purposes only. All information is provided in good faith; however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information.</p>
-
-                <h3 class="text-base font-bold text-slate-800">2. No Financial, Legal, or Tax Advice</h3>
-                <p>Nothing on this website or within our services constitutes professional financial, legal, tax, or investment advice. You should consult with appropriate licensed professionals before making any financial, legal, or tax decisions. L7S is not a law firm, accounting firm, or registered investment advisor.</p>
-
-                <h3 class="text-base font-bold text-slate-800">3. No Guarantees</h3>
-                <p>L7S does not guarantee specific results, outcomes, credit score improvements, loan approvals, revenue increases, or business growth. Results vary based on individual circumstances, effort, market conditions, and other factors beyond our control.</p>
-
-                <h3 class="text-base font-bold text-slate-800">4. Affiliate Disclosure</h3>
-                <p>Some links on our website may be affiliate links. This means that if you click on the link and purchase an item or service, L7S may receive a commission at no additional cost to you. These affiliate relationships do not influence our recommendations or content.</p>
-
-                <h3 class="text-base font-bold text-slate-800">5. Third-Party Links</h3>
-                <p>Our website and services may contain links to third-party websites and services. L7S has no control over and assumes no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
-
-                <h3 class="text-base font-bold text-slate-800">6. Testimonials</h3>
-                <p>Any testimonials or reviews displayed on our website represent individual experiences and do not guarantee that all users will achieve the same results. Individual results may vary.</p>
-
-                <h3 class="text-base font-bold text-slate-800">7. Limitation of Liability</h3>
-                <p>Under no circumstances shall L7S, Inc. be liable for any direct, indirect, incidental, special, consequential, or punitive damages that result from the use of, or the inability to use, our services or materials.</p>
-
-                <h3 class="text-base font-bold text-slate-800">8. Contact</h3>
-                <p>L7S Inc.<br>760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076<br>Email: admin@l7sinc.com</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- DMCA Policy Modal -->
-<div id="modal-dmca" class="fixed inset-0 z-[100] hidden">
-    <div class="absolute inset-0 bg-black/60 modal-overlay" onclick="closeModal('modal-dmca')"></div>
-    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-black">DMCA Policy</h2>
-                <button onclick="closeModal('modal-dmca')" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-            <p class="text-sm text-slate-500 mb-6">Effective Date: October 15, 2024</p>
-            <div class="prose prose-sm prose-slate max-w-none text-sm text-slate-600 space-y-4">
-                <p>L7S, Inc. ("L7S") respects the intellectual property rights of others and expects its users to do the same. In accordance with the Digital Millennium Copyright Act of 1998 ("DMCA"), L7S will respond expeditiously to claims of copyright infringement.</p>
-
-                <h3 class="text-base font-bold text-slate-800">1. Designated Copyright Agent</h3>
-                <p>L7S Inc.<br>Attn: Copyright Agent<br>760 Old Roswell Rd, Suite 324<br>Roswell, GA 30076<br>Email: admin@l7sinc.com</p>
-
-                <h3 class="text-base font-bold text-slate-800">2. Filing a DMCA Notice</h3>
-                <p>If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement, please provide our Copyright Agent with the following information:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>A physical or electronic signature of the copyright owner or authorized agent.</li>
-                    <li>Identification of the copyrighted work claimed to have been infringed.</li>
-                    <li>Identification of the material that is claimed to be infringing, with sufficient detail to locate it on our site.</li>
-                    <li>Your contact information (address, telephone number, and email address).</li>
-                    <li>A statement that you have a good faith belief that use of the material is not authorized by the copyright owner, its agent, or the law.</li>
-                    <li>A statement, under penalty of perjury, that the information in the notification is accurate and that you are the copyright owner or authorized to act on the owner's behalf.</li>
-                </ul>
-
-                <h3 class="text-base font-bold text-slate-800">3. Counter-Notice</h3>
-                <p>If you believe your content was removed in error, you may submit a counter-notice to our Copyright Agent containing:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>Your physical or electronic signature.</li>
-                    <li>Identification of the material that was removed and the location where it appeared before removal.</li>
-                    <li>A statement under penalty of perjury that you have a good faith belief that the material was removed as a result of mistake or misidentification.</li>
-                    <li>Your name, address, and telephone number, and a statement that you consent to the jurisdiction of the federal district court for the judicial district in which your address is located.</li>
-                </ul>
-
-                <h3 class="text-base font-bold text-slate-800">4. Repeat Infringer Policy</h3>
-                <p>L7S will, in appropriate circumstances, terminate the accounts of users who are repeat infringers of copyrighted materials.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- ============================================================ -->
 <!-- JAVASCRIPT                                                   -->
 <!-- ============================================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
+    
     // --- Handle Stripe Checkout return ---
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('status') === 'success') {
-        // User completed Stripe Checkout — show success view
         setTimeout(function() { setView('success'); }, 100);
-        // Clean the URL
         window.history.replaceState({}, '', window.location.pathname);
     } else if (urlParams.get('status') === 'cancelled') {
         window.history.replaceState({}, '', window.location.pathname);
@@ -1118,22 +1299,56 @@ document.addEventListener('DOMContentLoaded', function() {
     try { lucide.createIcons(); } catch(e) { console.warn('Lucide init:', e); }
 
     // --- View Router ---
-    function setView(viewName) {
+    function setView(viewName, policyId = null) {
         document.querySelectorAll('.view').forEach(function(v) {
             v.classList.remove('active');
         });
         var target = document.getElementById('view-' + viewName);
         if (target) {
             target.classList.add('active');
+        }
+        
+        setSupportPopover(false);
+        
+        if (viewName === 'legal') {
+            showPolicy(policyId || 'privacy');
+        } else {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        setSupportPopover(false);
-        // Re-init Lucide icons for new view
+
         setTimeout(function() {
             try { lucide.createIcons(); } catch(e) { console.warn('Lucide re-init:', e); }
         }, 100);
     }
     window.setView = setView;
+
+    // --- Legal Policy Router Logic ---
+    function showPolicy(policyId) {
+        document.querySelectorAll('.policy-section').forEach(el => {
+            el.classList.add('hidden');
+            el.classList.remove('block');
+        });
+        
+        var targetSection = document.getElementById('policy-' + policyId);
+        if(targetSection) {
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('block');
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(el => {
+            el.classList.remove('bg-red-50', 'text-red-600', 'border-red-600');
+            el.classList.add('text-slate-500', 'border-transparent');
+        });
+        
+        const activeBtn = document.getElementById('tab-' + policyId);
+        if(activeBtn) {
+            activeBtn.classList.remove('text-slate-500', 'border-transparent');
+            activeBtn.classList.add('bg-red-50', 'text-red-600', 'border-red-600');
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.showPolicy = showPolicy;
 
     function normalizeUsPhone(value) {
         var digits = (value || '').replace(/\D/g, '');
@@ -1164,6 +1379,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Cal('modal', { calLink: 'l7sinc' });
         } catch(err) {
             console.warn('Cal.com modal:', err);
+            window.open('https://cal.com/l7sinc', '_blank');
         }
     };
 
@@ -1177,16 +1393,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var monitoringStatus = document.getElementById('monitoringStatus');
         var monitoringFeedback = document.getElementById('monitoring-feedback');
 
-        if (monitoringStatus) {
-            monitoringStatus.value = hasMonitoring ? 'yes' : 'no';
-        }
+        if (monitoringStatus) monitoringStatus.value = hasMonitoring ? 'yes' : 'no';
         if (monitoringFeedback) {
             monitoringFeedback.textContent = '';
             monitoringFeedback.classList.add('hidden');
         }
-        if (monitoringSelect) {
-            monitoringSelect.setCustomValidity('');
-        }
+        if (monitoringSelect) monitoringSelect.setCustomValidity('');
+
         yesBtn.setAttribute('aria-pressed', hasMonitoring ? 'true' : 'false');
         noBtn.setAttribute('aria-pressed', hasMonitoring ? 'false' : 'true');
 
@@ -1262,7 +1475,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setView('intake');
     };
 
-    // Redirect to Stripe Checkout after form submission
     window.redirectToStripe = function(productId) {
         var priceId = stripePriceMap[productId];
         if (!priceId) { console.error('No price ID for product:', productId); return; }
@@ -1285,6 +1497,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var formData = new FormData(form);
             var data = {};
             formData.forEach(function(value, key) { data[key] = value; });
+            
             if (phoneInput) phoneInput.setCustomValidity('');
             if (monitoringSelect) monitoringSelect.setCustomValidity('');
             if (monitoringFeedback) {
@@ -1302,15 +1515,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // POST lead data to GHL via form submission API
             var GHL_FORM_ID = 'NU96puPRZZkFbH06Y31q';
             var GHL_LOCATION_ID = 'Thv6yzRgyq3txWmhUPiz';
 
-            // Conditional routing: determine lead tags based on plan tier
             var planTier = data.selectedPlan || 'No Plan Selected';
             var monService = data.monitoringService || '';
-            var monitoringStatus = document.getElementById('monitoringStatus');
-            if (!monitoringStatus || !monitoringStatus.value) {
+            var monitoringStatusInput = document.getElementById('monitoringStatus');
+            
+            if (!monitoringStatusInput || !monitoringStatusInput.value) {
                 if (monitoringFeedback) {
                     monitoringFeedback.textContent = 'Please choose whether you currently have active credit monitoring.';
                     monitoringFeedback.classList.remove('hidden');
@@ -1318,7 +1530,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('btn-mon-yes').focus();
                 return;
             }
-            var hasMonitoring = monitoringStatus.value === 'yes';
+            
+            var hasMonitoring = monitoringStatusInput.value === 'yes';
             if (hasMonitoring && !monService) {
                 if (monitoringSelect) {
                     monitoringSelect.setCustomValidity('Please select your credit monitoring service.');
@@ -1327,6 +1540,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return;
             }
+            
             var leadTags = ['L7S Website Lead'];
             if (planTier !== 'No Plan Selected') leadTags.push(planTier + ' Tier');
             if (hasMonitoring) { leadTags.push('Has Monitoring'); if (monService) leadTags.push(monService); }
@@ -1352,8 +1566,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     hasCreditMonitoring: hasMonitoring
                 }
             };
+            
             var ghlFormData = new FormData();
             ghlFormData.append('formData', JSON.stringify(ghlPayload));
+            
+            // Note: Placeholder Webhook is active per backend_keys.md structure
             fetch('https://backend.leadconnectorhq.com/forms/submit?formId=' + GHL_FORM_ID + '&locationId=' + GHL_LOCATION_ID, {
                 method: 'POST',
                 body: ghlFormData
@@ -1361,22 +1578,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.warn('GHL submit error:', err);
             });
 
-            // Redirect to Stripe Checkout if a plan was selected
             var selectedProduct = data.stripeProductId;
             if (selectedProduct && stripePriceMap[selectedProduct]) {
                 redirectToStripe(selectedProduct);
-                return; // Stripe handles the rest — don't show success view yet
+                return; 
             }
 
-            // Trigger Cal.com modal for R&R session booking (no plan selected)
-            // Show success view first, then open Cal.com modal on top
             form.reset();
             document.getElementById('plan-badge').classList.add('hidden');
 
-            // Reset monitoring button states
             var yesBtn = document.getElementById('btn-mon-yes');
             var noBtn = document.getElementById('btn-mon-no');
-            var monitoringStatusInput = document.getElementById('monitoringStatus');
             yesBtn.classList.remove('border-red-600', 'bg-red-50', 'text-red-700');
             yesBtn.classList.add('border-slate-300', 'text-slate-600');
             noBtn.classList.remove('border-red-600', 'bg-red-50', 'text-red-700');
@@ -1386,17 +1598,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('monitoring-yes').classList.add('hidden');
             document.getElementById('monitoring-no').classList.add('hidden');
             if (monitoringStatusInput) monitoringStatusInput.value = '';
-            if (monitoringSelect) {
-                monitoringSelect.value = '';
-                monitoringSelect.removeAttribute('required');
-                monitoringSelect.setCustomValidity('');
-            }
-            if (monitoringFeedback) {
-                monitoringFeedback.textContent = '';
-                monitoringFeedback.classList.add('hidden');
-            }
-
-            // Navigate to success view, then open Cal.com modal after DOM settles
+            
             setView('success');
             setTimeout(function() {
                 openBookingCalendar();
@@ -1412,24 +1614,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (chevron) chevron.classList.toggle('rotate');
     };
 
-    // --- Legal Modals ---
-    window.openModal = function(id) {
-        var modal = document.getElementById(id);
-        if (modal) {
-            setSupportPopover(false);
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-    };
-
-    window.closeModal = function(id) {
-        var modal = document.getElementById(id);
-        if (modal) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-    };
-
+    // Close popover on outside click
     document.addEventListener('click', function(e) {
         var supportWidget = document.getElementById('support-widget');
         if (supportWidget && !supportWidget.contains(e.target)) {
@@ -1437,67 +1622,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Close modal on Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             setSupportPopover(false);
-            document.querySelectorAll('[id^="modal-"]').forEach(function(modal) {
-                if (!modal.classList.contains('hidden')) {
-                    closeModal(modal.id);
-                }
-            });
         }
     });
 
 });
 </script>
-
-<!-- ============================================================ -->
-<!-- FLOATING SUPPORT WIDGET                                       -->
-<!-- ============================================================ -->
-<div id="support-widget" class="fixed bottom-6 right-6 z-50">
-    <!-- Popover -->
-    <div id="support-popover" class="hidden absolute bottom-16 right-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-2" aria-hidden="true">
-        <div class="bg-slate-900 text-white p-4">
-            <h4 class="font-bold text-sm">Need Help?</h4>
-            <p class="text-xs text-slate-400 mt-1">Choose how you'd like to reach us</p>
-        </div>
-        <div class="p-3 space-y-2">
-            <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Call Us</p>
-                    <p class="text-[10px] text-slate-400">(833) 693-0777</p>
-                </div>
-            </a>
-            <a href="sms:+18336930777?body=Hi%20L7S%20Hero%20Team%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Text Us</p>
-                    <p class="text-[10px] text-slate-400">SMS to (833) 693-0777</p>
-                </div>
-            </a>
-            <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Email Support</p>
-                    <p class="text-[10px] text-slate-400">admin@l7sinc.com</p>
-                </div>
-            </a>
-            <button onclick="openBookingCalendar()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group text-left">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-semibold text-slate-800 group-hover:text-red-600">Book a Call</p>
-                    <p class="text-[10px] text-slate-400">Schedule R&R™ Audit</p>
-                </div>
-            </button>
-        </div>
-    </div>
-    <!-- Toggle Button -->
-    <button id="support-toggle" type="button" onclick="toggleSupportPopover()" class="bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-lg shadow-red-600/30 flex items-center justify-center transition-all hover:scale-110" aria-label="Contact Support" aria-controls="support-popover" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-    </button>
-</div>
-
 </body>
 </html>
