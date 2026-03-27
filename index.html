@@ -716,7 +716,7 @@
 
     <!-- FOOTER -->
     <footer class="bg-slate-950 pt-20 pb-10 px-4 border-t border-slate-900 text-slate-400">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-start mb-16">
             <!-- Brand & About -->
             <div class="space-y-6">
                 <div class="flex items-center gap-3">
@@ -727,7 +727,7 @@
                     Transforming business challenges into success stories through expert guidance and strategic solutions.
                 </p>
                 <div class="space-y-3 text-sm font-medium">
-                    <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-red-500 shrink-0"></i> 760 Old Roswell Rd, Suite 324<br/>Roswell, GA 30076</div>
+                    <div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i><span>760 Old Roswell Rd, Suite 324<br/>Roswell, GA 30076</span></div>
                     <div class="flex items-center gap-3"><i data-lucide="phone" class="w-5 h-5 text-red-500 shrink-0"></i> +1 (833) 693-0777</div>
                     <div class="flex items-center gap-3"><i data-lucide="mail" class="w-5 h-5 text-red-500 shrink-0"></i> admin@l7sinc.com</div>
                 </div>
@@ -763,14 +763,14 @@
                 <h4 class="text-white font-black uppercase tracking-wider mb-6 flex items-center gap-2">
                     <i data-lucide="clock" class="w-5 h-5 text-red-500"></i> R&R Audit Hours
                 </h4>
-                <ul class="space-y-2 text-sm font-medium">
-                    <li class="flex justify-between"><span>Monday</span> <span class="text-red-400">Closed for Operations</span></li>
-                    <li class="flex justify-between"><span>Tuesday</span> <span class="text-slate-300">11:00 AM - 7:00 PM</span></li>
-                    <li class="flex justify-between"><span>Wednesday</span> <span class="text-red-400">Closed for Structuring</span></li>
-                    <li class="flex justify-between"><span>Thursday</span> <span class="text-slate-300">11:00 AM - 7:00 PM</span></li>
-                    <li class="flex justify-between"><span>Friday</span> <span class="text-red-400">Closed for Fulfillment</span></li>
-                    <li class="flex justify-between"><span>Saturday</span> <span class="text-slate-300">10:00 AM - 5:00 PM</span></li>
-                    <li class="flex justify-between text-slate-500"><span>Sunday</span> <span>Unavailable</span></li>
+                <ul class="space-y-2 text-xs font-medium">
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Monday</span> <span class="text-red-400 text-right">Ops Day</span></li>
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Tuesday</span> <span class="text-slate-300 text-right">11:00 AM – 7:00 PM</span></li>
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Wednesday</span> <span class="text-red-400 text-right">Structure Day</span></li>
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Thursday</span> <span class="text-slate-300 text-right">11:00 AM – 7:00 PM</span></li>
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Friday</span> <span class="text-red-400 text-right">Fulfillment Day</span></li>
+                    <li class="flex items-center justify-between gap-2"><span class="shrink-0">Saturday</span> <span class="text-slate-300 text-right">10:00 AM – 5:00 PM</span></li>
+                    <li class="flex items-center justify-between gap-2 text-slate-500"><span class="shrink-0">Sunday</span> <span class="text-right">Unavailable</span></li>
                 </ul>
             </div>
         </div>
@@ -789,7 +789,7 @@
                 <p>© 2026 L7S, Inc. All rights reserved.</p>
                 
                 <!-- LEGAL ROUTING BUTTONS -->
-                <div class="flex flex-wrap gap-6">
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6">
                     <button onclick="setView('legal', 'privacy')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Privacy Policy</button>
                     <button onclick="setView('legal', 'terms')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Terms of Service</button>
                     <button onclick="setView('legal', 'disclaimers')" class="hover:text-red-400 transition-colors uppercase tracking-wide">Disclaimer</button>
@@ -933,17 +933,17 @@
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-wide text-center mb-4">We also accept alternate payments:</p>
                         <div class="grid grid-cols-3 gap-3">
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
-                                <span class="text-xl">💸</span>
+                                <i data-lucide="banknote" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Zelle</p>
                                 <p class="text-[10px] text-slate-500 font-medium">admin@l7sinc.com</p>
                             </div>
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
-                                <span class="text-xl">💲</span>
+                                <i data-lucide="dollar-sign" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Cash App</p>
                                 <p class="text-[10px] text-slate-500 font-medium">$L7SInc</p>
                             </div>
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors">
-                                <span class="text-xl">🪙</span>
+                                <i data-lucide="coins" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Crypto</p>
                                 <p class="text-[10px] text-slate-500 font-medium">Contact Us</p>
                             </div>
