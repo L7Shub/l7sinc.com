@@ -176,19 +176,6 @@
             </div>
 
             <div>
-                <label class="block text-sm font-semibold mb-1">GetCreditHelpNow link:</label>
-                <p class="text-xs text-slate-400 mb-2">We found this — is it correct?</p>
-                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm font-mono break-all mb-2">
-                    https://luckie.getcredithelpnow.com/start
-                </div>
-                <div class="grid grid-cols-2 gap-3" id="getcredit-choice">
-                    <button onclick="selectChoice('getcredit-choice', this, 'yes')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">✅ Correct</button>
-                    <button onclick="selectChoice('getcredit-choice', this, 'no')" class="choice-btn border-2 border-slate-200 rounded-xl p-3 text-center hover:border-red-300 transition-colors text-sm font-semibold">❌ Needs Update</button>
-                </div>
-                <input type="url" id="getcredit-new" placeholder="Enter correct URL..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm mt-2">
-            </div>
-
-            <div>
                 <label class="block text-sm font-semibold mb-1">Any other affiliate/referral partner links to include?</label>
                 <textarea id="other-affiliates" rows="3" placeholder="McCarthy Law, New Life Credit Fix, Mark Hunter Law, etc. — paste any URLs here..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm"></textarea>
             </div>
@@ -560,7 +547,6 @@
         lines.push('  Score Progression: ' + val('link-scoreprog'));
         lines.push('  IdentityIQ: ' + val('link-identityiq'));
         lines.push('  Credit Hero Score: ' + (choices['credithero-choice'] === 'yes' ? '✅ Confirmed' : (choices['credithero-choice'] === 'no' ? '❌ Update: ' + val('credithero-new') : 'Not answered')));
-        lines.push('  GetCreditHelpNow: ' + (choices['getcredit-choice'] === 'yes' ? '✅ Confirmed' : (choices['getcredit-choice'] === 'no' ? '❌ Update: ' + val('getcredit-new') : 'Not answered')));
         lines.push('  Other affiliates: ' + val('other-affiliates'));
         lines.push('');
 
