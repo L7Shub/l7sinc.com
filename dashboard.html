@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>L7S Inc. — Operations Dashboard</title>
+
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="L7S Dashboard">
+<meta name="application-name" content="L7S Dashboard">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="msapplication-TileColor" content="#dc2626">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        l7red: '#dc2626',
+        l7dark: '#0f172a',
+        l7slate: '#1e293b',
+        l7card: '#1e293b',
+      }
+    }
+  }
+}
+</script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .tab-enter { animation: fadeIn 0.35s ease-out forwards; }
+  .glass { background: rgba(30, 41, 59, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
+  .glow-red { box-shadow: 0 0 24px rgba(220, 38, 38, 0.18), 0 0 6px rgba(220, 38, 38, 0.10); }
+</style>
+</head>
+
+<body class="bg-l7dark text-gray-200 min-h-screen font-sans antialiased">
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header class="sticky top-0 z-50 glass border-b border-white/10">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <div class="flex items-center gap-3">
+      <!-- Inline SVG Logo -->
+      <svg viewBox="0 0 48 48" class="w-10 h-10 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="24,2 45,14 45,34 24,46 3,34 3,14" fill="#dc2626" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="24" y="29" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="system-ui,sans-serif">L7S</text>
+      </svg>
+      <div>
+        <h1 class="text-white font-bold text-lg leading-tight tracking-tight">L7S Inc.</h1>
+        <p class="text-xs text-gray-400">Operations Dashboard</p>
+      </div>
+    </div>
+    <div class="text-right">
+      <div id="live-clock" class="text-white font-mono text-sm tabular-nums"></div>
+      <div class="text-xs text-gray-500">March 30, 2026</div>
+    </div>
+  </div>
+
+  <!-- Tab Bar -->
+  <nav class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto pb-0 scrollbar-hide" id="tab-bar">
+    <button onclick="switchTab(0)" class="tab-btn active whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="0">🏠 Overview</button>
+    <button onclick="switchTab(1)" class="tab-btn whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="1">🌐 Site Changes</button>
+    <button onclick="switchTab(2)" class="tab-btn whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="2">📅 Cal.com</button>
+    <button onclick="switchTab(3)" class="tab-btn whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="3">🤖 Agents</button>
+    <button onclick="switchTab(4)" class="tab-btn whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="4">💳 Stripe</button>
+    <button onclick="switchTab(5)" class="tab-btn whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all" data-idx="5">🚀 Next Steps</button>
+  </nav>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 0 — SESSION OVERVIEW                           -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel tab-enter" data-tab="0">
+
+  <!-- Hero -->
+  <div class="text-center mb-8">
+    <svg viewBox="0 0 48 48" class="w-20 h-20 mx-auto mb-4 drop-shadow-lg" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="24,2 45,14 45,34 24,46 3,34 3,14" fill="#dc2626" stroke="#ef4444" stroke-width="1.5"/>
+      <text x="24" y="29" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="system-ui,sans-serif">L7S</text>
+    </svg>
+    <h2 class="text-3xl font-bold text-white mb-1">Operations Dashboard</h2>
+    <p class="text-gray-400">Session: March 30, 2026 — All systems operational</p>
+  </div>
+
+  <!-- Completed Task Cards -->
+  <div class="grid md:grid-cols-2 gap-4 mb-8">
+    <div class="glass rounded-xl p-5 glow-red">
+      <div class="flex items-start gap-3">
+        <span class="text-green-400 text-xl mt-0.5">✅</span>
+        <div>
+          <h3 class="text-white font-semibold">Logo &amp; PWA Perfection</h3>
+          <p class="text-sm text-gray-400 mt-1">Nav logo fixed, manifest corrected, cross-platform meta tags added for iOS, Android &amp; desktop PWA install.</p>
+        </div>
+      </div>
+    </div>
+    <div class="glass rounded-xl p-5 glow-red">
+      <div class="flex items-start gap-3">
+        <span class="text-green-400 text-xl mt-0.5">✅</span>
+        <div>
+          <h3 class="text-white font-semibold">Stripe Checkout Hardened</h3>
+          <p class="text-sm text-gray-400 mt-1">Price map refactored, error toasts added, loading states on buttons, success/cancel URL fixes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="glass rounded-xl p-5 glow-red">
+      <div class="flex items-start gap-3">
+        <span class="text-green-400 text-xl mt-0.5">✅</span>
+        <div>
+          <h3 class="text-white font-semibold">Cal.com Notification Setup</h3>
+          <p class="text-sm text-gray-400 mt-1">Step-by-step guide created. luckieg@l7sinc.com set as priority routing target, workflows documented.</p>
+        </div>
+      </div>
+    </div>
+    <div class="glass rounded-xl p-5 glow-red">
+      <div class="flex items-start gap-3">
+        <span class="text-green-400 text-xl mt-0.5">✅</span>
+        <div>
+          <h3 class="text-white font-semibold">Agent System Scaffolded</h3>
+          <p class="text-sm text-gray-400 mt-1">skills.json created, README written, n8n client-onboarding workflow designed &amp; exported.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-3xl font-bold text-l7red">4</div>
+      <div class="text-xs text-gray-400 mt-1">Tasks Complete</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-3xl font-bold text-l7red">6</div>
+      <div class="text-xs text-gray-400 mt-1">Products in Stripe</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-3xl font-bold text-l7red">10</div>
+      <div class="text-xs text-gray-400 mt-1">Agent Skills</div>
+    </div>
+    <div class="glass rounded-xl p-4 text-center">
+      <div class="text-3xl font-bold text-l7red">3</div>
+      <div class="text-xs text-gray-400 mt-1">PWA Products</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 1 — SITE CHANGES                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel hidden" data-tab="1">
+
+  <h2 class="text-2xl font-bold text-white mb-6">🌐 Site Changes — l7sinc.com</h2>
+
+  <!-- Logo & Branding Diff -->
+  <div class="glass rounded-xl p-5 mb-5">
+    <h3 class="text-white font-semibold mb-3 flex items-center gap-2"><i data-lucide="image" class="w-5 h-5 text-l7red"></i> Logo &amp; Branding</h3>
+    <div class="grid md:grid-cols-2 gap-3">
+      <div class="bg-red-950/40 border border-red-500/20 rounded-lg p-4">
+        <div class="text-xs text-red-400 font-mono mb-2">— BEFORE (removed)</div>
+        <code class="text-sm text-red-300">&lt;i data-lucide="shield" class="nav-logo"&gt;&lt;/i&gt;</code>
+      </div>
+      <div class="bg-green-950/40 border border-green-500/20 rounded-lg p-4">
+        <div class="text-xs text-green-400 font-mono mb-2">+ AFTER (added)</div>
+        <code class="text-sm text-green-300">&lt;img src="assets/logo.svg" alt="L7S" class="nav-logo"&gt;</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- PWA Manifest -->
+  <div class="glass rounded-xl p-5 mb-5">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-white font-semibold flex items-center gap-2"><i data-lucide="file-json" class="w-5 h-5 text-l7red"></i> PWA Manifest — site.webmanifest</h3>
+      <button onclick="copyCode('manifest-code')" class="text-xs bg-white/10 hover:bg-white/20 text-gray-300 px-3 py-1 rounded-md transition">Copy</button>
+    </div>
+    <pre id="manifest-code" class="bg-black/40 rounded-lg p-4 text-sm overflow-x-auto font-mono leading-relaxed"><span class="text-gray-500">{</span>
+  <span class="text-red-400">"name"</span>: <span class="text-green-400">"L7S Inc."</span>,
+  <span class="text-red-400">"short_name"</span>: <span class="text-green-400">"L7S"</span>,
+  <span class="text-red-400">"start_url"</span>: <span class="text-green-400">"/"</span>,                  <span class="text-yellow-500">← fixed</span>
+  <span class="text-red-400">"display"</span>: <span class="text-green-400">"standalone"</span>,
+  <span class="text-red-400">"display_override"</span>: [<span class="text-green-400">"window-controls-overlay"</span>, <span class="text-green-400">"standalone"</span>],  <span class="text-yellow-500">← new</span>
+  <span class="text-red-400">"background_color"</span>: <span class="text-green-400">"#0f172a"</span>,
+  <span class="text-red-400">"theme_color"</span>: <span class="text-green-400">"#dc2626"</span>,
+  <span class="text-red-400">"icons"</span>: [
+    { <span class="text-red-400">"src"</span>: <span class="text-green-400">"assets/icon-192.png"</span>, <span class="text-red-400">"sizes"</span>: <span class="text-green-400">"192x192"</span>, <span class="text-red-400">"type"</span>: <span class="text-green-400">"image/png"</span> },
+    { <span class="text-red-400">"src"</span>: <span class="text-green-400">"assets/icon-512.png"</span>, <span class="text-red-400">"sizes"</span>: <span class="text-green-400">"512x512"</span>, <span class="text-red-400">"type"</span>: <span class="text-green-400">"image/png"</span> },
+    { <span class="text-red-400">"src"</span>: <span class="text-green-400">"assets/icon-maskable.png"</span>, <span class="text-red-400">"sizes"</span>: <span class="text-green-400">"512x512"</span>, <span class="text-red-400">"purpose"</span>: <span class="text-green-400">"maskable"</span> }  <span class="text-yellow-500">← maskable</span>
+  ]
+<span class="text-gray-500">}</span></pre>
+  </div>
+
+  <!-- PWA Meta Tags -->
+  <div class="glass rounded-xl p-5 mb-5">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-white font-semibold flex items-center gap-2"><i data-lucide="code" class="w-5 h-5 text-l7red"></i> PWA Meta Tags Added to &lt;head&gt;</h3>
+      <button onclick="copyCode('meta-code')" class="text-xs bg-white/10 hover:bg-white/20 text-gray-300 px-3 py-1 rounded-md transition">Copy</button>
+    </div>
+    <pre id="meta-code" class="bg-black/40 rounded-lg p-4 text-sm overflow-x-auto font-mono leading-relaxed text-green-300">&lt;meta name="theme-color" content="#0f172a"&gt;
+&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+&lt;meta name="apple-mobile-web-app-title" content="L7S Inc."&gt;
+&lt;meta name="application-name" content="L7S Inc."&gt;
+&lt;meta name="mobile-web-app-capable" content="yes"&gt;
+&lt;meta name="msapplication-TileColor" content="#dc2626"&gt;</pre>
+  </div>
+
+  <!-- Stripe Improvements -->
+  <div class="glass rounded-xl p-5">
+    <h3 class="text-white font-semibold mb-3 flex items-center gap-2"><i data-lucide="credit-card" class="w-5 h-5 text-l7red"></i> Stripe Checkout Improvements</h3>
+    <div class="grid md:grid-cols-2 gap-3 mb-4">
+      <div class="bg-red-950/40 border border-red-500/20 rounded-lg p-4">
+        <div class="text-xs text-red-400 font-mono mb-2">— OLD price map</div>
+        <pre class="text-sm text-red-300 font-mono">const prices = {
+  foundation: "price_xxx",
+  growth: "price_yyy",
+  // ... inline strings
+}</pre>
+      </div>
+      <div class="bg-green-950/40 border border-green-500/20 rounded-lg p-4">
+        <div class="text-xs text-green-400 font-mono mb-2">+ NEW price map</div>
+        <pre class="text-sm text-green-300 font-mono">const PRICE_MAP = {
+  foundation: {
+    id: "price_1SD3TO...",
+    mode: "payment"
+  },
+  monthly: {
+    id: "price_1SH8XX...",
+    mode: "subscription"
+  }
+  // ...structured objects
+}</pre>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-2">
+      <div class="flex items-center gap-2 text-sm"><span class="text-green-400">+</span> Error toast notifications on failure</div>
+      <div class="flex items-center gap-2 text-sm"><span class="text-green-400">+</span> .catch() handler on all Stripe calls</div>
+      <div class="flex items-center gap-2 text-sm"><span class="text-green-400">+</span> Button loading state with spinner</div>
+      <div class="flex items-center gap-2 text-sm"><span class="text-green-400">+</span> success_url &amp; cancel_url fixed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 2 — CAL.COM SETUP                              -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel hidden" data-tab="2">
+
+  <h2 class="text-2xl font-bold text-white mb-2">📅 Cal.com Setup — cal.com/l7sinc</h2>
+
+  <!-- Progress Bar -->
+  <div class="glass rounded-xl p-4 mb-6">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm text-gray-400">Setup Progress</span>
+      <span id="cal-progress-text" class="text-sm font-semibold text-l7red">0 of 14 steps complete</span>
+    </div>
+    <div class="w-full bg-black/40 rounded-full h-3 overflow-hidden">
+      <div id="cal-progress-bar" class="bg-gradient-to-r from-red-600 to-red-400 h-3 rounded-full transition-all duration-500" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Priority: luckieg routing -->
+  <div class="glass rounded-xl p-5 mb-4">
+    <h3 class="text-white font-semibold mb-4 flex items-center gap-2">🎯 Priority: luckieg@l7sinc.com as R&amp;R Lead</h3>
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="0"><span class="text-sm text-gray-300 group-hover:text-white transition">Log in to cal.com with l7sinc account credentials</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="1"><span class="text-sm text-gray-300 group-hover:text-white transition">Navigate to Settings → Teams → L7S Inc. Team</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="2"><span class="text-sm text-gray-300 group-hover:text-white transition">Click "Invite Member" → enter <code class="text-red-400">luckieg@l7sinc.com</code> → Role: Admin</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="3"><span class="text-sm text-gray-300 group-hover:text-white transition">OR: Go to Event Types → R&amp;R Meeting/Audit → Edit → Hosts → Add <code class="text-red-400">luckieg@l7sinc.com</code> as first host</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="4"><span class="text-sm text-gray-300 group-hover:text-white transition">Set <code class="text-red-400">luckieg@l7sinc.com</code> as the round-robin priority / first routing target</span></label>
+    </div>
+  </div>
+
+  <!-- Add admin notifications -->
+  <div class="glass rounded-xl p-5 mb-4">
+    <h3 class="text-white font-semibold mb-4 flex items-center gap-2">📧 Add admin@l7sinc.com Notifications</h3>
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="5"><span class="text-sm text-gray-300 group-hover:text-white transition">Go to Workflows → Create Workflow → Trigger: "Booking Created"</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="6"><span class="text-sm text-gray-300 group-hover:text-white transition">Action: Send Email → To: <code class="text-red-400">admin@l7sinc.com</code> → Template: Booking confirmation</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="7"><span class="text-sm text-gray-300 group-hover:text-white transition">Action: Send Email → To: <code class="text-red-400">luckieg@l7sinc.com</code> → Template: New R&amp;R client alert</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="8"><span class="text-sm text-gray-300 group-hover:text-white transition">Save and enable the workflow</span></label>
+    </div>
+  </div>
+
+  <!-- No-Show Protection -->
+  <div class="glass rounded-xl p-5 mb-4">
+    <h3 class="text-white font-semibold mb-4 flex items-center gap-2">🛡️ No-Show Protection</h3>
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="9"><span class="text-sm text-gray-300 group-hover:text-white transition">Create second Workflow → Trigger: "No Show" → Action: Email <code class="text-red-400">luckieg@l7sinc.com</code> + <code class="text-red-400">hero@l7sinc.com</code></span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="10"><span class="text-sm text-gray-300 group-hover:text-white transition">Add 24-hour reminder → Trigger: "Before Event" (24h) → Send reminder to guest + team</span></label>
+    </div>
+  </div>
+
+  <!-- Verify -->
+  <div class="glass rounded-xl p-5">
+    <h3 class="text-white font-semibold mb-4 flex items-center gap-2">✅ Verify</h3>
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="11"><span class="text-sm text-gray-300 group-hover:text-white transition">Test book a meeting at cal.com/l7sinc</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="12"><span class="text-sm text-gray-300 group-hover:text-white transition">Confirm <code class="text-red-400">luckieg@l7sinc.com</code> receives the notification FIRST</span></label>
+      <label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" class="cal-check mt-1 w-5 h-5 rounded accent-red-600 flex-shrink-0" data-step="13"><span class="text-sm text-gray-300 group-hover:text-white transition">Confirm <code class="text-red-400">admin@l7sinc.com</code> and <code class="text-red-400">hero@l7sinc.com</code> also receive</span></label>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 3 — AGENT SYSTEM                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel hidden" data-tab="3">
+
+  <h2 class="text-2xl font-bold text-white mb-6">🤖 Agent System — 10 Skills</h2>
+
+  <!-- Operations Skills -->
+  <h3 class="text-lg font-semibold text-gray-300 mb-3">Operations Skills</h3>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">🚀</div>
+      <h4 class="text-white font-semibold text-sm">Client Onboarding</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Automated intake, welcome sequence &amp; account provisioning</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">new_client</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">send_welcome</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">create_account</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">💳</div>
+      <h4 class="text-white font-semibold text-sm">Billing &amp; Payments</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Stripe integration, invoice generation &amp; payment tracking</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">payment_received</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">send_invoice</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">update_billing</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">⚖️</div>
+      <h4 class="text-white font-semibold text-sm">Compliance &amp; Contracts</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Legal document management, NDA generation &amp; compliance checks</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">contract_request</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">generate_nda</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">audit_compliance</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">👥</div>
+      <h4 class="text-white font-semibold text-sm">CRM &amp; Customer Service</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Contact management, follow-ups &amp; support ticket routing</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">support_ticket</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">route_ticket</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">update_crm</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">📣</div>
+      <h4 class="text-white font-semibold text-sm">Content Marketing &amp; VSLs</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Video sales letters, social content &amp; marketing automation</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">content_schedule</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">create_vsl</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">publish_content</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">📊</div>
+      <h4 class="text-white font-semibold text-sm">Bookkeeping &amp; Reporting</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Financial reporting, expense tracking &amp; revenue analytics</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">monthly_close</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">generate_report</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">track_expenses</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-5 hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-2">🏗️</div>
+      <h4 class="text-white font-semibold text-sm">Overhead Management</h4>
+      <p class="text-xs text-gray-400 mt-1 mb-3">Vendor management, cost optimization &amp; operational overhead</p>
+      <div class="flex flex-wrap gap-1">
+        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">cost_review</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">optimize_spend</span>
+        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full">manage_vendors</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PWA Products -->
+  <h3 class="text-lg font-semibold text-gray-300 mb-3">PWA Products</h3>
+  <div class="grid md:grid-cols-3 gap-4 mb-8">
+    <div class="rounded-xl p-6 bg-gradient-to-br from-red-700/60 to-red-900/40 border border-red-500/20 glow-red">
+      <div class="text-3xl mb-2">📈</div>
+      <h4 class="text-white font-bold text-lg">L7S Analytics™</h4>
+      <p class="text-sm text-red-200/80 mt-2">Data dashboards &amp; business intelligence. Real-time metrics, subscriber analytics &amp; revenue tracking.</p>
+      <div class="mt-4 text-xs bg-white/10 inline-block px-3 py-1 rounded-full text-red-200">Coming Soon</div>
+    </div>
+    <div class="rounded-xl p-6 bg-gradient-to-br from-blue-800/60 to-indigo-900/40 border border-blue-500/20">
+      <div class="text-3xl mb-2">🗺️</div>
+      <h4 class="text-white font-bold text-lg">L7S Blueprints™</h4>
+      <p class="text-sm text-blue-200/80 mt-2">Strategic frameworks &amp; business structure. Downloadable templates for every growth stage.</p>
+      <div class="mt-4 text-xs bg-white/10 inline-block px-3 py-1 rounded-full text-blue-200">Coming Soon</div>
+    </div>
+    <div class="rounded-xl p-6 bg-gradient-to-br from-slate-600/60 to-slate-800/40 border border-slate-500/20">
+      <div class="text-3xl mb-2">✅</div>
+      <h4 class="text-white font-bold text-lg">L7S Checklists™</h4>
+      <p class="text-sm text-slate-200/80 mt-2">Compliance, onboarding &amp; process checklists. Interactive step-by-step guides.</p>
+      <div class="mt-4 text-xs bg-white/10 inline-block px-3 py-1 rounded-full text-slate-200">Coming Soon</div>
+    </div>
+  </div>
+
+  <!-- Integration Stack -->
+  <h3 class="text-lg font-semibold text-gray-300 mb-3">Integration Stack</h3>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="glass rounded-xl p-4 text-center hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-1">💳</div>
+      <h4 class="text-white font-semibold text-sm">Stripe</h4>
+      <p class="text-xs text-gray-400">Payments &amp; Billing</p>
+    </div>
+    <div class="glass rounded-xl p-4 text-center hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-1">📅</div>
+      <h4 class="text-white font-semibold text-sm">Cal.com</h4>
+      <p class="text-xs text-gray-400">Scheduling &amp; Booking</p>
+    </div>
+    <div class="glass rounded-xl p-4 text-center hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-1">⚡</div>
+      <h4 class="text-white font-semibold text-sm">n8n</h4>
+      <p class="text-xs text-gray-400">Workflow Automation</p>
+    </div>
+    <div class="glass rounded-xl p-4 text-center hover:border-red-500/30 transition-all">
+      <div class="text-2xl mb-1">🏢</div>
+      <h4 class="text-white font-semibold text-sm">GoHighLevel</h4>
+      <p class="text-xs text-gray-400">CRM &amp; Marketing</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 4 — STRIPE PRODUCTS                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel hidden" data-tab="4">
+
+  <h2 class="text-2xl font-bold text-white mb-6">💳 Stripe Products</h2>
+
+  <!-- Live Key Badge -->
+  <div class="flex items-center gap-2 mb-5">
+    <span class="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-500/20">
+      <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+      Live Key Active — pk_live_51QwJqxBgJmN1...
+    </span>
+  </div>
+
+  <!-- Products Table -->
+  <div class="glass rounded-xl overflow-hidden mb-8">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10 text-left">
+            <th class="px-5 py-3 text-gray-400 font-medium">Product</th>
+            <th class="px-5 py-3 text-gray-400 font-medium">Price ID</th>
+            <th class="px-5 py-3 text-gray-400 font-medium">Amount</th>
+            <th class="px-5 py-3 text-gray-400 font-medium">Mode</th>
+            <th class="px-5 py-3 text-gray-400 font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">Monthly Membership</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SH8XX...</td>
+            <td class="px-5 py-3 text-white">$39/mo</td>
+            <td class="px-5 py-3"><span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">subscription</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">Foundation Blueprint</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TO...</td>
+            <td class="px-5 py-3 text-white">$97 OTP</td>
+            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">Growth Blueprint</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TQ...</td>
+            <td class="px-5 py-3 text-white">$197 OTP</td>
+            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">Elite Blueprint</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TS...</td>
+            <td class="px-5 py-3 text-white">$397 OTP</td>
+            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">Enterprise Blueprint</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TV...</td>
+            <td class="px-5 py-3 text-white">$1,497 OTP</td>
+            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+          <tr class="hover:bg-white/5 transition">
+            <td class="px-5 py-3 text-white font-medium">R&amp;R Audit Session</td>
+            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1RfUcx...</td>
+            <td class="px-5 py-3 text-white">Variable</td>
+            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
+            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Payment Flow Diagram -->
+  <h3 class="text-lg font-semibold text-gray-300 mb-3">Payment Flow</h3>
+  <div class="glass rounded-xl p-5">
+    <div class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm">
+      <div class="bg-l7slate px-3 py-2 rounded-lg text-white font-medium border border-white/10">User clicks plan</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-l7slate px-3 py-2 rounded-lg text-red-300 font-mono border border-red-500/20">selectPlan()</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-l7slate px-3 py-2 rounded-lg text-white font-medium border border-white/10">Intake Form</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-l7slate px-3 py-2 rounded-lg text-red-300 font-mono border border-red-500/20">redirectToStripe()</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-purple-900/50 px-3 py-2 rounded-lg text-purple-300 font-medium border border-purple-500/20">Stripe Checkout</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-l7slate px-3 py-2 rounded-lg text-green-300 font-mono border border-green-500/20">successUrl</div>
+      <span class="text-l7red font-bold">→</span>
+      <div class="bg-green-900/30 px-3 py-2 rounded-lg text-green-300 font-medium border border-green-500/20">Session Dashboard</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- TAB 5 — NEXT STEPS                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="tab-panel hidden" data-tab="5">
+
+  <h2 class="text-2xl font-bold text-white mb-6">🚀 Next Steps</h2>
+
+  <!-- 🔴 Do Now -->
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-3 h-3 bg-red-500 rounded-full"></span>
+      <h3 class="text-lg font-semibold text-white">Do Now — Manual Actions</h3>
+    </div>
+    <div class="space-y-3">
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-red-400 font-bold text-sm w-6">1</span>
+          <span class="text-white font-medium flex-1">Log into cal.com/l7sinc and add luckieg@l7sinc.com</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">See Tab 3 (📅 Cal.com) for the full step-by-step checklist. Priority: Set luckieg@l7sinc.com as the first round-robin routing target for R&R meetings.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-red-400 font-bold text-sm w-6">2</span>
+          <span class="text-white font-medium flex-1">Test a live Stripe payment end-to-end</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Visit l7sinc.com, select any Blueprint plan, fill out the intake form, and complete the Stripe Checkout. Verify the success page loads and Stripe dashboard shows the payment.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-red-400 font-bold text-sm w-6">3</span>
+          <span class="text-white font-medium flex-1">Push updated site files to GitHub / hosting</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Commit all changes (logo fix, manifest, meta tags, Stripe hardening) and push to your hosting provider. If using Vercel/Netlify, the deploy should auto-trigger.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟡 This Week -->
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
+      <h3 class="text-lg font-semibold text-white">This Week</h3>
+    </div>
+    <div class="space-y-3">
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-yellow-400 font-bold text-sm w-6">4</span>
+          <span class="text-white font-medium flex-1">Connect n8n to Stripe + Cal.com + GHL webhooks</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Set up webhook endpoints in n8n for Stripe payment events, Cal.com booking events, and GoHighLevel API triggers. Connect these to the client-onboarding workflow.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-yellow-400 font-bold text-sm w-6">5</span>
+          <span class="text-white font-medium flex-1">Load client-onboarding.json into n8n</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Import <code>agent/workflows/client-onboarding.json</code> into your n8n instance. Configure credentials for Stripe, email, and GHL. Activate the workflow.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-yellow-400 font-bold text-sm w-6">6</span>
+          <span class="text-white font-medium flex-1">Set up Google Analytics GA4</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Replace the <code>G-XXXXXXXXXX</code> placeholder in index.html with your actual GA4 measurement ID from analytics.google.com.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-yellow-400 font-bold text-sm w-6">7</span>
+          <span class="text-white font-medium flex-1">Set up Meta Pixel</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Replace the <code>YOUR_PIXEL_ID</code> placeholder in index.html with your Meta Pixel ID from business.facebook.com.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟢 Build Next -->
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+      <h3 class="text-lg font-semibold text-white">Build Next — PWA Products</h3>
+    </div>
+    <div class="space-y-3">
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-green-400 font-bold text-sm w-6">8</span>
+          <span class="text-white font-medium flex-1">Build L7S Analytics™ PWA</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Subscriber dashboard with business metrics, revenue charts, booking analytics and KPI tracking. Requires Stripe API integration for real-time data.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-green-400 font-bold text-sm w-6">9</span>
+          <span class="text-white font-medium flex-1">Build L7S Blueprints™ PWA</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Framework library with downloadable templates for Foundation, Growth, Elite, and Enterprise tiers. Include PDF generation and tier-gated access.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-green-400 font-bold text-sm w-6">10</span>
+          <span class="text-white font-medium flex-1">Build L7S Checklists™ PWA</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Interactive compliance, onboarding &amp; process checklists. Similar to the Cal.com tab — persistent progress, share results, generate completion certificates.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-green-400 font-bold text-sm w-6">11</span>
+          <span class="text-white font-medium flex-1">Add Stripe subscription gate to each PWA</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Check for active <code>price_1SH8XXBgJmN1Pv6F3jtT1TDd</code> subscription before granting PWA access. Redirect non-subscribers to the membership signup page.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔵 Infrastructure -->
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+      <h3 class="text-lg font-semibold text-white">Infrastructure</h3>
+    </div>
+    <div class="space-y-3">
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-blue-400 font-bold text-sm w-6">12</span>
+          <span class="text-white font-medium flex-1">Add server-side Stripe webhook handler</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Build a Node.js/Vercel serverless function to handle Stripe webhooks: subscription created, payment succeeded, subscription cancelled. Update user access accordingly.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-blue-400 font-bold text-sm w-6">13</span>
+          <span class="text-white font-medium flex-1">Set up email automation in GHL</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Create email sequences in GoHighLevel for each hero tier: welcome series, onboarding drip, milestone check-ins, and renewal reminders.</div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden next-card">
+        <button onclick="toggleNext(this)" class="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/5 transition">
+          <span class="text-blue-400 font-bold text-sm w-6">14</span>
+          <span class="text-white font-medium flex-1">Deploy n8n to VPS or Railway</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 transition-transform next-chevron"></i>
+        </button>
+        <div class="next-detail hidden px-5 pb-4 pl-14 text-sm text-gray-400">Move n8n from local development to a production environment. Railway or a VPS with Docker is recommended. Configure SSL, environment variables, and automated backups.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="text-center text-xs text-gray-600 py-6 border-t border-white/5">
+  L7S Inc. © 2026 — Operations Dashboard v1.0 — Built with precision
+</footer>
+
+<!-- ═══════════════════════ JAVASCRIPT ═══════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ─── Live Clock ───
+  function updateClock() {
+    const el = document.getElementById('live-clock');
+    if (!el) return;
+    const now = new Date();
+    el.textContent = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // ─── Tab Switching ───
+  const panels = document.querySelectorAll('.tab-panel');
+  const buttons = document.querySelectorAll('.tab-btn');
+
+  window.switchTab = function(idx) {
+    panels.forEach(p => {
+      p.classList.add('hidden');
+      p.classList.remove('tab-enter');
+    });
+    buttons.forEach(b => {
+      b.classList.remove('text-white', 'border-b-2', 'border-l7red');
+      b.classList.add('text-gray-400');
+    });
+
+    const target = document.querySelector(`[data-tab="${idx}"]`);
+    const btn = document.querySelector(`[data-idx="${idx}"]`);
+    if (target) {
+      target.classList.remove('hidden');
+      // trigger reflow for animation
+      void target.offsetWidth;
+      target.classList.add('tab-enter');
+    }
+    if (btn) {
+      btn.classList.add('text-white', 'border-b-2', 'border-l7red');
+      btn.classList.remove('text-gray-400');
+    }
+
+    // Re-init Lucide icons for newly visible tab
+    if (window.lucide) lucide.createIcons();
+  };
+
+  // Set initial active tab styling
+  switchTab(0);
+
+  // ─── Cal.com Checkboxes with localStorage ───
+  const CAL_KEY = 'l7s_cal_checks';
+
+  function loadCalState() {
+    try {
+      return JSON.parse(localStorage.getItem(CAL_KEY)) || {};
+    } catch { return {}; }
+  }
+
+  function saveCalState(state) {
+    try { localStorage.setItem(CAL_KEY, JSON.stringify(state)); } catch {}
+  }
+
+  function updateCalProgress() {
+    const checks = document.querySelectorAll('.cal-check');
+    const total = checks.length;
+    const done = Array.from(checks).filter(c => c.checked).length;
+    const bar = document.getElementById('cal-progress-bar');
+    const text = document.getElementById('cal-progress-text');
+    if (bar) bar.style.width = total ? ((done / total) * 100) + '%' : '0%';
+    if (text) text.textContent = `${done} of ${total} steps complete`;
+  }
+
+  function initCalChecks() {
+    const state = loadCalState();
+    const checks = document.querySelectorAll('.cal-check');
+    checks.forEach(cb => {
+      const step = cb.getAttribute('data-step');
+      if (state[step]) cb.checked = true;
+      cb.addEventListener('change', function() {
+        const s = loadCalState();
+        s[this.getAttribute('data-step')] = this.checked;
+        saveCalState(s);
+        updateCalProgress();
+      });
+    });
+    updateCalProgress();
+  }
+
+  initCalChecks();
+
+  // ─── Copy Code ───
+  window.copyCode = function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = el.parentElement.querySelector('button');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('text-green-400');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('text-green-400'); }, 1500);
+      }
+    }).catch(() => {});
+  };
+
+  // ─── Collapsible Next Steps ───
+  window.toggleNext = function(btn) {
+    const card = btn.closest('.next-card');
+    if (!card) return;
+    const detail = card.querySelector('.next-detail');
+    const chevron = card.querySelector('.next-chevron');
+    if (!detail) return;
+    const isHidden = detail.classList.contains('hidden');
+    detail.classList.toggle('hidden');
+    if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
+  };
+
+  // ─── Init Lucide ───
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.lucide) lucide.createIcons();
+  });
+
+  // Also try immediately in case DOM is already loaded
+  if (window.lucide) lucide.createIcons();
+
+})();
+</script>
+
+</body>
+</html>
