@@ -271,6 +271,11 @@
         .btn-pulse { animation: pulse-red 2s infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .animate-spin { animation: spin 1s linear infinite; }
+        /* Fluid typography — headings scale with viewport, no fixed breakpoint jumps */
+        h1 { font-size: clamp(2rem, 5vw + 1rem, 5rem) !important; }
+        h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem) !important; }
+        h3 { font-size: clamp(1.1rem, 2vw + 0.25rem, 1.5rem) !important; }
+        h4 { font-size: clamp(0.95rem, 1.5vw + 0.2rem, 1.2rem) !important; }
         /* YES/NO monitoring toggle active state */
         .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
     </style>
@@ -351,7 +356,7 @@
                 <!-- Hero 1: Credit Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="star" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Credit Hero</h3>
@@ -370,7 +375,7 @@
                 <!-- Hero 2: CEO Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="briefcase" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">CEO Hero</h3>
@@ -389,7 +394,7 @@
                 <!-- Hero 3: Capital Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="dollar-sign" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Loan Hero</h3>
@@ -408,7 +413,7 @@
                 <!-- Hero 4: Cashflow Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="zap" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Cashflow Hero</h3>
@@ -427,7 +432,7 @@
                 <!-- Hero 5: Crypto Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="bitcoin" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Crypto Hero</h3>
@@ -446,7 +451,7 @@
                 <!-- Hero 6: Coverage Hero -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="shield-alert" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Coverage Hero</h3>
@@ -465,7 +470,7 @@
                 <!-- Hero 7: Community Hero (Fixed col-span issue) -->
                 <div class="w-full">
                     <div class="hero-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:border-red-200 flex flex-col h-full group">
-                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors">
+                        <div class="bg-slate-50 border border-slate-100 group-hover:bg-red-600 group-hover:border-red-600 text-red-600 group-hover:text-white w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors mx-auto">
                             <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-900 mb-3">Community Hero</h3>
@@ -514,28 +519,28 @@
                     <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                         <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-3">A — Analytics</h3>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Analytics</h3>
                     <p class="text-sm text-slate-600 font-medium leading-relaxed">Data-driven insights, credit reports analysis, business audits, and performance scorecards to establish your baseline.</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                         <i data-lucide="file-text" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-3">B — Blueprints</h3>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Blueprints</h3>
                     <p class="text-sm text-slate-600 font-medium leading-relaxed">Custom business plans, BXBlueprints™, buildout bundles, and strategic roadmaps tailored to your mission.</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                         <i data-lucide="check-square" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-3">C — Checklists</h3>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Checklists</h3>
                     <p class="text-sm text-slate-600 font-medium leading-relaxed">Progress trackers, compliance checklists, P.A.T. D.O.W.N.S.™ protocols, and accountability dashboards.</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-red-50 border border-red-100 text-red-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
                         <i data-lucide="trending-up" class="w-8 h-8"></i>
                     </div>
-                    <h3 class="text-xl font-black text-slate-900 mb-3">S — Scaling</h3>
+                    <h3 class="text-xl font-black text-slate-900 mb-3">Scaling</h3>
                     <p class="text-sm text-slate-600 font-medium leading-relaxed">Systems, sequences, SOPs, and L7S automation frameworks to multiply your results and streamline operations.</p>
                 </div>
             </div>
