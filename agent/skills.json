@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "brand": "L7S Inc.",
   "mission": "Automate and manage all aspects of L7S Inc. company operations",
+  "skills_library": "See skills-library.json for full reusable skill definitions",
+  "skill_capture_protocol": "See SKILL_CAPTURE_PROTOCOL.md",
   "skills": [
     {
       "id": "client-onboarding",

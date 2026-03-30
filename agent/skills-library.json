@@ -1,0 +1,216 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-30",
+  "total_skills": 7,
+  "categories": ["branding", "pwa", "payments", "scheduling", "automation", "agent-system"],
+  "skills": [
+    {
+      "id": "pwa-nav-logo-fix",
+      "name": "Replace Nav Icon with Brand Logo",
+      "category": "branding",
+      "version": "1.0.0",
+      "description": "Replace generic Lucide icon placeholders in sticky nav with the actual brand logo image",
+      "problem_solved": "Generic icon placeholder used in sticky nav instead of actual brand logo",
+      "input_required": ["logo.svg asset", "nav HTML with data-lucide or icon placeholder"],
+      "output_produced": ["All nav instances use real logo img tag", "Consistent branding across all page views"],
+      "steps": [
+        "Step 1: Search ALL instances of data-lucide icons in nav elements (not just the first)",
+        "Step 2: Replace each <div><i data-lucide='X'></i></div> with <img src='assets/logo.svg' alt='Brand' class='w-10 h-10 rounded-lg shadow-lg'>",
+        "Step 3: Check every view/section that has its own nav or header",
+        "Step 4: Verify with grep for any remaining data-lucide in nav context"
+      ],
+      "code_pattern": "<img src=\"assets/logo.svg\" alt=\"Brand\" class=\"w-10 h-10 rounded-lg shadow-lg shadow-red-600/20\">",
+      "gotchas": [
+        "Sites with multiple views/modals often have a SECOND nav header (e.g. legal modal, inner app view) — always grep for ALL instances",
+        "Check for lucide icon in mobile hamburger menu too"
+      ],
+      "reuse_instructions": "Grep the entire HTML for data-lucide or icon placeholders in nav/header context. Replace every match with an img tag pointing to the brand logo asset. Verify no instances remain.",
+      "dependencies": [],
+      "tags": ["branding", "logo", "nav", "pwa", "html", "lucide"],
+      "source_todo": "nav-logo-fix",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "pwa-manifest-perfection",
+      "name": "PWA Manifest Full Optimization",
+      "category": "pwa",
+      "version": "1.0.0",
+      "description": "Create a fully cross-platform site.webmanifest that passes all PWA install checks on every device",
+      "problem_solved": "Basic manifest breaks PWA install on custom domains; missing cross-platform fields",
+      "input_required": ["site domain (for start_url)", "brand hex colors", "icon PNG files at 192px and 512px"],
+      "output_produced": ["Fully cross-platform site.webmanifest", "Installable on iOS, Android, Desktop, ChromeOS"],
+      "steps": [
+        "Step 1: Set start_url, id, scope all to '/' for custom domain (NOT /repo-name/ path)",
+        "Step 2: Add display_override: ['window-controls-overlay','standalone','minimal-ui','browser']",
+        "Step 3: Add prefer_related_applications: false to force install prompt",
+        "Step 4: Split any 'any maskable' purpose into TWO entries: one purpose:any, one purpose:maskable",
+        "Step 5: Add categories, orientation, screenshots: []"
+      ],
+      "code_pattern": "\"start_url\":\"/\",\"id\":\"/\",\"scope\":\"/\",\"prefer_related_applications\":false,\"display_override\":[\"window-controls-overlay\",\"standalone\",\"minimal-ui\",\"browser\"]",
+      "gotchas": [
+        "GitHub Pages repos use /repo-name/ as start_url — custom domains always use /",
+        "Never combine 'any maskable' — they must be separate entries for Android adaptive icons",
+        "screenshots array can be empty but must be present for full compliance"
+      ],
+      "reuse_instructions": "Copy the manifest template. Replace name, short_name, colors, and icon paths. Set start_url/id/scope to '/' for custom domains. Split icon purposes. Validate with Chrome DevTools > Application > Manifest.",
+      "dependencies": [],
+      "tags": ["pwa", "manifest", "ios", "android", "installable", "cross-platform"],
+      "source_todo": "pwa-manifest-fix",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "pwa-cross-platform-meta",
+      "name": "Cross-Platform PWA Head Meta Tags",
+      "category": "pwa",
+      "version": "1.0.0",
+      "description": "Add all required Apple and Android meta tags in HTML head for proper standalone app experience when installed",
+      "problem_solved": "Missing Apple/Android meta tags prevent proper standalone app experience when installed",
+      "input_required": ["App short name (≤12 chars)", "Brand color hex", "icon paths at 192 and 512"],
+      "output_produced": ["7 meta tags in <head>", "Status bar styling on iOS", "Proper app name under icon on all platforms"],
+      "steps": [
+        "Step 1: Add mobile-web-app-capable + apple-mobile-web-app-capable = yes",
+        "Step 2: Add apple-mobile-web-app-status-bar-style = black-translucent (shows content under status bar)",
+        "Step 3: Add apple-mobile-web-app-title and application-name with short app name",
+        "Step 4: Add apple-touch-icon links for 192 and 512 (keep existing 180x180 separate)"
+      ],
+      "code_pattern": "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\"><meta name=\"apple-mobile-web-app-title\" content=\"App Name\">",
+      "gotchas": [
+        "Do not duplicate 180x180 apple-touch-icon if already present",
+        "black-translucent makes content bleed under status bar — ensure top padding on body"
+      ],
+      "reuse_instructions": "Add all 7 meta tags to the HTML <head>. Replace app name and icon paths. Test by installing the PWA on iOS Safari and verifying the status bar renders correctly.",
+      "dependencies": [],
+      "tags": ["pwa", "meta-tags", "apple", "android", "installable", "head"],
+      "source_todo": "pwa-meta-tags",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "stripe-price-map-refactor",
+      "name": "Stripe Price Map Mode Refactor",
+      "category": "payments",
+      "version": "1.0.0",
+      "description": "Refactor flat Stripe price map into structured objects with explicit payment/subscription mode per product",
+      "problem_solved": "Hardcoded price ID comparison for subscription detection; flat string map is fragile",
+      "input_required": ["Existing stripePriceMap", "Knowledge of which products are subscription vs one-time"],
+      "output_produced": ["Structured { price, mode } price map", "Explicit mode per product, no string comparisons"],
+      "steps": [
+        "Step 1: Convert each map value from 'price_X' to { price: 'price_X', mode: 'payment'|'subscription' }",
+        "Step 2: Update redirectToStripe to destructure: var entry = map[id]; var priceId = entry.price; var mode = entry.mode;",
+        "Step 3: Verify all downstream code that checks map[id] still works (objects are truthy — safe)",
+        "Step 4: Update checkout call: mode: mode instead of ternary"
+      ],
+      "code_pattern": "var stripePriceMap = { 'prod_X': { price: 'price_Y', mode: 'payment' } }; var entry = stripePriceMap[productId]; stripe.redirectToCheckout({ mode: entry.mode })",
+      "gotchas": [
+        "Check ALL places that use stripePriceMap — form submit guards, analytics, etc.",
+        "Object values are truthy so if (map[id]) checks still work",
+        "Subscription mode requires price to be set as recurring in Stripe dashboard"
+      ],
+      "reuse_instructions": "Find the existing price map. Convert each string value to { price, mode } object. Update all references to destructure entry.price and entry.mode. Test both payment and subscription checkout flows.",
+      "dependencies": [],
+      "tags": ["stripe", "payments", "refactor", "subscription", "checkout", "javascript"],
+      "source_todo": "stripe-price-map",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "stripe-error-ux",
+      "name": "Stripe Checkout Error Toast + Recovery Pattern",
+      "category": "payments",
+      "version": "1.0.0",
+      "description": "Replace browser alert() on Stripe errors with branded toast notifications and automatic button recovery",
+      "problem_solved": "browser alert() on payment errors breaks UX; no recovery path for network failures",
+      "input_required": ["Existing site toast style", "Submit button ID", "Stripe redirectToCheckout call"],
+      "output_produced": ["Branded error toast matching site design", "Loading spinner on redirect", "Auto-restore button on any failure"],
+      "steps": [
+        "Step 1: Create showStripeErrorToast(message) that injects a fixed-position toast matching site colors",
+        "Step 2: Create restoreStripeBtn() that re-enables button and restores original text+icon",
+        "Step 3: Set button to disabled + spinner text BEFORE calling stripe.redirectToCheckout()",
+        "Step 4: In .then(): if result.error → restoreStripeBtn() + showStripeErrorToast()",
+        "Step 5: Add .catch() → restoreStripeBtn() + showStripeErrorToast('Unable to connect...')",
+        "Step 6: Fix successUrl/cancelUrl to use origin + '/' not origin + pathname (trailing slash bug)"
+      ],
+      "code_pattern": "stripe.redirectToCheckout({...}).then(r => { if(r.error){ restore(); toast(r.error.message); }}).catch(e => { restore(); toast('Connection error'); });",
+      "gotchas": [
+        "origin + pathname can produce double slashes or missing slashes — always use origin + '/'",
+        "restoreStripeBtn must handle case where button doesn't exist (direct API calls)",
+        "Toast needs a unique ID to prevent stacking on rapid retry"
+      ],
+      "reuse_instructions": "Add showStripeErrorToast() and restoreStripeBtn() helper functions. Wrap the redirectToCheckout call with .then()/.catch() using both helpers. Style the toast to match the site's existing design system.",
+      "dependencies": ["stripe-price-map-refactor"],
+      "tags": ["stripe", "error-handling", "ux", "toast", "loading-state", "javascript"],
+      "source_todo": "stripe-error-ux",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "calcom-notification-routing",
+      "name": "Cal.com Multi-Recipient Notification Routing",
+      "category": "scheduling",
+      "version": "1.0.0",
+      "description": "Configure Cal.com to notify multiple recipients on bookings, no-shows, and reminders with priority ordering",
+      "problem_solved": "Cal.com only notifies one email by default; critical leads miss meeting notifications",
+      "input_required": ["Cal.com account access", "Ordered list of recipient emails", "Event type name"],
+      "output_produced": ["Step-by-step dashboard config guide", "Webhook relay code comment", "No-show fallback workflow"],
+      "steps": [
+        "Step 1: In cal.com: Settings → Teams → Invite primary contact as Admin",
+        "Step 2: Event Types → [Event] → Hosts → add primary email first",
+        "Step 3: Workflows → New → Trigger: Booking Created → Email action per recipient",
+        "Step 4: Add No-Show workflow → Trigger: No Show → Email all stakeholders",
+        "Step 5: Add 24h reminder → Trigger: Before Event (24h) → Email guest + team",
+        "Step 6: Add webhook endpoint comment in codebase for relay to n8n/custom system"
+      ],
+      "code_pattern": "// Cal.com webhook: POST https://your-n8n/webhook/cal → route to luckieg, admin, hero in order",
+      "gotchas": [
+        "cal.com free plan limits Workflows — check plan limits before designing flow",
+        "Team host priority only available on Teams plan",
+        "Always test with a real booking after setup to verify email order"
+      ],
+      "reuse_instructions": "Log into Cal.com dashboard. Follow the steps to add team members, configure host priority, create booking/no-show/reminder workflows, and optionally add a webhook for external relay.",
+      "dependencies": [],
+      "tags": ["cal.com", "scheduling", "notifications", "email", "workflow", "no-show"],
+      "source_todo": "calcom-notifications",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    },
+    {
+      "id": "agent-skills-scaffold",
+      "name": "Agent System Skills JSON Scaffold",
+      "category": "automation",
+      "version": "1.0.0",
+      "description": "Create a structured agent skills registry with triggers, actions, product definitions, and integration mappings",
+      "problem_solved": "No structured definition of what the company agent can do; workflows can't be assembled without a skill registry",
+      "input_required": ["List of business functions to automate", "Integration stack (CRM, billing, scheduling tools)", "Product/service names"],
+      "output_produced": ["agent/skills.json with 10+ skill definitions", "agent/README.md system documentation", "agent/workflows/ directory with n8n stub", "Integration block mapping tools to purposes"],
+      "steps": [
+        "Step 1: List all business operations as skills: onboarding, billing, compliance, CRM, content, bookkeeping, overhead",
+        "Step 2: For each: define triggers[] (what fires it) and actions[] (what it does)",
+        "Step 3: Add product skills for each branded deliverable (Analytics, Blueprints, Checklists)",
+        "Step 4: Add integrations{} block mapping each tool to its purpose and env var",
+        "Step 5: Create one n8n workflow JSON per core skill as execution template",
+        "Step 6: Write README documenting the full system architecture"
+      ],
+      "code_pattern": "{ \"id\": \"skill-id\", \"triggers\": [\"event1\",\"event2\"], \"actions\": [\"action1\",\"action2\"] }",
+      "gotchas": [
+        "Skills must have concrete triggers and actions — avoid vague descriptions",
+        "n8n workflow stubs need real node types (not placeholder names)",
+        "Integrations block should reference env vars not hardcoded credentials"
+      ],
+      "reuse_instructions": "List all business operations. For each, create a skill object with id, name, description, triggers, and actions. Add product entries for deliverables. Map integrations with env var references. Generate n8n workflow stubs and a README.",
+      "dependencies": [],
+      "tags": ["automation", "agent", "n8n", "skills", "scaffold", "json", "workflow"],
+      "source_todo": "agent-skills-scaffold",
+      "date_captured": "2026-03-30",
+      "times_used": 1,
+      "status": "active"
+    }
+  ]
+}
