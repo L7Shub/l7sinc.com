@@ -276,6 +276,9 @@
         h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem) !important; }
         h3 { font-size: clamp(1.1rem, 2vw + 0.25rem, 1.5rem) !important; }
         h4 { font-size: clamp(0.95rem, 1.5vw + 0.2rem, 1.2rem) !important; }
+        /* Center lists — make block shrink to content width then auto-margin center it */
+        ul { margin-left: auto; margin-right: auto; width: fit-content; max-width: 100%; }
+        ul li { text-align: left; }
         /* YES/NO monitoring toggle active state */
         .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
     </style>
@@ -489,7 +492,7 @@
                 <!-- Hero 8: The Red Action Card Anchor -->
                 <div class="w-full">
                     <div class="hero-card bg-gradient-to-br from-red-600 to-red-800 border border-red-500 p-6 rounded-3xl shadow-lg hover:shadow-red-600/30 transition-all flex flex-col h-full">
-                        <div class="w-14 h-14 bg-white/20 border border-white/20 rounded-2xl flex items-center justify-center text-white mb-6 backdrop-blur-sm">
+                        <div class="w-14 h-14 bg-white/20 border border-white/20 rounded-2xl flex items-center justify-center text-white mb-6 backdrop-blur-sm mx-auto">
                             <i data-lucide="zap" class="w-6 h-6"></i>
                         </div>
                         <h3 class="text-xl font-black text-white mb-1">Initiate S.S.S.</h3>
