@@ -766,27 +766,65 @@
 
     <!-- FOOTER -->
     <footer class="bg-slate-950 border-t border-slate-800 py-16 px-4 text-center text-slate-400">
-        <div class="max-w-2xl mx-auto space-y-6">
+        <div class="max-w-2xl mx-auto space-y-8">
 
-            <img src="assets/logo.svg" alt="L7S Inc." class="w-14 h-14 object-contain mx-auto">
+            <!-- Brand -->
+            <div class="space-y-3">
+                <img src="assets/logo.svg" alt="L7S Inc." class="w-14 h-14 object-contain mx-auto">
+                <p class="text-white font-black text-xl uppercase tracking-widest">L7S Inc.</p>
+                <p class="text-sm font-medium leading-relaxed">
+                    AI-powered business coordination for Founders, Owners, Operators &amp; Executives.
+                </p>
+            </div>
 
-            <p class="text-white font-black text-xl uppercase tracking-widest">L7S Inc.</p>
+            <!-- Our Heroes -->
+            <div class="space-y-2">
+                <p class="text-white font-bold text-xs uppercase tracking-widest">Our Heroes</p>
+                <p class="text-sm font-medium leading-relaxed">
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Credit Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">CEO Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Capital Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Cashflow Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Coverage Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Crypto Hero</button> ·
+                    <button onclick="setView('landing'); setTimeout(() => window.location.hash='league', 100)" class="hover:text-red-400 transition-colors">Community Hero</button>
+                </p>
+            </div>
 
-            <p class="text-sm font-medium leading-relaxed">
-                AI-powered business coordination for Founders, Owners, Operators &amp; Executives.<br>
-                Credit · CEO · Capital · Cashflow · Coverage · Crypto · Currency
-            </p>
+            <!-- Services -->
+            <div class="space-y-2">
+                <p class="text-white font-bold text-xs uppercase tracking-widest">Services</p>
+                <p class="text-sm font-medium leading-relaxed">
+                    Strategic Assessment · Operational Optimization · Sustainable Solutions · Business Transformation
+                </p>
+            </div>
 
-            <p class="text-sm font-medium">
-                760 Old Roswell Rd, Suite 324 · Roswell, GA 30076<br>
-                <a href="tel:+18336930777" class="hover:text-red-400 transition-colors">(833) 693-0777</a> ·
-                <a href="mailto:admin@l7sinc.com" class="hover:text-red-400 transition-colors">admin@l7sinc.com</a>
-            </p>
+            <!-- Contact -->
+            <div class="space-y-2">
+                <p class="text-white font-bold text-xs uppercase tracking-widest">Contact</p>
+                <p class="text-sm font-medium leading-relaxed">
+                    760 Old Roswell Rd, Suite 324 · Roswell, GA 30076<br>
+                    <a href="tel:+18336930777" class="hover:text-red-400 transition-colors">(833) 693-0777</a> ·
+                    <a href="mailto:admin@l7sinc.com" class="hover:text-red-400 transition-colors">admin@l7sinc.com</a>
+                </p>
+            </div>
 
+            <!-- R&R Audit Hours -->
+            <div class="space-y-2">
+                <p class="text-white font-bold text-xs uppercase tracking-widest">R&amp;R Audit Hours</p>
+                <p class="text-sm font-medium leading-relaxed">
+                    Tue &amp; Thu: 11:00 AM – 7:00 PM · Sat: 10:00 AM – 5:00 PM<br>
+                    <span class="text-red-500">Mon: Ops Day · Wed: Structure Day · Fri: Fulfillment Day</span><br>
+                    <span class="text-slate-600">Sun: Unavailable</span>
+                </p>
+            </div>
+
+            <!-- Disclaimer -->
             <p class="text-xs text-slate-500 leading-relaxed max-w-xl mx-auto">
                 L7S Inc. is a financial guidance and connection platform. We connect members with licensed credit specialists, attorneys, accountants, and financial advisors. L7S Inc. does not directly provide credit repair, legal, or financial advisory services. All services are provided by licensed third-party professionals in compliance with applicable state and federal law.
             </p>
 
+            <!-- Legal Links -->
             <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-bold uppercase tracking-wider">
                 <button onclick="setView('legal', 'privacy')" class="hover:text-red-400 transition-colors">Privacy Policy</button>
                 <button onclick="setView('legal', 'terms')" class="hover:text-red-400 transition-colors">Terms of Service</button>
