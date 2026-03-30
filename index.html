@@ -125,6 +125,15 @@
     <meta name="msapplication-TileColor" content="#0f172a">
     <meta name="msapplication-TileImage" content="assets/logo-192.png">
 
+    <!-- PWA Cross-Platform App Identity -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="L7S Hero">
+    <meta name="application-name" content="L7S Hero">
+    <link rel="apple-touch-icon" sizes="192x192" href="assets/logo-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="assets/logo-512.png">
+
     <!-- ============================================================ -->
     <!-- GOOGLE ANALYTICS 4                                           -->
     <!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID            -->
@@ -177,6 +186,38 @@
     <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
     
     <!-- Cal.com Embed -->
+    <!--
+      ═══════════════════════════════════════════════════════════════════════
+      CAL.COM WEBHOOK RELAY — OPTIONAL ADVANCED SETUP
+      ═══════════════════════════════════════════════════════════════════════
+      To route booking notifications through your own backend (e.g., n8n),
+      configure a webhook in Cal.com:
+
+        Cal.com Dashboard → Settings → Developer → Webhooks → + New Webhook
+          Subscriber URL : https://your-n8n.com/webhook/calcom-booking
+          Triggers       : BOOKING_CREATED, BOOKING_CANCELLED, BOOKING_RESCHEDULED
+
+      Cal.com will POST a JSON payload to that URL on each event:
+      {
+        "triggerEvent": "BOOKING_CREATED",
+        "payload": {
+          "uid": "abc123",
+          "title": "R&R Meeting with John Doe",
+          "startTime": "2024-12-01T14:00:00Z",
+          "attendees": [{ "name": "John Doe", "email": "john@example.com" }],
+          "organizer": { "name": "Luckie Goggins", "email": "luckieg@l7sinc.com" }
+        }
+      }
+
+      Your n8n workflow (agent/workflows/client-onboarding.json) handles this
+      payload and fans out to: luckieg@l7sinc.com → admin@l7sinc.com → GHL CRM.
+
+      NOTIFICATION PRIORITY ORDER:
+        1. luckieg@l7sinc.com  (R&R Meeting Lead — PRIMARY)
+        2. admin@l7sinc.com    (Admin — SECONDARY)
+        3. hero@l7sinc.com     (Hero Ops — via GHL pipeline)
+      ═══════════════════════════════════════════════════════════════════════
+    -->
     <script>
         (function (C, A, L) {
             let p = function (a, ar) { a.q.push(ar); };
@@ -249,9 +290,7 @@
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
             <div class="flex items-center gap-3 cursor-pointer" onclick="setView('landing')">
-                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/20">
-                    <i data-lucide="shield" class="text-white w-6 h-6"></i>
-                </div>
+                <img src="assets/logo.svg" alt="L7S Inc." class="w-10 h-10 rounded-lg shadow-lg shadow-red-600/20">
                 <span class="text-xl font-extrabold tracking-tight uppercase">L7S<span class="text-red-600">, Inc.</span></span>
             </div>
             <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-wider text-slate-600">
@@ -1013,9 +1052,7 @@
     <nav class="bg-white border-b border-slate-200 p-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="setView('landing')">
-                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center shadow-lg shadow-red-600/20">
-                    <i data-lucide="shield" class="text-white w-6 h-6"></i>
-                </div>
+                <img src="assets/logo.svg" alt="L7S Inc." class="w-10 h-10 rounded-lg shadow-lg shadow-red-600/20">
                 <span class="text-slate-900 font-black tracking-widest text-xl uppercase hidden sm:block">
                     L7S <span class="text-red-500">Compliance</span>
                 </span>
@@ -1481,12 +1518,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Stripe Checkout ---
     var STRIPE_PK = 'pk_live_51J5a9IBgJmN1Pv6Fkoo5pVtIvAPr89MFB7wEjKSQdDi9Ym58aoiCSEFgLZRtbD83WWV5IUC7u6812iNXXC73ahAc009j5RXMmz';
     var stripePriceMap = {
-        'prod_T9MBq2PwfaeM3K': 'price_1SD3TOBgJmN1Pv6FyCrBerAe',   // Foundation $97
-        'prod_T9MB0wTZD4tD3C': 'price_1SD3TQBgJmN1Pv6F3egEvEBf',   // Growth $197
-        'prod_T9MBXCw8HlHQQm': 'price_1SD3TSBgJmN1Pv6Frsd5vRtj',   // Elite $397
-        'prod_T9MBkhUrmJFC7Y': 'price_1SD3TVBgJmN1Pv6FuSN1n2l1',   // Enterprise $1,497
-        'prod_SafyZJIV81QiVJ': 'price_1RfUcxBgJmN1Pv6Fb2LLdnl2',   // R&R Audit
-        'prod_T9MA6MdhEXEu8u': 'price_1SH8XXBgJmN1Pv6F3jtT1TDd'    // Monthly $39/mo
+        'prod_T9MBq2PwfaeM3K': { price: 'price_1SD3TOBgJmN1Pv6FyCrBerAe', mode: 'payment' },      // Foundation $97
+        'prod_T9MB0wTZD4tD3C': { price: 'price_1SD3TQBgJmN1Pv6F3egEvEBf', mode: 'payment' },      // Growth $197
+        'prod_T9MBXCw8HlHQQm': { price: 'price_1SD3TSBgJmN1Pv6Frsd5vRtj', mode: 'payment' },      // Elite $397
+        'prod_T9MBkhUrmJFC7Y': { price: 'price_1SD3TVBgJmN1Pv6FuSN1n2l1', mode: 'payment' },      // Enterprise $1,497
+        'prod_SafyZJIV81QiVJ': { price: 'price_1RfUcxBgJmN1Pv6Fb2LLdnl2', mode: 'payment' },      // R&R Audit
+        'prod_T9MA6MdhEXEu8u': { price: 'price_1SH8XXBgJmN1Pv6F3jtT1TDd', mode: 'subscription' }  // Monthly $39/mo
     };
 
     // --- Plan Selection ---
@@ -1503,16 +1540,53 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     window.redirectToStripe = function(productId) {
-        var priceId = stripePriceMap[productId];
-        if (!priceId) { console.error('No price ID for product:', productId); return; }
+        var entry = stripePriceMap[productId];
+        if (!entry) { console.error('No price ID for product:', productId); return; }
+        var priceId = entry.price;
+        var mode = entry.mode;
+
+        // Show loading state on submit button if not already loading (e.g. direct calls)
+        var submitBtn = document.getElementById('form-submit-btn');
+        if (submitBtn && !submitBtn.disabled) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<svg class="animate-spin w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>Redirecting to checkout...';
+        }
+
+        function showStripeErrorToast(message) {
+            var existing = document.getElementById('stripe-error-toast');
+            if (existing) existing.remove();
+            var toast = document.createElement('div');
+            toast.id = 'stripe-error-toast';
+            toast.setAttribute('role', 'alert');
+            toast.style.cssText = 'position:fixed;top:20px;right:20px;z-index:9999;background:#0f172a;color:#fff;border:1px solid #dc2626;border-radius:12px;padding:16px 24px;font-family:system-ui,sans-serif;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.4);display:flex;align-items:center;gap:12px;max-width:360px;';
+            toast.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><div>Payment error</div><div style="font-weight:400;font-size:12px;color:#94a3b8;margin-top:2px;">' + message + '</div></div><button onclick="document.getElementById(\'stripe-error-toast\').remove();" style="background:none;border:none;cursor:pointer;color:#64748b;font-size:18px;line-height:1;padding:0;margin-left:auto;">×</button>';
+            document.body.appendChild(toast);
+            setTimeout(function() { if (toast.parentNode) toast.remove(); }, 8000);
+        }
+
+        function restoreStripeBtn() {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'PROCEED TO R&R™ AUDIT SESSION <i data-lucide="arrow-right" class="w-5 h-5 inline-block ml-2"></i>';
+                try { lucide.createIcons(); } catch(e) {}
+            }
+        }
+
         var stripe = Stripe(STRIPE_PK);
         stripe.redirectToCheckout({
             lineItems: [{ price: priceId, quantity: 1 }],
-            mode: priceId === 'price_1SH8XXBgJmN1Pv6F3jtT1TDd' ? 'subscription' : 'payment',
-            successUrl: window.location.origin + window.location.pathname + '?session_id={CHECKOUT_SESSION_ID}&status=success',
-            cancelUrl: window.location.origin + window.location.pathname + '?status=cancelled'
+            mode: mode,
+            successUrl: window.location.origin + '/?session_id={CHECKOUT_SESSION_ID}&status=success',
+            cancelUrl: window.location.origin + '/?status=cancelled'
         }).then(function(result) {
-            if (result.error) { alert(result.error.message); }
+            if (result.error) {
+                restoreStripeBtn();
+                showStripeErrorToast(result.error.message);
+            }
+        }).catch(function(err) {
+            console.error('Stripe redirect failed:', err);
+            restoreStripeBtn();
+            showStripeErrorToast('Unable to connect to checkout. Please check your connection and try again.');
         });
     };
 

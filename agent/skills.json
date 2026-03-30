@@ -1,0 +1,84 @@
+{
+  "agent": "L7S Inc. Company Management Agent",
+  "version": "1.0.0",
+  "brand": "L7S Inc.",
+  "mission": "Automate and manage all aspects of L7S Inc. company operations",
+  "skills": [
+    {
+      "id": "client-onboarding",
+      "name": "Client Onboarding",
+      "description": "Automate new client intake, document collection, welcome sequences",
+      "triggers": ["new stripe payment", "new cal.com booking", "new form submission"],
+      "actions": ["send welcome email", "create CRM contact", "assign hero tier", "schedule R&R audit"]
+    },
+    {
+      "id": "billing",
+      "name": "Billing & Payments",
+      "description": "Manage Stripe subscriptions, invoicing, failed payments, upgrades",
+      "triggers": ["payment succeeded", "payment failed", "subscription cancelled", "subscription upgraded"],
+      "actions": ["send receipt", "update CRM", "alert team", "send dunning email"]
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance & Contracts",
+      "description": "Track compliance deadlines, contract renewals, regulatory filings",
+      "triggers": ["deadline approaching", "contract expiring", "new client"],
+      "actions": ["send reminder", "generate checklist", "alert captain", "update tracker"]
+    },
+    {
+      "id": "crm",
+      "name": "CRM & Customer Service",
+      "description": "Manage customer relationships, support tickets, follow-ups",
+      "triggers": ["inbound message", "support request", "no-show", "milestone reached"],
+      "actions": ["create ticket", "assign hero", "send follow-up", "update status"]
+    },
+    {
+      "id": "content-marketing",
+      "name": "Content Marketing & VSLs",
+      "description": "Automate content distribution, VSL sequences, social posting",
+      "triggers": ["new content created", "scheduled post time", "campaign launched"],
+      "actions": ["post to social", "send to email list", "update VSL sequence", "track engagement"]
+    },
+    {
+      "id": "bookkeeping",
+      "name": "Bookkeeping & Financial Reporting",
+      "description": "Track income, expenses, categorize transactions, generate reports",
+      "triggers": ["stripe payment", "expense logged", "monthly close"],
+      "actions": ["categorize transaction", "update P&L", "generate report", "alert accountant"]
+    },
+    {
+      "id": "overhead",
+      "name": "Overhead Management",
+      "description": "Track subscriptions, vendor payments, team tasks, recurring costs",
+      "triggers": ["vendor payment due", "subscription renewal", "task assigned"],
+      "actions": ["alert captain", "auto-pay if approved", "update expense log"]
+    },
+    {
+      "id": "analytics-pwa",
+      "name": "L7S Analytics Product",
+      "description": "Deliver branded Analytics dashboards as subscription PWA",
+      "product_tier": "subscription",
+      "branding": "L7S Analytics™"
+    },
+    {
+      "id": "blueprints-pwa",
+      "name": "L7S Blueprints Product",
+      "description": "Deliver branded Blueprints (frameworks, strategies) as subscription PWA",
+      "product_tier": "subscription",
+      "branding": "L7S Blueprints™"
+    },
+    {
+      "id": "checklists-pwa",
+      "name": "L7S Checklists Product",
+      "description": "Deliver branded Checklists (compliance, onboarding, processes) as subscription PWA",
+      "product_tier": "subscription",
+      "branding": "L7S Checklists™"
+    }
+  ],
+  "integrations": {
+    "stripe": { "purpose": "billing", "key_env": "STRIPE_SECRET_KEY" },
+    "cal_com": { "purpose": "scheduling", "calendar": "cal.com/l7sinc" },
+    "ghl": { "purpose": "crm", "note": "GoHighLevel CRM for pipeline management" },
+    "n8n": { "purpose": "automation", "note": "Self-hosted n8n for workflow automation" }
+  }
+}

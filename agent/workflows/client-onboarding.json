@@ -1,0 +1,175 @@
+{
+  "name": "L7S Client Onboarding",
+  "description": "Automates the full new client intake flow triggered by a Cal.com booking or Stripe payment. Creates GHL CRM contact, sends welcome email, assigns hero tier, and schedules R&R audit.",
+  "nodes": [
+    {
+      "id": "trigger-calcom-webhook",
+      "name": "Cal.com Booking Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "calcom-booking",
+        "responseMode": "onReceived",
+        "responseData": "allEntries"
+      },
+      "notes": "Receives BOOKING_CREATED events from Cal.com. Configure in Cal.com: Settings > Developer > Webhooks > Subscriber URL: https://your-n8n.com/webhook/calcom-booking"
+    },
+    {
+      "id": "trigger-stripe-payment",
+      "name": "Stripe Payment Succeeded",
+      "type": "n8n-nodes-base.stripeTrigger",
+      "typeVersion": 1,
+      "position": [240, 460],
+      "parameters": {
+        "events": ["payment_intent.succeeded", "checkout.session.completed"]
+      },
+      "notes": "Alternative trigger: fires when a new Stripe payment completes. Both triggers feed into the same onboarding flow."
+    },
+    {
+      "id": "normalize-input",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [460, 380],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "clientName",
+              "value": "={{ $json.payload?.attendees?.[0]?.name ?? $json.customer_details?.name ?? 'Unknown' }}"
+            },
+            {
+              "name": "clientEmail",
+              "value": "={{ $json.payload?.attendees?.[0]?.email ?? $json.customer_details?.email ?? '' }}"
+            },
+            {
+              "name": "bookingTime",
+              "value": "={{ $json.payload?.startTime ?? $json.created ?? '' }}"
+            },
+            {
+              "name": "meetingLink",
+              "value": "={{ $json.payload?.metadata?.videoCallUrl ?? '' }}"
+            },
+            {
+              "name": "source",
+              "value": "={{ $json.triggerEvent ? 'cal.com' : 'stripe' }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "notify-luckieg",
+      "name": "Notify luckieg@l7sinc.com",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 260],
+      "parameters": {
+        "fromEmail": "admin@l7sinc.com",
+        "toEmail": "luckieg@l7sinc.com",
+        "subject": "🔔 New R&R Booking — {{ $json.clientName }}",
+        "emailFormat": "html",
+        "message": "<h2>New Client Booking</h2><p><strong>Client:</strong> {{ $json.clientName }}</p><p><strong>Email:</strong> {{ $json.clientEmail }}</p><p><strong>Time:</strong> {{ $json.bookingTime }}</p><p><strong>Meeting Link:</strong> <a href='{{ $json.meetingLink }}'>{{ $json.meetingLink }}</a></p><p><strong>Source:</strong> {{ $json.source }}</p><hr><p>Please review and prepare for the R&amp;R audit session.</p>"
+      },
+      "notes": "PRIMARY notification — luckieg@l7sinc.com receives this FIRST"
+    },
+    {
+      "id": "notify-admin",
+      "name": "Notify admin@l7sinc.com",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 400],
+      "parameters": {
+        "fromEmail": "admin@l7sinc.com",
+        "toEmail": "admin@l7sinc.com",
+        "subject": "[ADMIN] New Booking — {{ $json.clientName }}",
+        "emailFormat": "html",
+        "message": "<h2>[Admin Copy] New Client Booking</h2><p><strong>Client:</strong> {{ $json.clientName }}</p><p><strong>Email:</strong> {{ $json.clientEmail }}</p><p><strong>Source:</strong> {{ $json.source }}</p><p><strong>Time:</strong> {{ $json.bookingTime }}</p>"
+      },
+      "notes": "SECONDARY notification — admin@l7sinc.com receives this after luckieg"
+    },
+    {
+      "id": "create-ghl-contact",
+      "name": "Create GHL CRM Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 540],
+      "parameters": {
+        "method": "POST",
+        "url": "https://rest.gohighlevel.com/v1/contacts/",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "goHighLevelApi",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "firstName", "value": "={{ $json.clientName.split(' ')[0] }}" },
+            { "name": "lastName", "value": "={{ $json.clientName.split(' ').slice(1).join(' ') }}" },
+            { "name": "email", "value": "={{ $json.clientEmail }}" },
+            { "name": "tags", "value": "new-client,r-and-r-pending" },
+            { "name": "source", "value": "={{ $json.source }}" }
+          ]
+        }
+      },
+      "notes": "Creates or updates contact in GHL CRM. Requires GHL API credentials in n8n."
+    },
+    {
+      "id": "send-welcome-email",
+      "name": "Send Welcome Email to Client",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [900, 380],
+      "parameters": {
+        "fromEmail": "hero@l7sinc.com",
+        "toEmail": "={{ $json.clientEmail }}",
+        "subject": "Welcome to L7S Inc. — Your R&R Session is Confirmed",
+        "emailFormat": "html",
+        "message": "<h1>Welcome to L7S Inc.!</h1><p>Hi {{ $json.clientName }},</p><p>Your R&R (Risks &amp; Rewards) audit session has been confirmed. Here's what to expect:</p><ul><li>🎯 We'll review your current business situation</li><li>📊 Identify growth opportunities and risks</li><li>🗺️ Build your personalized L7S Hero roadmap</li></ul><p><strong>Your session:</strong> {{ $json.bookingTime }}</p><p><strong>Join link:</strong> <a href='{{ $json.meetingLink }}'>Click here to join</a></p><p>In the meantime, check out our resources at <a href='https://l7sinc.com'>l7sinc.com</a>.</p><p>Talk soon,<br><strong>The L7S Hero Team</strong></p>"
+      }
+    },
+    {
+      "id": "schedule-rr-audit",
+      "name": "Tag for R&R Audit Queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 540],
+      "parameters": {
+        "method": "PUT",
+        "url": "https://rest.gohighlevel.com/v1/contacts/{{ $json.ghlContactId }}/tags",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "goHighLevelApi",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "tags", "value": "r-and-r-scheduled" }
+          ]
+        }
+      },
+      "notes": "Updates GHL contact tags to mark R&R audit as scheduled. Triggers GHL pipeline stage change."
+    }
+  ],
+  "connections": {
+    "trigger-calcom-webhook": { "main": [[{ "node": "normalize-input", "type": "main", "index": 0 }]] },
+    "trigger-stripe-payment": { "main": [[{ "node": "normalize-input", "type": "main", "index": 0 }]] },
+    "normalize-input": {
+      "main": [[
+        { "node": "notify-luckieg", "type": "main", "index": 0 },
+        { "node": "notify-admin", "type": "main", "index": 0 },
+        { "node": "create-ghl-contact", "type": "main", "index": 0 }
+      ]]
+    },
+    "create-ghl-contact": {
+      "main": [[
+        { "node": "send-welcome-email", "type": "main", "index": 0 },
+        { "node": "schedule-rr-audit", "type": "main", "index": 0 }
+      ]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateId": "l7s-client-onboarding-v1",
+    "instanceId": "l7sinc",
+    "notes": "Import this file into your n8n instance via Workflows > Import from JSON. Configure credentials for Gmail/SMTP and GoHighLevel before activating."
+  }
+}

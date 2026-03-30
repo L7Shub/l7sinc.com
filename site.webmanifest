@@ -2,16 +2,25 @@
   "name": "L7S Inc. — Hero S.O.S.™",
   "short_name": "L7S Hero",
   "description": "L7S Hero S.O.S.™ — AI-Powered Business Ecosystem Platform",
-  "start_url": "/l7sinc.com/",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
   "background_color": "#0f172a",
   "theme_color": "#dc2626",
+  "prefer_related_applications": false,
+  "categories": ["business", "productivity"],
+  "screenshots": [],
   "icons": [
-    { "src": "assets/logo.svg",            "sizes": "any",   "type": "image/svg+xml" },
+    { "src": "assets/logo.svg",           "sizes": "any",     "type": "image/svg+xml", "purpose": "any" },
     { "src": "assets/favicon-16x16.png",  "sizes": "16x16",   "type": "image/png" },
     { "src": "assets/favicon-32x32.png",  "sizes": "32x32",   "type": "image/png" },
     { "src": "assets/favicon-96x96.png",  "sizes": "96x96",   "type": "image/png" },
-    { "src": "assets/logo-192.png",        "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "assets/logo-512.png",        "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "assets/logo-192.png",       "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/logo-192.png",       "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/logo-512.png",       "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/logo-512.png",       "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
