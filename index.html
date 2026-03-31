@@ -276,9 +276,11 @@
         h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem) !important; }
         h3 { font-size: clamp(1.1rem, 2vw + 0.25rem, 1.5rem) !important; }
         h4 { font-size: clamp(0.95rem, 1.5vw + 0.2rem, 1.2rem) !important; }
-        /* Center lists — make block shrink to content width then auto-margin center it */
-        ul { margin-left: auto; margin-right: auto; width: fit-content; max-width: 100%; }
+        /* Center lists — shrink to content width and auto-margin center (only non-flex-1 uls) */
+        ul:not(.flex-1) { margin-left: auto; margin-right: auto; width: fit-content; max-width: 100%; }
         ul li { text-align: left; }
+        /* Footer clickable links underlined */
+        footer a, footer button { text-decoration: underline; }
         /* YES/NO monitoring toggle active state */
         .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
     </style>
@@ -618,13 +620,14 @@
                             <span class="text-4xl font-black text-slate-900">$97</span>
                             <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
                         </div>
-                        <ul class="space-y-4 mb-8 flex-1">
+                        <div class="flex-1"><ul class="space-y-4 mb-8 w-fit mx-auto">
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>A.B.C.S.™ Framework access</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Basic business blueprints</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>S.O.S.™ community access</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Monthly group strategy</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Essential checklists</span></li>
                         </ul>
+                        </div>
                         <button onclick="selectPlan('Foundation','97','prod_T9MBq2PwfaeM3K')" class="w-full py-3.5 rounded-xl font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-md mt-auto">Select Upgrade</button>
                     </div>
                 </div>
@@ -632,14 +635,14 @@
                 <!-- Growth (Best Value) -->
                 <div class="w-full">
                     <div class="pricing-card bg-gradient-to-b from-red-600 to-red-800 rounded-3xl p-1 shadow-2xl relative transform lg:-translate-y-4 flex flex-col h-full">
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-black uppercase tracking-widest py-1.5 px-5 rounded-full shadow-lg border-2 border-white">Best Value</div>
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-black uppercase tracking-widest py-1.5 px-5 rounded-full shadow-lg border-2 border-white z-20">Best Value</div>
                         <div class="bg-white rounded-[22px] p-8 flex flex-col h-full relative">
                             <h4 class="text-lg font-black text-red-600 uppercase tracking-widest mb-4">Growth Tier</h4>
                             <div class="mb-6">
                                 <span class="text-4xl font-black text-slate-900">$197</span>
                                 <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
                             </div>
-                            <ul class="space-y-4 mb-8 flex-1">
+                            <div class="flex-1"><ul class="space-y-4 mb-8 w-fit mx-auto">
                                 <li class="text-sm font-bold text-slate-900 italic border-b border-slate-100 pb-2">Everything in Foundation, plus:</li>
                                 <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>P.A.C.T.S.™ implementation</span></li>
                                 <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Credit Hero basic strategies</span></li>
@@ -647,6 +650,7 @@
                                 <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>1-on-1 monthly consultation</span></li>
                                 <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Priority support access</span></li>
                             </ul>
+                            </div>
                             <button onclick="selectPlan('Growth','197','prod_T9MB0wTZD4tD3C')" class="w-full py-3.5 rounded-xl font-bold bg-red-600 text-white hover:bg-red-500 transition-colors shadow-lg shadow-red-500/25 mt-auto">Select Upgrade</button>
                         </div>
                     </div>
@@ -660,7 +664,7 @@
                             <span class="text-4xl font-black text-slate-900">$397</span>
                             <span class="block text-slate-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
                         </div>
-                        <ul class="space-y-4 mb-8 flex-1">
+                        <div class="flex-1"><ul class="space-y-4 mb-8 w-fit mx-auto">
                             <li class="text-sm font-bold text-slate-900 italic border-b border-slate-100 pb-2">Everything in Growth, plus:</li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Full T.H.I.S. I.S. V.I.P.™</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>B.E.S.T. M.A.P.S.™</span></li>
@@ -668,6 +672,7 @@
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Custom SOP development</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-700 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Direct founder access</span></li>
                         </ul>
+                        </div>
                         <button onclick="selectPlan('Elite','397','prod_T9MBXCw8HlHQQm')" class="w-full py-3.5 rounded-xl font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors shadow-md mt-auto">Select Upgrade</button>
                     </div>
                 </div>
@@ -680,7 +685,7 @@
                             <span class="text-4xl font-black text-white">$1,497</span>
                             <span class="block text-red-500 text-xs font-bold uppercase mt-2">One-time upgrade</span>
                         </div>
-                        <ul class="space-y-4 mb-8 flex-1">
+                        <div class="flex-1"><ul class="space-y-4 mb-8 w-fit mx-auto">
                             <li class="text-sm font-bold text-slate-300 italic border-b border-slate-700 pb-2">Everything in Elite, plus:</li>
                             <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>White-label licensing</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Custom frameworks</span></li>
@@ -688,6 +693,7 @@
                             <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>JV partnerships</span></li>
                             <li class="flex items-start gap-3 text-sm text-slate-300 font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0"></i> <span>Full IP licensing rights</span></li>
                         </ul>
+                        </div>
                         <button onclick="selectPlan('Enterprise','1497','prod_T9MBkhUrmJFC7Y')" class="w-full py-3.5 rounded-xl font-bold bg-white text-slate-900 hover:bg-slate-100 transition-colors shadow-md mt-auto">Apply Now</button>
                     </div>
                 </div>
@@ -706,11 +712,11 @@
             <div class="grid md:grid-cols-2 gap-10 mb-20">
                 <!-- Application Process -->
                 <div class="bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm">
-                    <div class="flex items-center gap-3 mb-8">
+                    <div class="flex items-center justify-center gap-3 mb-8">
                         <i data-lucide="briefcase" class="w-7 h-7 text-red-600"></i>
                         <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Application Process</h3>
                     </div>
-                    <ol class="space-y-6 text-slate-600 font-medium relative border-l-2 border-red-100 ml-4">
+                    <ol class="space-y-6 text-slate-600 font-medium relative border-l-2 border-red-100 mx-auto w-fit max-w-full">
                         <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Complete the W.O.M.E.N.™ intake profile with your business details and objectives.</li>
                         <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Book your R&amp;R™ Audit Session with The Captain for strategic assessment.</li>
                         <li class="pl-8 relative"><span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-white border-4 border-red-600"></span>Receive your personalized A.B.C.S.™ roadmap and hero deployment plan.</li>
@@ -720,7 +726,7 @@
                 
                 <!-- FAQ -->
                 <div class="bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm flex flex-col">
-                    <div class="flex items-center gap-3 mb-8">
+                    <div class="flex items-center justify-center gap-3 mb-8">
                         <i data-lucide="help-circle" class="w-7 h-7 text-red-600"></i>
                         <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide">Intelligence Brief</h3>
                     </div>
