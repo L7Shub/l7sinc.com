@@ -307,9 +307,9 @@
         #view-intake h3 { font-size: clamp(1rem, 2.5vw + 0.3rem, 1.5rem); }
         #view-success .text-lg { font-size: clamp(0.875rem, 2vw + 0.25rem, 1.125rem); }
         #view-intake, #view-success { overflow-x: hidden; }
-        #view-intake p, #view-intake label, #view-intake span { overflow-wrap: break-word; word-break: break-word; }
-        #view-intake .grid > * { min-width: 0; }
-        #view-intake input, #view-intake select { min-width: 0; width: 100%; box-sizing: border-box; }
+        #view-intake p, #view-intake label, #view-intake span, #view-success p { overflow-wrap: anywhere; }
+        #view-intake .grid > *, #view-intake .flex > * { min-width: 0; }
+        #view-intake input, #view-intake select { min-width: 0; }
 
         /* ════════════════════════════════════════
            ANIMATIONS
@@ -926,7 +926,7 @@
 <div id="view-intake" class="view">
     <div class="min-h-screen bg-slate-50 py-12 px-4">
         <div class="max-w-5xl mx-auto">
-            <button onclick="setView('landing')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider mb-8">
+            <button type="button" onclick="setView('landing')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider mb-8">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> BACK TO HEADQUARTERS
             </button>
 
@@ -936,20 +936,20 @@
                     <div class="absolute top-0 right-0 w-64 h-64 bg-red-600/20 blur-3xl rounded-full pointer-events-none"></div>
                     <div class="relative z-10 space-y-6">
                         <img src="assets/logo.svg" alt="L7S" class="w-14 h-14 object-contain mb-6 mx-auto block">
-                        <h2 class="text-3xl font-black uppercase leading-tight tracking-wide">W.O.M.E.N.™<br/><span class="text-red-500">Profile</span></h2>
+                        <h2 class="font-black uppercase leading-tight tracking-wide">W.O.M.E.N.™<br/><span class="text-red-500">Profile</span></h2>
                         <p class="text-sm font-bold text-red-400 uppercase tracking-wider">Personal Profile Intake</p>
-                        <p class="text-slate-300 font-medium text-sm leading-relaxed">
+                        <p class="text-slate-200 font-medium text-sm leading-relaxed">
                             Complete your profile to proceed to your R&amp;R™ (Review &amp; Recommendation) Audit &amp; Analysis Awareness Evaluation Session.
                         </p>
                     </div>
-                    <div class="relative z-10 mt-12 flex items-center justify-center gap-2 text-red-400 text-xs font-bold uppercase tracking-wider">
+                    <div class="relative z-10 mt-12 flex flex-wrap items-center justify-center gap-2 text-center text-red-400 text-xs font-bold uppercase tracking-wider">
                         <i data-lucide="lock" class="w-4 h-4"></i> 256-Bit Encrypted | CROA Compliant
                     </div>
                 </div>
 
                 <!-- Right Form Panel -->
                 <div class="md:col-span-3 p-8">
-                    <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wide">R&amp;R™ Audit Intake</h3>
+                    <h3 class="font-black text-slate-900 mb-6 uppercase tracking-wide">R&amp;R™ Audit Intake</h3>
                     <form id="intake-form" class="space-y-6">
                         
                         <!-- Hidden plan fields -->
@@ -958,50 +958,51 @@
                         <input type="hidden" name="planPrice" id="planPrice" value="">
                         
                         <!-- Plan badge -->
-                        <div id="plan-badge" class="hidden bg-red-50 border border-red-200 rounded-xl px-5 py-3 flex items-center justify-between">
+                        <div id="plan-badge" class="hidden bg-red-50 border border-red-200 rounded-xl px-5 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                             <span class="text-sm font-medium text-slate-700">Selected Plan: <strong id="plan-badge-name" class="text-red-700 uppercase tracking-wide"></strong></span>
-                            <span id="plan-badge-price" class="text-sm font-black text-red-600"></span>
+                            <span id="plan-badge-price" class="text-sm font-black text-red-600 sm:text-right"></span>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div class="space-y-2">
-                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">First Name *</label>
-                                <input required name="firstName" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="First name" />
+                                <label for="first-name" class="text-xs font-bold text-slate-500 uppercase tracking-wide">First Name *</label>
+                                <input required name="firstName" id="first-name" type="text" autocomplete="given-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition font-medium" placeholder="First name" />
                             </div>
                             <div class="space-y-2">
-                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Last Name *</label>
-                                <input required name="lastName" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="Last name" />
+                                <label for="last-name" class="text-xs font-bold text-slate-500 uppercase tracking-wide">Last Name *</label>
+                                <input required name="lastName" id="last-name" type="text" autocomplete="family-name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition font-medium" placeholder="Last name" />
                             </div>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Email Address *</label>
-                            <input required name="email" type="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="you@example.com" />
+                            <label for="email" class="text-xs font-bold text-slate-500 uppercase tracking-wide">Email Address *</label>
+                            <input required name="email" id="email" type="email" autocomplete="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition font-medium" placeholder="you@example.com" />
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Phone Number *</label>
-                            <input required name="phone" id="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="^(?:\+?1[\s.-]?)?(?:\([0-9]{3}\)|[0-9]{3})[\s.-]?[0-9]{3}[\s.-]?[0-9]{4}$" title="Please enter a valid 10-digit U.S. phone number." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition-all font-medium" placeholder="(555) 000-0000" />
+                            <label for="phone" class="text-xs font-bold text-slate-500 uppercase tracking-wide">Phone Number *</label>
+                            <input required name="phone" id="phone" type="tel" inputmode="tel" autocomplete="tel-national" pattern="^(?:\+?1[\s.-]?)?(?:\([0-9]{3}\)|[0-9]{3})[\s.-]?[0-9]{3}[\s.-]?[0-9]{4}$" title="Please enter a valid 10-digit U.S. phone number." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 focus:bg-white outline-none transition font-medium" placeholder="(555) 000-0000" />
                         </div>
 
                         <!-- Credit Monitoring -->
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <fieldset class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
                             <input type="hidden" name="monitoringStatus" id="monitoringStatus" value="">
-                            <label class="text-sm font-bold text-slate-900 block text-center uppercase tracking-wide">
+                            <legend class="text-sm font-bold text-slate-900 block w-full text-center uppercase tracking-wide">
                                 Do you have active credit monitoring? *
-                            </label>
-                            <div class="flex gap-4 justify-center">
-                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
+                            </legend>
+                            <div class="flex flex-col gap-4 justify-center sm:flex-row">
+                                <button type="button" id="btn-mon-yes" onclick="setMonitoring(true)" aria-pressed="false" class="flex-1 py-3 rounded-xl font-bold text-sm transition border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
                                     YES
                                 </button>
-                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" class="flex-1 py-3 rounded-xl font-bold text-sm transition-all border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
+                                <button type="button" id="btn-mon-no" onclick="setMonitoring(false)" aria-pressed="false" class="flex-1 py-3 rounded-xl font-bold text-sm transition border-2 bg-white border-slate-200 text-slate-600 hover:border-red-600">
                                     NO
                                 </button>
                             </div>
                             <p id="monitoring-feedback" class="hidden text-xs text-red-600 mt-2 text-center font-bold"></p>
 
                             <!-- Show if YES -->
-                            <div id="monitoring-yes" class="hidden pt-4 transition-all">
+                            <div id="monitoring-yes" class="hidden pt-4">
+                                <label for="monitoringSelect" class="mb-2 block text-xs font-bold text-slate-500 uppercase tracking-wide">Credit Monitoring Provider *</label>
                                 <select name="monitoringService" id="monitoringSelect" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-red-600 outline-none font-medium text-slate-700">
                                     <option value="">-- Choose Provider --</option>
                                     <option value="IdentityIQ">IdentityIQ</option>
@@ -1014,7 +1015,7 @@
                             </div>
 
                             <!-- Show if NO -->
-                            <div id="monitoring-no" class="hidden pt-4 transition-all">
+                            <div id="monitoring-no" class="hidden pt-4">
                                 <div class="bg-white border border-slate-200 rounded-xl p-5 text-center">
                                     <p class="text-sm font-bold text-slate-800 mb-2">Credit monitoring is required for assessment.</p>
                                     <a href="https://scoreprogression.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-slate-900 text-white font-bold text-sm py-3 px-6 rounded-lg hover:bg-slate-800 transition-colors w-full shadow-md mb-2">
@@ -1025,11 +1026,11 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
 
                         <!-- E-Signature Agreement -->
                         <div class="border border-slate-200 rounded-xl p-5 bg-white">
-                            <label class="flex items-start gap-3 cursor-pointer">
+                            <label for="agree-terms" class="flex items-start gap-3 cursor-pointer">
                                 <input type="checkbox" id="agree-terms" required class="mt-1 w-4 h-4 accent-red-600 shrink-0">
                                 <span class="text-xs text-slate-600 font-medium leading-relaxed">
                                     I acknowledge and agree to L7S, Inc.'s
@@ -1042,7 +1043,7 @@
                         </div>
 
                         <!-- Submit -->
-                        <button type="submit" id="form-submit-btn" class="w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transform transition-all active:scale-95 shadow-xl shadow-red-600/20 flex flex-wrap items-center justify-center gap-3">
+                        <button type="submit" id="form-submit-btn" class="w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transform transition active:scale-95 shadow-xl shadow-red-600/20 flex flex-wrap items-center justify-center gap-3">
                             PROCEED TO R&amp;R™ AUDIT SESSION <i data-lucide="arrow-right" class="w-5 h-5 shrink-0"></i>
                         </button>
                     </form>
@@ -1050,21 +1051,21 @@
                     <!-- Alternate Payment Methods -->
                     <div class="border-t border-slate-200 pt-6 mt-8">
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-wide text-center mb-4">We also accept alternate payments:</p>
-                        <div class="grid grid-cols-3 gap-3">
+                        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors min-w-0">
                                 <i data-lucide="banknote" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Zelle</p>
-                                <p class="text-[10px] text-slate-500 font-medium truncate">admin@l7sinc.com</p>
+                                <p class="text-[10px] text-slate-500 font-medium">admin@l7sinc.com</p>
                             </div>
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors min-w-0">
                                 <i data-lucide="dollar-sign" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Cash App</p>
-                                <p class="text-[10px] text-slate-500 font-medium truncate">$L7SInc</p>
+                                <p class="text-[10px] text-slate-500 font-medium">$L7SInc</p>
                             </div>
                             <div class="text-center bg-slate-50 border border-slate-200 rounded-xl p-3 hover:border-red-300 transition-colors min-w-0">
                                 <i data-lucide="coins" class="w-6 h-6 text-slate-600 mx-auto"></i>
                                 <p class="text-xs font-bold text-slate-800 mt-2">Crypto</p>
-                                <p class="text-[10px] text-slate-500 font-medium truncate">Contact Us</p>
+                                <p class="text-[10px] text-slate-500 font-medium">Contact Us</p>
                             </div>
                         </div>
                         <p class="text-xs text-slate-500 font-medium text-center mt-4">Submit your intake form first, then contact us at <a href="tel:+18336930777" class="text-red-600 font-bold hover:underline">(833) 693-0777</a></p>
@@ -1083,12 +1084,12 @@
         <!-- Background Glow -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/20 blur-[120px] rounded-full pointer-events-none"></div>
         
-        <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl p-10 max-w-lg w-full text-center relative z-10">
+        <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl p-6 sm:p-10 max-w-lg w-full text-center relative z-10">
             <div class="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-slate-900/30">
                 <i data-lucide="check-circle" class="w-10 h-10 text-red-500"></i>
             </div>
             
-            <h2 class="text-3xl font-black text-slate-900 mb-2 uppercase tracking-wide">Transmission<br/>Received</h2>
+            <h2 class="font-black text-slate-900 mb-2 uppercase tracking-wide">Transmission<br/>Received</h2>
             <p class="text-slate-500 font-medium mb-8">Your W.O.M.E.N.™ profile has been securely logged in the L7S Database.</p>
             
             <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 mb-8">
@@ -1097,13 +1098,13 @@
                     Lock in your Review &amp; Recommendation (R&amp;R) Audit time slot now.
                 </p>
                 
-                <a href="https://cal.com/l7sinc" target="_blank" rel="noopener noreferrer" class="btn-pulse flex items-center justify-center gap-3 w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transition-all shadow-lg active:scale-95">
+                <a href="https://cal.com/l7sinc" target="_blank" rel="noopener noreferrer" class="btn-pulse flex items-center justify-center gap-3 w-full bg-red-600 text-white font-black text-sm uppercase tracking-wide py-4 px-6 rounded-xl hover:bg-red-700 transition shadow-lg active:scale-95">
                     <i data-lucide="calendar" class="w-5 h-5"></i>
                     SCHEDULE R&amp;R AUDIT
                 </a>
             </div>
 
-            <button onclick="setView('landing')" class="text-slate-500 hover:text-slate-900 font-bold text-xs transition-colors uppercase tracking-widest">
+            <button type="button" onclick="setView('landing')" class="text-slate-500 hover:text-slate-900 font-bold text-xs transition-colors uppercase tracking-widest">
                 Return to Headquarters
             </button>
         </div>
