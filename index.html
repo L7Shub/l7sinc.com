@@ -246,43 +246,107 @@
     </script>
     
     <style>
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
         .view { display: none; }
         .view.active { display: block; }
-        .faq-answer { transition: all 0.3s ease; }
+
+        /* ─── Transitions (base state so exit also animates) ─── */
+        .faq-answer { transition: opacity 0.3s ease; }
         .faq-chevron { transition: transform 0.3s ease; }
         .faq-chevron.rotate { transform: rotate(180deg); }
         .modal-overlay { transition: opacity 0.3s ease; }
-        /* Smooth, premium hover animations */
-        .hero-card:hover { transform: translateY(-4px); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-        .pricing-card:hover { transform: translateY(-4px); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-        /* Custom scrollbar for legal content */
+        .hero-card, .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .hero-card:hover, .pricing-card:hover { transform: translateY(-4px); }
+
+        /* ─── Scrollbar ─── */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        
-        /* Pulse animation for the booking button */
+
+        /* ─── Keyframes ─── */
         @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            0%   { box-shadow: 0 0 0 0 rgba(220,38,38,0.7); }
+            70%  { box-shadow: 0 0 0 15px rgba(220,38,38,0); }
+            100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
         }
         .btn-pulse { animation: pulse-red 2s infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .animate-spin { animation: spin 1s linear infinite; }
-        /* Fluid typography — headings scale with viewport, no fixed breakpoint jumps */
-        h1 { font-size: clamp(2rem, 5vw + 1rem, 5rem) !important; }
-        h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem) !important; }
-        h3 { font-size: clamp(1.1rem, 2vw + 0.25rem, 1.5rem) !important; }
-        h4 { font-size: clamp(0.95rem, 1.5vw + 0.2rem, 1.2rem) !important; }
-        /* Center lists — shrink to content width and auto-margin center (only non-flex-1 uls) */
-        ul:not(.flex-1) { margin-left: auto; margin-right: auto; width: fit-content; max-width: 100%; }
+
+        /* ─── Fluid typography ─── */
+        h1 { font-size: clamp(2rem, 5vw + 1rem, 5rem); }
+        h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem); }
+        h3 { font-size: clamp(1.1rem, 2vw + 0.25rem, 1.5rem); }
+        h4 { font-size: clamp(0.95rem, 1.5vw + 0.2rem, 1.2rem); }
+
+        /* ─── Lists ─── */
+        ul { margin-left: auto; margin-right: auto; width: fit-content; max-width: 100%; }
         ul li { text-align: left; }
-        /* Footer clickable links underlined */
+        input, textarea, select { text-align: left; }
+
+        /* ─── Footer ─── */
         footer a, footer button { text-decoration: underline; }
-        /* YES/NO monitoring toggle active state */
+
+        /* ─── Caption pill ─── */
+        .caption-pill { font-size: clamp(0.65rem, 1.5vw, 0.875rem); }
+
+        /* ─── Toggle ─── */
         .mon-toggle[aria-pressed="true"] { background-color: #dc2626; color: #ffffff; border-color: #dc2626; }
+
+        /* ════════════════════════════════════════
+           ANIMATIONS
+        ════════════════════════════════════════ */
+        @media (prefers-reduced-motion: no-preference) {
+
+            /* NAV slides down on load */
+            nav { animation: navDown 0.5s cubic-bezier(.4,0,.2,1) both; }
+            @keyframes navDown {
+                from { opacity: 0; transform: translateY(-100%); }
+                to   { opacity: 1; transform: none; }
+            }
+
+            /* Hero page-load sequence */
+            .hero-load    { animation: heroFade 0.7s cubic-bezier(.4,0,.2,1) both; }
+            .hero-load-d1 { animation: heroFade 0.7s 0.12s cubic-bezier(.4,0,.2,1) both; }
+            .hero-load-d2 { animation: heroFade 0.7s 0.26s cubic-bezier(.4,0,.2,1) both; }
+            .hero-load-d3 { animation: heroFade 0.7s 0.42s cubic-bezier(.4,0,.2,1) both; }
+            .hero-load-d4 { animation: heroFade 0.7s 0.58s cubic-bezier(.4,0,.2,1) both; }
+            @keyframes heroFade {
+                from { opacity: 0; transform: translateY(22px); }
+                to   { opacity: 1; transform: none; }
+            }
+
+            /* Scroll-reveal — individual elements */
+            .anim {
+                opacity: 0;
+                transform: translateY(24px);
+                transition: opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1);
+            }
+            .anim.visible { opacity: 1; transform: none; }
+
+            /* Scroll-reveal — staggered grid containers */
+            .anim-grid > * {
+                opacity: 0;
+                transform: translateY(24px);
+                transition: opacity 0.6s cubic-bezier(.4,0,.2,1), transform 0.6s cubic-bezier(.4,0,.2,1);
+            }
+            .anim-grid.visible > * { opacity: 1; transform: none; }
+            .anim-grid.visible > *:nth-child(1) { transition-delay: 0.00s; }
+            .anim-grid.visible > *:nth-child(2) { transition-delay: 0.12s; }
+            .anim-grid.visible > *:nth-child(3) { transition-delay: 0.24s; }
+            .anim-grid.visible > *:nth-child(4) { transition-delay: 0.36s; }
+            .anim-grid.visible > *:nth-child(5) { transition-delay: 0.08s; }
+            .anim-grid.visible > *:nth-child(6) { transition-delay: 0.20s; }
+            .anim-grid.visible > *:nth-child(7) { transition-delay: 0.32s; }
+            .anim-grid.visible > *:nth-child(8) { transition-delay: 0.44s; }
+        }
     </style>
 </head>
 <body class="bg-white text-slate-800 font-sans antialiased selection:bg-red-500 selection:text-white text-center">
@@ -1273,38 +1337,38 @@
 <!-- ============================================================ -->
 <div id="support-widget" class="fixed bottom-6 right-6 z-50">
     <!-- Popover -->
-    <div id="support-popover" class="hidden absolute bottom-16 right-0 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-2" aria-hidden="true">
-        <div class="bg-slate-900 text-white p-4">
-            <h4 class="font-bold text-sm">Need Help?</h4>
-            <p class="text-xs text-slate-400 mt-1">Choose how you'd like to reach us</p>
+    <div id="support-popover" class="hidden absolute bottom-16 right-0 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-2" aria-hidden="true">
+        <div class="bg-slate-900 text-white px-4 py-3 text-left">
+            <p class="font-extrabold text-sm uppercase tracking-wide">Need Help?</p>
+            <p class="text-xs text-slate-400 mt-0.5">Choose how you'd like to reach us</p>
         </div>
-        <div class="p-3 space-y-2">
-            <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Call Us</p>
-                    <p class="text-[10px] font-medium text-slate-500">(833) 693-0777</p>
+        <div class="p-3 space-y-1">
+            <a href="tel:+18336930777" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-9 h-9 rounded-full flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-4 h-4"></i></span>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600 leading-none mb-0.5">Call Us</p>
+                    <p class="text-xs text-slate-500">(833) 693-0777</p>
                 </div>
             </a>
-            <a href="sms:+18336930777?body=Hi%20L7S%20Hero%20Team%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Text Us</p>
-                    <p class="text-[10px] font-medium text-slate-500">SMS to (833) 693-0777</p>
+            <a href="sms:+18336930777?body=Hi%20L7S%20Inc.%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-9 h-9 rounded-full flex items-center justify-center shrink-0"><i data-lucide="message-circle" class="w-4 h-4"></i></span>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600 leading-none mb-0.5">Text Us</p>
+                    <p class="text-xs text-slate-500">SMS to (833) 693-0777</p>
                 </div>
             </a>
-            <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Email Support</p>
-                    <p class="text-[10px] font-medium text-slate-500">admin@l7sinc.com</p>
+            <a href="mailto:admin@l7sinc.com" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-9 h-9 rounded-full flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-4 h-4"></i></span>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600 leading-none mb-0.5">Email Us</p>
+                    <p class="text-xs text-slate-500">admin@l7sinc.com</p>
                 </div>
             </a>
-            <button onclick="openBookingCalendar()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 transition-colors group text-left">
-                <span class="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-3.5 h-3.5"></i></span>
-                <div>
-                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600">Book a Call</p>
-                    <p class="text-[10px] font-medium text-slate-500">Schedule R&amp;R™ Audit</p>
+            <button onclick="openBookingCalendar()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors group">
+                <span class="bg-red-100 text-red-600 w-9 h-9 rounded-full flex items-center justify-center shrink-0"><i data-lucide="calendar" class="w-4 h-4"></i></span>
+                <div class="text-left">
+                    <p class="text-sm font-bold text-slate-800 group-hover:text-red-600 leading-none mb-0.5">Book a Call</p>
+                    <p class="text-xs text-slate-500">Schedule R&amp;R™ Audit</p>
                 </div>
             </button>
         </div>
