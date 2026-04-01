@@ -446,79 +446,178 @@ tailwind.config = {
 <!-- ═══════════════════════════════════════════════════ -->
 <section class="tab-panel hidden" data-tab="4">
 
-  <h2 class="text-2xl font-bold text-white mb-6">💳 Stripe Products</h2>
-
-  <!-- Live Key Badge -->
-  <div class="flex items-center gap-2 mb-5">
-    <span class="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-500/20">
-      <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-      Live Key Active — pk_live_51QwJqxBgJmN1...
-    </span>
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <h2 class="text-2xl font-bold text-white">💳 Stripe Product Catalog</h2>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-500/20">
+        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>Live Key Active
+      </span>
+      <span class="bg-white/10 text-gray-300 text-xs font-semibold px-3 py-1.5 rounded-full">~90 products total</span>
+    </div>
   </div>
 
-  <!-- Products Table -->
+  <!-- ── ON THE WEBSITE ───────────────────────────── -->
+  <h3 class="text-sm font-bold text-green-400 uppercase tracking-widest mb-3">🟢 Active on l7sinc.com</h3>
   <div class="glass rounded-xl overflow-hidden mb-8">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b border-white/10 text-left">
-            <th class="px-5 py-3 text-gray-400 font-medium">Product</th>
-            <th class="px-5 py-3 text-gray-400 font-medium">Price ID</th>
-            <th class="px-5 py-3 text-gray-400 font-medium">Amount</th>
-            <th class="px-5 py-3 text-gray-400 font-medium">Mode</th>
-            <th class="px-5 py-3 text-gray-400 font-medium">Status</th>
-          </tr>
-        </thead>
+        <thead><tr class="border-b border-white/10 text-left">
+          <th class="px-4 py-3 text-gray-400 font-medium">Product</th>
+          <th class="px-4 py-3 text-gray-400 font-medium">Prod ID</th>
+          <th class="px-4 py-3 text-gray-400 font-medium">Price</th>
+          <th class="px-4 py-3 text-gray-400 font-medium">Mode</th>
+        </tr></thead>
         <tbody>
-          <tr class="border-b border-white/5 hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">Monthly Membership</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SH8XX...</td>
-            <td class="px-5 py-3 text-white">$39/mo</td>
-            <td class="px-5 py-3"><span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">subscription</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">L7S HERO Monthly Membership</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MA6MdhEXEu8u</td>
+            <td class="px-4 py-3 text-white">$39/mo <span class="text-yellow-400 text-xs">(⚠ $49/mo also exists)</span></td>
+            <td class="px-4 py-3"><span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">subscription</span></td>
           </tr>
-          <tr class="border-b border-white/5 hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">Foundation Blueprint</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TO...</td>
-            <td class="px-5 py-3 text-white">$97 OTP</td>
-            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">Foundation Tier Upgrade</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MBq2PwfaeM3K</td>
+            <td class="px-4 py-3 text-white">$97</td>
+            <td class="px-4 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">one-time</span></td>
           </tr>
-          <tr class="border-b border-white/5 hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">Growth Blueprint</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TQ...</td>
-            <td class="px-5 py-3 text-white">$197 OTP</td>
-            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">Growth Tier Upgrade</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MB0wTZD4tD3C</td>
+            <td class="px-4 py-3 text-white">$197</td>
+            <td class="px-4 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">one-time</span></td>
           </tr>
-          <tr class="border-b border-white/5 hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">Elite Blueprint</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TS...</td>
-            <td class="px-5 py-3 text-white">$397 OTP</td>
-            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">Elite Tier Upgrade</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MBXCw8HlHQQm</td>
+            <td class="px-4 py-3 text-white">$397</td>
+            <td class="px-4 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">one-time</span></td>
           </tr>
-          <tr class="border-b border-white/5 hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">Enterprise Blueprint</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1SD3TV...</td>
-            <td class="px-5 py-3 text-white">$1,497 OTP</td>
-            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="border-b border-white/5 hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">Enterprise Tier Upgrade</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MBkhUrmJFC7Y</td>
+            <td class="px-4 py-3 text-white">$1,497</td>
+            <td class="px-4 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">one-time</span></td>
           </tr>
-          <tr class="hover:bg-white/5 transition">
-            <td class="px-5 py-3 text-white font-medium">R&amp;R Audit Session</td>
-            <td class="px-5 py-3 font-mono text-xs text-gray-400">price_1RfUcx...</td>
-            <td class="px-5 py-3 text-white">Variable</td>
-            <td class="px-5 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">payment</span></td>
-            <td class="px-5 py-3"><span class="text-green-400">🟢 Live</span></td>
+          <tr class="hover:bg-white/5">
+            <td class="px-4 py-3 text-white font-semibold">R&amp;R Audit Session</td>
+            <td class="px-4 py-3 font-mono text-xs text-gray-500">prod_SafyZJIV81QiVJ</td>
+            <td class="px-4 py-3 text-white">$297 <span class="text-yellow-400 text-xs">(⚠ $497 &amp; $997 also exist)</span></td>
+            <td class="px-4 py-3"><span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">one-time</span></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Payment Flow Diagram -->
-  <h3 class="text-lg font-semibold text-gray-300 mb-3">Payment Flow</h3>
+  <!-- ── L7S HERO CLUB ────────────────────────────── -->
+  <h3 class="text-sm font-bold text-red-400 uppercase tracking-widest mb-3">⚡ L7S Hero Club — 28 Products (Not on Site)</h3>
+  <div class="glass rounded-xl overflow-hidden mb-8">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-white/10 text-left">
+          <th class="px-4 py-3 text-gray-400 font-medium">Hero · Tier</th>
+          <th class="px-4 py-3 text-gray-400 font-medium">Prod ID</th>
+          <th class="px-4 py-3 text-gray-400 font-medium">Price</th>
+        </tr></thead>
+        <tbody>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Credit Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNI6jO7XryCe</td><td class="px-4 py-3 text-white">$777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Credit Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNH6kkbkaaa9</td><td class="px-4 py-3 text-white">$2,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Credit Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNRP6oFFvhUQ</td><td class="px-4 py-3 text-white">$9,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Credit Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNwF790BZz9T</td><td class="px-4 py-3 text-white">$33,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">CEO Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNJkk673PPFv</td><td class="px-4 py-3 text-white">$1,277</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">CEO Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MN1PvZI9mnBn</td><td class="px-4 py-3 text-white">$4,277</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">CEO Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNfMpd8OJyXQ</td><td class="px-4 py-3 text-white">$14,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">CEO Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNC1uXuclVSA</td><td class="px-4 py-3 text-white">$47,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Loan Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNS1G5rhqkiT</td><td class="px-4 py-3 text-white">$1,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Loan Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNd9fEs5nIwN</td><td class="px-4 py-3 text-white">$5,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Loan Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNOHehConAso</td><td class="px-4 py-3 text-white">$19,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Loan Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNuOFf9PGCdx</td><td class="px-4 py-3 text-white">$67,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Crypto Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNZaGCAQ0HwC</td><td class="px-4 py-3 text-white">$2,277</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Crypto Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNKhSt1hRHYm</td><td class="px-4 py-3 text-white">$7,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Crypto Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNfeFuR7hZWp</td><td class="px-4 py-3 text-white">$27,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Crypto Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNFQPLhUhp8G</td><td class="px-4 py-3 text-white">$97,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Cashflow Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MN1nb0FLVgtV</td><td class="px-4 py-3 text-white">$1,477</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Cashflow Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNPIqts3DMGy</td><td class="px-4 py-3 text-white">$4,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Cashflow Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNKYatLmtzBy</td><td class="px-4 py-3 text-white">$16,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Cashflow Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MN5JJXkw74Hr</td><td class="px-4 py-3 text-white">$57,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Coverage Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNrKZ3ig9V0s</td><td class="px-4 py-3 text-white">$977</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Coverage Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MN2eUM2r5JSP</td><td class="px-4 py-3 text-white">$3,277</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Coverage Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNin6NPicvEX</td><td class="px-4 py-3 text-white">$11,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Coverage Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNayC3P1Ymrq</td><td class="px-4 py-3 text-white">$37,777</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Community Hero · H.I.T.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNfCg9UfPKqo</td><td class="px-4 py-3 text-white">$677</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Community Hero · R.E.A.L.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNr7NRMHwiw6</td><td class="px-4 py-3 text-white">$2,277</td></tr>
+          <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Community Hero · E.A.T.S.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNUTQvnXVFXj</td><td class="px-4 py-3 text-white">$7,777</td></tr>
+          <tr class="hover:bg-white/5"><td class="px-4 py-3 text-white">Community Hero · O.M.N.I.</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNonsxwnXyGR</td><td class="px-4 py-3 text-white">$27,777</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── B.E.S.T. + I.C.E. ────────────────────────── -->
+  <div class="grid sm:grid-cols-2 gap-6 mb-8">
+    <div>
+      <h3 class="text-sm font-bold text-yellow-400 uppercase tracking-widest mb-3">📚 B.E.S.T. — Business Education</h3>
+      <div class="glass rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-white/10 text-left"><th class="px-4 py-3 text-gray-400">Tier</th><th class="px-4 py-3 text-gray-400">Prod ID</th><th class="px-4 py-3 text-gray-400">Price</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Basic</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNkaysX7tHKF</td><td class="px-4 py-3 text-white">$197/mo</td></tr>
+            <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Professional</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNjy65ZwnkKJ</td><td class="px-4 py-3 text-white">$497/mo</td></tr>
+            <tr class="hover:bg-white/5"><td class="px-4 py-3 text-white">Enterprise</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MN5UasG72pFD</td><td class="px-4 py-3 text-white">$997/mo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-sm font-bold text-blue-400 uppercase tracking-widest mb-3">🧊 I.C.E. Framework</h3>
+      <div class="glass rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-white/10 text-left"><th class="px-4 py-3 text-gray-400">Tier</th><th class="px-4 py-3 text-gray-400">Prod ID</th><th class="px-4 py-3 text-gray-400">Price</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Foundation</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNF1vL9B0AfN</td><td class="px-4 py-3 text-white">$777</td></tr>
+            <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Advanced</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNzM4LrX61dg</td><td class="px-4 py-3 text-white">$1,777</td></tr>
+            <tr class="border-b border-white/5 hover:bg-white/5"><td class="px-4 py-3 text-white">Master</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNyOjrhpUDqi</td><td class="px-4 py-3 text-white">$3,777</td></tr>
+            <tr class="hover:bg-white/5"><td class="px-4 py-3 text-white">Complete L.O.L. Lexicon</td><td class="px-4 py-3 font-mono text-xs text-gray-500">prod_T9MNGGlAdkNWUz</td><td class="px-4 py-3 text-white">$7,777</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROGRAMS & MISC ──────────────────────────── -->
+  <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">📋 Programs, Services &amp; Legacy Products</h3>
+  <div class="glass rounded-xl p-5 text-sm text-gray-300 space-y-2 mb-8">
+    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-1.5">
+      <div><span class="text-white font-semibold">A.B.C. 777 Mentorship</span> — <span class="font-mono text-xs text-gray-500">prod_SagH9gi8Ep8i8P</span> · $7,777</div>
+      <div><span class="text-white font-semibold">T.H.I.S.I.S.V.I.P.</span> — <span class="font-mono text-xs text-gray-500">prod_SagBRW7ElVD4Mu</span></div>
+      <div><span class="text-white font-semibold">B.E.T.B.I.D. &amp; B.A.D.D.I.E.S.</span> — <span class="font-mono text-xs text-gray-500">prod_Sag5RYLmtdM2g0</span></div>
+      <div><span class="text-white font-semibold">L7S S.O.S.</span> — <span class="font-mono text-xs text-gray-500">prod_Sag4BjdmUtdacb</span></div>
+      <div><span class="text-white font-semibold">A.B.C. Foundation Club</span> — <span class="font-mono text-xs text-gray-500">prod_Sag3M83kO02nJQ</span></div>
+      <div><span class="text-white font-semibold">BXBlueprints</span> — <span class="font-mono text-xs text-gray-500">prod_Sag2kDIk6d5T0q</span></div>
+      <div><span class="text-white font-semibold">ID x Q&amp;A</span> — <span class="font-mono text-xs text-gray-500">prod_SafowpC6xDjmZL</span></div>
+      <div><span class="text-white font-semibold">Hero's Path to FAME</span> — <span class="font-mono text-xs text-gray-500">prod_SXBBZwXM7R2rAU</span></div>
+      <div><span class="text-white font-semibold">H.I.T. Citation Checklist</span> — <span class="font-mono text-xs text-gray-500">prod_RimJuhWTm7HCCo</span></div>
+      <div><span class="text-white font-semibold">ABC Foundation Club Membership</span> — <span class="font-mono text-xs text-gray-500">prod_RCyqVoJcWLpKKq</span></div>
+      <div><span class="text-white font-semibold">CRM Consultation &amp; Setup</span> — <span class="font-mono text-xs text-gray-500">prod_MQSCJhOTUwM0LD</span></div>
+      <div><span class="text-white font-semibold">Strategy Session — Luckie Goggins</span> — <span class="font-mono text-xs text-gray-500">prod_MCFWzadMwFQH0Y</span></div>
+      <div><span class="text-white font-semibold">B5X (Bulletproofing)</span> — <span class="font-mono text-xs text-gray-500">prod_MMU8fq60PGeptD</span></div>
+      <div><span class="text-white font-semibold">B7X</span> — <span class="font-mono text-xs text-gray-500">prod_RCwpW0zkRaQsbH</span></div>
+      <div><span class="text-white font-semibold">B10X</span> — <span class="font-mono text-xs text-gray-500">prod_RCx0MDL2YLU2xJ</span></div>
+      <div><span class="text-white font-semibold">Agency Asset Acquisition (AAA)</span> — <span class="font-mono text-xs text-gray-500">prod_UFbSp9Ie1zfDn5 · prod_UFWVOJeWTKM17P · prod_UFJpXqapKmXe2c</span></div>
+      <div><span class="text-white font-semibold">Trademark Services</span> — <span class="font-mono text-xs text-gray-500">prod_M1YC2RN1aKHLFY</span></div>
+      <div><span class="text-white font-semibold">Virtual Office</span> — <span class="font-mono text-xs text-gray-500">prod_M1YAbebDBaKJzP</span></div>
+      <div><span class="text-white font-semibold">Website Creation</span> — <span class="font-mono text-xs text-gray-500">prod_M1Y4vZbZSsmVtv</span></div>
+      <div><span class="text-white font-semibold">Business Phone Line</span> — <span class="font-mono text-xs text-gray-500">prod_M1Y6GCgYUOFTeM</span></div>
+      <div><span class="text-white font-semibold">Business Domain (Email)</span> — <span class="font-mono text-xs text-gray-500">prod_M1Y8MxgIwR5DsT</span></div>
+      <div><span class="text-white font-semibold">411 Listing</span> — <span class="font-mono text-xs text-gray-500">prod_M1YBsujVRwKV0v</span></div>
+      <div><span class="text-white font-semibold">Business License Research</span> — <span class="font-mono text-xs text-gray-500">prod_M1YKjMbwsAkLFj</span></div>
+      <div><span class="text-white font-semibold">LLC Shipping Upgrade</span> — <span class="font-mono text-xs text-gray-500">prod_M1XXFkQExhIjS2</span></div>
+      <div><span class="text-white font-semibold">Doc Prep Services (multiple)</span> — <span class="font-mono text-xs text-gray-500">prod_Mys2DY62n9ArI6 + 8 more</span></div>
+    </div>
+  </div>
+
+  <!-- Payment Flow -->
+  <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">🔁 Payment Flow</h3>
   <div class="glass rounded-xl p-5">
     <div class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm">
       <div class="bg-l7slate px-3 py-2 rounded-lg text-white font-medium border border-white/10">User clicks plan</div>
@@ -531,11 +630,10 @@ tailwind.config = {
       <span class="text-l7red font-bold">→</span>
       <div class="bg-purple-900/50 px-3 py-2 rounded-lg text-purple-300 font-medium border border-purple-500/20">Stripe Checkout</div>
       <span class="text-l7red font-bold">→</span>
-      <div class="bg-l7slate px-3 py-2 rounded-lg text-green-300 font-mono border border-green-500/20">successUrl</div>
-      <span class="text-l7red font-bold">→</span>
-      <div class="bg-green-900/30 px-3 py-2 rounded-lg text-green-300 font-medium border border-green-500/20">Session Dashboard</div>
+      <div class="bg-green-900/30 px-3 py-2 rounded-lg text-green-300 font-medium border border-green-500/20">Success / Cal.com</div>
     </div>
   </div>
+
 </section>
 
 <!-- ═══════════════════════════════════════════════════ -->
