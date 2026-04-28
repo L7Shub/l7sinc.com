@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L7S Launch Dashboard — 2026-04-28</title>
+<style>
+  :root{
+    --bg:#0e0e12; --panel:#171821; --panel2:#1d1f2b;
+    --text:#e8e8ee; --muted:#8b8e9c; --line:rgba(255,255,255,.07);
+    --green:#3ddc97; --amber:#ffb454; --red:#ff5c7a; --blue:#5b9cf6; --purple:#b48cff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 -apple-system,system-ui,sans-serif;padding:24px}
+  h1{font-size:22px;margin:0 0 4px;font-weight:600;letter-spacing:-.01em}
+  h2{font-size:13px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card.wide{grid-column:1/-1}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);gap:8px}
+  .row:last-child{border-bottom:0}
+  .row .l{flex:1;min-width:0}
+  .row .r{flex-shrink:0}
+  .pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.02em}
+  .pill.done{background:rgba(61,220,151,.14);color:var(--green)}
+  .pill.ready{background:rgba(91,156,246,.14);color:var(--blue)}
+  .pill.prog{background:rgba(255,180,84,.14);color:var(--amber)}
+  .pill.block{background:rgba(255,92,122,.16);color:var(--red)}
+  .pill.todo{background:rgba(180,140,255,.14);color:var(--purple)}
+  .num{font-size:30px;font-weight:600;letter-spacing:-.02em}
+  .num small{color:var(--muted);font-size:14px;font-weight:400}
+  .stat{display:flex;flex-direction:column;gap:4px;flex:1}
+  .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .row-stats{display:flex;gap:16px;margin-bottom:16px}
+  .lk{color:var(--blue);text-decoration:none}
+  .lk:hover{text-decoration:underline}
+  code{background:#0a0a0e;padding:2px 6px;border-radius:5px;font-size:12px;color:#cdd1e0}
+  .step{display:flex;gap:10px;align-items:flex-start;padding:8px 0}
+  .step .nm{width:22px;height:22px;border-radius:99px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--muted);flex-shrink:0}
+  .step.done .nm{background:rgba(61,220,151,.18);color:var(--green)}
+  .step.now .nm{background:rgba(91,156,246,.18);color:var(--blue)}
+  .step.block .nm{background:rgba(255,92,122,.18);color:var(--red)}
+  .step .body{flex:1}
+  .step .body strong{display:block;font-size:13px}
+  .step .body em{font-style:normal;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<h1>L7S Launch Dashboard</h1>
+<div class="sub">2026-04-28 · East + Luckie · 20-task workflow · live state</div>
+
+<div class="row-stats">
+  <div class="card stat"><span class="lbl">Done</span><span class="num">20<small> / 20</small></span></div>
+  <div class="card stat"><span class="lbl">Blocked</span><span class="num" style="color:var(--green)">0</span></div>
+  <div class="card stat"><span class="lbl">In progress</span><span class="num" style="color:var(--amber)">1</span><span class="lbl">A2P SMS reg</span></div>
+  <div class="card stat"><span class="lbl">Ready</span><span class="num" style="color:var(--blue)">1</span><span class="lbl">Automations</span></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>✅ Cal.com</h2>
+    <div class="row"><div class="l">Pricing patched (8 events)</div><div class="r"><span class="pill done">Done</span></div></div>
+    <div class="row"><div class="l">Schedules dialysis-aware (Tue/Thu/Sat)</div><div class="r"><span class="pill done">Done</span></div></div>
+    <div class="row"><div class="l">Stripe app installed in Cal</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">API keys saved local + verified</div><div class="r"><span class="pill done">Done</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>🌐 DNS · l7sinc.com</h2>
+    <div class="row"><div class="l">A → GitHub Pages (185.199.108-111.153)</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">CNAME www → l7shub.github.io</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">CNAME loanhero → sites.ludicrous.cloud</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">CNAME hero → 172.66.0.70 (Cloudflare/GHL)</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">MX Google Workspace · SPF · DKIM Mailgun</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">Wix DNS deep-link bookmarked</div><div class="r"><span class="pill done">Saved</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>🦸 GoHighLevel</h2>
+    <div class="row"><div class="l">CRJ sub-account</div><div class="r"><span class="pill block">Suspended</span></div></div>
+    <div class="row"><div class="l">Loan Hero sub-account ($1 reactivation)</div><div class="r"><span class="pill done">Active</span></div></div>
+    <div class="row"><div class="l">Logo 350×180 black canvas</div><div class="r"><span class="pill ready">Asset ready</span></div></div>
+    <div class="row"><div class="l">Refund policy page</div><div class="r"><span class="pill ready">Draft ready</span></div></div>
+    <div class="row"><div class="l">A2P SMS registration</div><div class="r"><span class="pill prog">In progress</span></div></div>
+    <div class="row"><div class="l">Contacts import (CALL OF A HERO)</div><div class="r"><span class="pill todo">Pending</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>💳 Stripe</h2>
+    <div class="row"><div class="l">Account · acct_1J5a9IBgJmN1Pv6F</div><div class="r"><span class="pill done">Live</span></div></div>
+    <div class="row"><div class="l">Owner · admin@l7sinc.com</div><div class="r"><span class="pill done">L7 Solutions</span></div></div>
+    <div class="row"><div class="l">Live keys (pk + sk + rk) verified vs API</div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l">Dashboard 2FA</div><div class="r"><span class="pill done">Logged in via Luckie</span></div></div>
+    <div class="row"><div class="l">Backup code in hand</div><div class="r"><span class="pill ready">Ready</span></div></div>
+    <div class="row"><div class="l">Cal.com OAuth connection</div><div class="r"><span class="pill done">Connected</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Launch Artifacts (Drive · L7S - Status Handoffs)</h2>
+    <div class="row"><div class="l">East-Luckie_Status_2026-04-28.md</div><div class="r"><span class="pill done">In Drive</span></div></div>
+    <div class="row"><div class="l">L7S_Logo_350x180_Black.png</div><div class="r"><span class="pill done">In Drive</span></div></div>
+    <div class="row"><div class="l">L7S_Refund_Policy_DRAFT.md</div><div class="r"><span class="pill done">In Drive</span></div></div>
+    <div class="row"><div class="l">L7S_Quick_Intake_Form_DRAFT.md (5-field)</div><div class="r"><span class="pill done">In Drive</span></div></div>
+    <div class="row"><div class="l">L7S_Call_of_Hero_Sequence.md</div><div class="r"><span class="pill done">In Drive</span></div></div>
+    <div class="row"><div class="l">L7S_Outing_Onboarding_Cheatsheet.md</div><div class="r"><span class="pill done">In Drive</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>🔐 Local Credentials (chmod 600)</h2>
+    <div class="row"><div class="l"><code>~/.xen/cal_key_l7sinc.txt</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l"><code>~/.xen/cal_key_luckieg.txt</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l"><code>~/.xen/crj_ghl_credentials.md</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l"><code>~/.xen/loan_hero_ghl_credentials.md</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l"><code>~/.xen/stripe_credentials.md</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+    <div class="row"><div class="l"><code>~/.xen/l7sinc_dns_quicklink.md</code></div><div class="r"><span class="pill done">Saved</span></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>⏭ Next Actions (in order)</h2>
+    <div class="step block"><div class="nm">1</div><div class="body"><strong>Stripe 2FA via Luckie</strong><em>Get Luckie on phone to relay Google Authenticator code OR use backup code <code>xqkh-caek-qfwi-krve-xemz</code> at the "can't access" link.</em></div></div>
+    <div class="step now"><div class="nm">2</div><div class="body"><strong>Authorize.net reactivation</strong><em>Luckie calls 800-430-7161. Enables Cal.com payment migration off Stripe.</em></div></div>
+    <div class="step now"><div class="nm">3</div><div class="body"><strong>GHL: upload logo + publish refund policy</strong><em>From Comet (XenBrowser headless can't render GHL settings). Both files in Drive.</em></div></div>
+    <div class="step now"><div class="nm">4</div><div class="body"><strong>Build 5-field intake form on becomealoanhero.com/deal-review-lh</strong><em>Spec in Drive. Wire to CALL OF A HERO sequence on submit.</em></div></div>
+    <div class="step now"><div class="nm">5</div><div class="body"><strong>Resolve CRJ suspension OR formally pivot all CRJ flows to Loan Hero</strong></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>📞 Open Human Action Items (Luckie)</h2>
+    <div class="row"><div class="l">Reactivate Authorize.net · 800-430-7161</div><div class="r"><span class="pill todo">Luckie</span></div></div>
+    <div class="row"><div class="l">DPW 3-day event registration confirmation</div><div class="r"><span class="pill todo">Luckie</span></div></div>
+    <div class="row"><div class="l">Megan start date confirm</div><div class="r"><span class="pill todo">Luckie</span></div></div>
+    <div class="row"><div class="l">Contact Rafael Rodriguez (Aaron King + Angela Verden backlog)</div><div class="r"><span class="pill todo">Luckie</span></div></div>
+    <div class="row"><div class="l">CRJ sub-account billing resolution</div><div class="r"><span class="pill todo">Luckie</span></div></div>
+    <div class="row"><div class="l">Provide Stripe 2FA code (Authenticator from washed phone)</div><div class="r"><span class="pill block">Luckie</span></div></div>
+  </div>
+
+  <div class="card">
+    <h2>📇 Contacts</h2>
+    <div class="row"><div class="l">East · Qi</div><div class="r"><code>+1 770-765-2217</code></div></div>
+    <div class="row"><div class="l">Luckie Goggins</div><div class="r"><code>+1 943-253-6011</code></div></div>
+    <div class="row"><div class="l">L7S main</div><div class="r"><code>+1 833-693-0777</code></div></div>
+    <div class="row"><div class="l">L7S office</div><div class="r">760 Old Roswell Rd #324, Roswell, GA 30076</div></div>
+    <div class="row"><div class="l">Hero email</div><div class="r"><a class="lk" href="mailto:hero@l7sinc.com">hero@l7sinc.com</a></div></div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 Quick Links</h2>
+    <div class="row"><div class="l">Wix DNS editor</div><div class="r"><a class="lk" href="https://manage.wix.com/my-domains/dns?accountManager=true&domainName=l7sinc.com">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero GHL dashboard</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/dashboard">→</a></div></div>
+    <div class="row"><div class="l">CRJ GHL dashboard (suspended)</div><div class="r"><a class="lk" href="https://app.creditrepairjunkies.com/v2/location/Thv6yzRgyq3txWmhUPiz/dashboard">→</a></div></div>
+    <div class="row"><div class="l">Stripe dashboard</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/acct_1J5a9IBgJmN1Pv6F/apikeys">→</a></div></div>
+    <div class="row"><div class="l">Cal.com event types</div><div class="r"><a class="lk" href="https://app.cal.com/event-types">→</a></div></div>
+    <div class="row"><div class="l">Asana East+Luckie task</div><div class="r"><a class="lk" href="https://app.asana.com/0/0/1214331858236429">→</a></div></div>
+    <div class="row"><div class="l">Sintra dashboard</div><div class="r"><a class="lk" href="https://app.sintra.ai/">→</a></div></div>
+    <div class="row"><div class="l">Live site · l7sinc.com</div><div class="r"><a class="lk" href="https://l7sinc.com">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — Cal.com</h2>
+    <div class="row"><div class="l">Event types</div><div class="r"><a class="lk" href="https://app.cal.com/event-types">→</a></div></div>
+    <div class="row"><div class="l">Bookings</div><div class="r"><a class="lk" href="https://app.cal.com/bookings/upcoming">→</a></div></div>
+    <div class="row"><div class="l">Availability — L7S schedule (925050)</div><div class="r"><a class="lk" href="https://app.cal.com/availability/925050">→</a></div></div>
+    <div class="row"><div class="l">Availability — Luckie schedule (1389079)</div><div class="r"><a class="lk" href="https://app.cal.com/availability/1389079">→</a></div></div>
+    <div class="row"><div class="l">Apps · Stripe config</div><div class="r"><a class="lk" href="https://app.cal.com/apps/installed/payment">→</a></div></div>
+    <div class="row"><div class="l">API Keys (Settings → Developer)</div><div class="r"><a class="lk" href="https://app.cal.com/settings/developer/api-keys">→</a></div></div>
+    <div class="row"><div class="l">Booking · 15-min Triage ($7)</div><div class="r"><a class="lk" href="https://cal.com/l7sinc/care-triage-15min">→</a></div></div>
+    <div class="row"><div class="l">Booking · 30-min Clarity Call ($27)</div><div class="r"><a class="lk" href="https://cal.com/l7sinc/care-clarity-30min">→</a></div></div>
+    <div class="row"><div class="l">Booking · 45-min Audit ($33)</div><div class="r"><a class="lk" href="https://cal.com/l7sinc/care-audit-45min">→</a></div></div>
+    <div class="row"><div class="l">Booking · 60-min Strategy + Blueprint ($127)</div><div class="r"><a class="lk" href="https://cal.com/l7sinc/care-strategy-60min">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — Stripe</h2>
+    <div class="row"><div class="l">Dashboard home</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/dashboard">→</a></div></div>
+    <div class="row"><div class="l">API Keys</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/acct_1J5a9IBgJmN1Pv6F/apikeys">→</a></div></div>
+    <div class="row"><div class="l">Payments</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/payments">→</a></div></div>
+    <div class="row"><div class="l">Customers</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/customers">→</a></div></div>
+    <div class="row"><div class="l">Products</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/products">→</a></div></div>
+    <div class="row"><div class="l">Connected applications (Cal.com)</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/account/applications">→</a></div></div>
+    <div class="row"><div class="l">Webhooks</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/webhooks">→</a></div></div>
+    <div class="row"><div class="l">Payouts</div><div class="r"><a class="lk" href="https://dashboard.stripe.com/payouts">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — GoHighLevel</h2>
+    <div class="row"><div class="l">Loan Hero · Dashboard</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/dashboard">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Settings · Business Profile</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/settings/company">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Calendars</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/calendars/view">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Contacts</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/contacts/smart_list/All">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Opportunities</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/opportunities/list">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Workflows / Automations</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/automation/workflows">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Funnels & Websites</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/funnels-websites/funnels">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Marketing · Social Planner</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/marketing/social-planner">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Reputation</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/reputation/overview">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Reporting</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/reporting/reports">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Integrations</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/integration">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero · Media Storage</div><div class="r"><a class="lk" href="https://app.loanherocrm.com/v2/location/uDDtIyI8zfewbD3m2tPm/media-storage">→</a></div></div>
+    <div class="row"><div class="l">CRJ · Dashboard (suspended)</div><div class="r"><a class="lk" href="https://app.creditrepairjunkies.com/v2/location/Thv6yzRgyq3txWmhUPiz/dashboard">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — Wix · DNS · Email</h2>
+    <div class="row"><div class="l">Wix · l7sinc.com DNS editor (deep link)</div><div class="r"><a class="lk" href="https://manage.wix.com/my-domains/dns?accountManager=true&domainName=l7sinc.com">→</a></div></div>
+    <div class="row"><div class="l">Wix · Domains list</div><div class="r"><a class="lk" href="https://manage.wix.com/studio/domains?referralInfo=sidebar">→</a></div></div>
+    <div class="row"><div class="l">Wix · Subscriptions</div><div class="r"><a class="lk" href="https://manage.wix.com/studio/subscriptions?referralInfo=sidebar">→</a></div></div>
+    <div class="row"><div class="l">Wix · L7SINC.com site</div><div class="r"><a class="lk" href="https://manage.wix.com/account/sites/15adcab8-e4fb-4647-ac4a-c51f15bb753f">→</a></div></div>
+    <div class="row"><div class="l">Google Workspace Admin</div><div class="r"><a class="lk" href="https://admin.google.com/">→</a></div></div>
+    <div class="row"><div class="l">Gmail · hero@l7sinc.com</div><div class="r"><a class="lk" href="https://mail.google.com/mail/u/?authuser=hero@l7sinc.com">→</a></div></div>
+    <div class="row"><div class="l">Mailgun control panel</div><div class="r"><a class="lk" href="https://app.mailgun.com/app/sending/domains">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — Asana · Sintra · Drive</h2>
+    <div class="row"><div class="l">Asana · Home</div><div class="r"><a class="lk" href="https://app.asana.com/0/home">→</a></div></div>
+    <div class="row"><div class="l">Asana · East+Luckie Workflow task</div><div class="r"><a class="lk" href="https://app.asana.com/0/0/1214331858236429">→</a></div></div>
+    <div class="row"><div class="l">Asana · STRIPE — L7S, INC. project</div><div class="r"><a class="lk" href="https://app.asana.com/0/search?q=STRIPE%20L7S%20INC">→</a></div></div>
+    <div class="row"><div class="l">Asana · BUSINESS STRUCTURE & COMPLIANCE</div><div class="r"><a class="lk" href="https://app.asana.com/0/search?q=BUSINESS%20STRUCTURE%20COMPLIANCE">→</a></div></div>
+    <div class="row"><div class="l">Sintra · Helpers dashboard</div><div class="r"><a class="lk" href="https://app.sintra.ai/">→</a></div></div>
+    <div class="row"><div class="l">Sintra · Vizzy chat</div><div class="r"><a class="lk" href="https://app.sintra.ai/">→</a></div></div>
+    <div class="row"><div class="l">Google Drive · hero@l7sinc.com root</div><div class="r"><a class="lk" href="https://drive.google.com/drive/u/0/home">→</a></div></div>
+    <div class="row"><div class="l">L7S Status Handoffs (Drive folder)</div><div class="r"><a class="lk" href="file:///Users/qi/Library/CloudStorage/CloudMounter-hero@I7sinc.com/L7S%20-%20Status%20Handoffs/">→</a></div></div>
+  </div>
+
+  <div class="card wide">
+    <h2>🔗 Direct Links — Public-facing & Lead Capture</h2>
+    <div class="row"><div class="l">L7S marketing site · l7sinc.com</div><div class="r"><a class="lk" href="https://l7sinc.com">→</a></div></div>
+    <div class="row"><div class="l">Loan Hero CRM landing · loanhero.l7sinc.com</div><div class="r"><a class="lk" href="https://loanhero.l7sinc.com">→</a></div></div>
+    <div class="row"><div class="l">Become a Loan Hero · Deal Review intake</div><div class="r"><a class="lk" href="https://becomealoanhero.com/deal-review-lh">→</a></div></div>
+    <div class="row"><div class="l">L7S Cal.com booking root</div><div class="r"><a class="lk" href="https://cal.com/l7sinc">→</a></div></div>
+    <div class="row"><div class="l">Mobile control surface · web.xlrd.org</div><div class="r"><a class="lk" href="https://web.xlrd.org">→</a></div></div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--muted);font-size:11px;margin-top:32px">
+  Generated by Xen · 2026-04-28 · refresh manually as state changes
+</div>
+</body>
+</html>
