@@ -258,7 +258,7 @@
     <div class="header-logo">L7S</div>
     <div>
       <h1>Production Test Suite</h1>
-      <div class="header-sub">l7sinc.com — index.html validation &nbsp;·&nbsp; <span id="target-url">fetching…</span></div>
+      <div class="header-sub">l7sinc.com — start.html validation &nbsp;·&nbsp; <span id="target-url">fetching…</span></div>
     </div>
   </div>
   <div id="score-pill">⏳ Not run</div>
@@ -291,7 +291,7 @@
 <script>
 // ─────────────────────────────────────────────────────────────
 //  L7S Inc. — Production Test Suite
-//  tests.html  ·  fetches index.html from same directory
+//  tests.html  ·  fetches start.html from same directory
 // ─────────────────────────────────────────────────────────────
 
 const CATEGORIES = [
@@ -781,28 +781,28 @@ async function runTests() {
 
   btn.disabled = true;
   btn.textContent = 'Running…';
-  statusMsg.innerHTML = '<span class="spinner"></span> Fetching index.html…';
+  statusMsg.innerHTML = '<span class="spinner"></span> Fetching start.html…';
   container.innerHTML = '';
 
   let html, doc;
 
   try {
-    const res = await fetch('index.html');
+    const res = await fetch('start.html');
     if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
     html = await res.text();
     const parser = new DOMParser();
     doc = parser.parseFromString(html, 'text/html');
-    targetUrlEl.textContent = 'index.html fetched ✓';
+    targetUrlEl.textContent = 'start.html fetched ✓';
   } catch (err) {
     container.innerHTML = `
       <div style="background:#450a0a;border:1px solid #dc2626;border-radius:8px;padding:20px 24px;color:#f87171;font-family:monospace;">
-        <strong>⚠ Could not load index.html</strong><br>
+        <strong>⚠ Could not load start.html</strong><br>
         ${err.message}<br><br>
-        Make sure both <code>tests.html</code> and <code>index.html</code> are served from the same origin
+        Make sure both <code>tests.html</code> and <code>start.html</code> are served from the same origin
         (e.g. <code>python -m http.server 8080</code> or VS Code Live Server).
         Fetching local files directly via <code>file://</code> is blocked by browser security.
       </div>`;
-    statusMsg.textContent = 'Failed to load index.html';
+    statusMsg.textContent = 'Failed to load start.html';
     btn.disabled = false;
     btn.textContent = '▶ Retry';
     ran = false;

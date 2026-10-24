@@ -3,7 +3,7 @@
   "short_name": "L7S Inc.",
   "description": "L7S Hero S.O.S.™ — AI-Powered Business Ecosystem Platform",
   "id": "/",
-  "start_url": "/",
+  "start_url": "/start.html",
   "scope": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
